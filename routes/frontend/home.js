@@ -10,11 +10,11 @@ const pageTitle = 'Home';
 
 /* GET home page. */
 router.get('/', async (req, res, next) => {
-
-	res.render(`${folderView}/index`, { 
-		pageTitle, 
-		layout,
-	});
+	res.send('Hello world')
+	// res.render(`${folderView}/index`, { 
+	// 	pageTitle, 
+	// 	layout,
+	// });
 });
 
 module.exports = router;

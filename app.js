@@ -71,7 +71,7 @@ app.locals.moment = moment;
 app.locals.folderUploads = pathConfigs.folderUploads;
 // Setup Router
 app.use(`/${systemConfigs.prefixAdmin}`, require(__path_routes + 'backend/index'));
-app.use(`/`, require(__path_routes + 'frontend/index'));
+// app.use(`/`, require(__path_routes + 'frontend/index'));
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
@@ -86,9 +86,9 @@ app.use(function(err, req, res, next) {
 
 	// render the error page
 	res.status(err.status || 500);
-	res.render(`${__path_views_frontend}pages/error/error-product`, { 
+	res.render(`${__path_views}error`, { 
 		pageTitle: 'Error',
-		layout: __path_views_frontend + 'layouts/layout',
+		layout: __path_views_admin + 'layouts/layout',
 	});
 });
 
