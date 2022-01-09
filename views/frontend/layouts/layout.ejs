@@ -1,23 +1,76 @@
 <!DOCTYPE html>
-<!--
-	24 News by FreeHTML5.co
-	Twitter: https://twitter.com/fh5co
-	Facebook: https://fb.com/fh5co
-	URL: https://freehtml5.co
--->
-<html lang="en" class="no-js">
+<html lang="en">
 <head>
     <% include ./../elements/head %>
 </head>
 <body>
+    <div class="app">
+        
+        <% include ./../elements/header %>
 
-    <% include ./../elements/header %>
-    <% include ./../elements/navbar %>
-    
-    <%- body %>
-    
-    <% include ./../elements/footer %>
+        <div class="app_container">
+            <div class="grid wide">
+
+                <% include ./../elements/slider %>
+                <% include ./../elements/category %>
+                
+                <div class="row sm-gutter">
+                    <div class="col l-12 m-12 c-12">
+                        <nav class="mobile-category">
+                            <ul class="mobile-category__list">
+                                <li class="mobile-category__item">
+                                    <a href="" class="mobile-category__link">Dụng cụ thiết bị và tiện ích</a>
+                                </li>
+                                <li class="mobile-category__item">
+                                    <a href="" class="mobile-category__link">Dụng cụ thiết bị và tiện ích</a>
+                                </li>
+                                <li class="mobile-category__item">
+                                    <a href="" class="mobile-category__link">Dụng cụ thiết bị và tiện ích</a>
+                                </li>
+                                <li class="mobile-category__item">
+                                    <a href="" class="mobile-category__link">Dụng cụ thiết bị và tiện ích</a>
+                                </li>
+                                <li class="mobile-category__item">
+                                    <a href="" class="mobile-category__link">Dụng cụ thiết bị và tiện ích</a>
+                                </li>
+                                <li class="mobile-category__item">
+                                    <a href="" class="mobile-category__link">Dụng cụ thiết bị và tiện ích</a>
+                                </li>
+                                <li class="mobile-category__item">
+                                    <a href="" class="mobile-category__link">Dụng cụ thiết bị và tiện ích</a>
+                                </li>
+                                <li class="mobile-category__item">
+                                    <a href="" class="mobile-category__link">Dụng cụ thiết bị và tiện ích</a>
+                                </li>
+                                <li class="mobile-category__item">
+                                    <a href="" class="mobile-category__link">Dụng cụ thiết bị và tiện ích</a>
+                                </li>
+                                <li class="mobile-category__item">
+                                    <a href="" class="mobile-category__link">Dụng cụ thiết bị và tiện ích</a>
+                                </li>
+                                <li class="mobile-category__item">
+                                    <a href="" class="mobile-category__link">Dụng cụ thiết bị và tiện ích</a>
+                                </li>
+                                <li class="mobile-category__item">
+                                    <a href="" class="mobile-category__link">Dụng cụ thiết bị và tiện ích</a>
+                                </li>
+                            </ul>
+                        </nav>
+
+                        <%- body %>
+                        
+                        <% include ./../elements/home-product %>
+                        <% include ./../elements/pagination %>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <% include ./../elements/footer %>
+        <% include ./../elements/modal %>
+    </div>
+
     <% include ./../elements/script %>
-
 </body>
 </html>
