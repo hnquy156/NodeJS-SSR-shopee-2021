@@ -1,0 +1,14 @@
+<% 
+    formGroupHelper = (formGroup) => {
+        let xhtml = '';
+
+        formGroup.forEach(group => {
+            xhtml += `<div class="form-group row">
+                        <label class="col-sm-2 col-form-label text-sm-right required">${group.label}</label>
+                        <div class="col-xs-12 col-sm-8">${group.input}</div>
+                    </div>`;
+        });
+
+        return xhtml;
+    }
+%>

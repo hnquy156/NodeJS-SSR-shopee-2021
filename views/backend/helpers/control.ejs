@@ -1,0 +1,12 @@
+<% 
+    controlHelper = (id, linkPrefix) => {
+        const linkDelete = `${linkPrefix}/delete/${id}`;
+        const linkEdit = `${linkPrefix}/form/${id}`;
+        return `<a href="${linkEdit}" class="rounded-circle btn btn-sm btn-info" title="Edit">
+                    <i class="fas fa-pencil-alt"></i>
+                </a>
+                <a href="javascript:deleteItem('${linkDelete}')" class="rounded-circle btn btn-sm btn-danger" title="Delete">
+                    <i class="fas fa-trash-alt"></i>
+                </a>`
+    }
+%>

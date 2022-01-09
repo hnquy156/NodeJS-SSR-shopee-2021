@@ -1,0 +1,50 @@
+<% 
+    paginationHelper = (pagination, linkPrefix, currentStatus, search_value) => {
+        let { pagesTotal, itemsOnPerPage, pageRanges } = pagination;
+        const currentPage = +pagination.currentPage;
+        let link = `${linkPrefix}/status/${currentStatus}?`;
+        let xhtml = '';
+        let xhtmlStart = '';
+        let xhtmlEnd = '';
+        let xhtmlPages = '';
+        let start, mid, end;
+        mid = Math.floor(+pageRanges / 2) + 1;
+
+        if (search_value) link += `search_value=${search_value}&`;
+
+        if (pagesTotal <= pageRanges ) {
+            start = 1;
+            end = pagesTotal;
+        } else {
+            if (currentPage <= mid) {
+                start = 1;
+                end = start + pageRanges - 1;
+            } else if (currentPage >= pagesTotal - mid + 1) {
+                end = pagesTotal;
+                start = pagesTotal - pageRanges + 1;
+            } else {
+                console.log(start)
+                console.log(end)
+                start = currentPage - mid + 1;
+                end = currentPage + mid - 1;
+            }
+        }
+
+
+        if (currentPage > 1) {
+            xhtmlStart += `<li class="page-item"><a href="${link}page=${1}" class="page-link"><i class="fas fa-angle-double-left"></i></a></li>
+                    <li class="page-item"><a href="${link}page=${currentPage - 1}" class="page-link"><i class="fas fa-angle-left"></i></a></li>`;
+        } 
+        if (currentPage < pagesTotal) {
+            xhtmlEnd += `<li class="page-item"><a class="page-link" href="${link}page=${currentPage + 1}"><i class="fas fa-angle-right"></i></a></li>
+                        <li class="page-item"><a class="page-link" href="${link}page=${pagesTotal}"><i class="fas fa-angle-double-right"></i></a></li>`;
+        }
+        for(let i = start; i <= end; i++) {
+            if (currentPage == i)
+                xhtmlPages += `<li class="page-item active "><a class="page-link">${i}</a></li>`
+            else xhtmlPages += `<li class="page-item"><a class="page-link" href="${link}page=${i}">${i}</a></li>`;
+        }
+
+        return `<ul class="pagination pagination-sm m-0 float-right">${xhtmlStart + xhtmlPages + xhtmlEnd}</ul>`;
+    }
+%>

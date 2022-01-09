@@ -1,0 +1,65 @@
+<% include ./../../helpers/notify-validate %>
+<% include ./../../helpers/selectbox %>
+<% include ./../../helpers/input %>
+<% include ./../../helpers/form-group %>
+<% include ./../../helpers/textarea %>
+<%
+    collection = 'groups';
+    linkPrefix = `/${systemConfigs.prefixAdmin}/${collection}`;
+    const statusSelectbox = [
+            {value: 'default', name: '- Select status -'},
+            {value: 'active', name: 'Active'},
+            {value: 'inactive', name: 'Inactive'},
+        ];
+    const groupACPSelectbox = [
+        {value: 'default', name: '- Select Group ACP -'},
+        {value: 'yes', name: 'Yes'},
+        {value: 'no', name: 'No'},
+    ];
+    const formGroup = [
+        {label: 'Name', input: inputHelper('name', item.name, 'text')},
+        {label: 'Status', input: selectboxHelper('status', statusSelectbox, item.status)},
+        {label: 'Group ACP', input: selectboxHelper('group_acp', groupACPSelectbox, item.group_acp)},
+        {label: 'Ordering', input: inputHelper('ordering', item.ordering, 'number')},
+        {label: 'Content', input: textareaHelper('content', item.content, 'text')},
+    ];
+%>
+
+<%- showErrors(errors) %>
+
+<div class="card card-info card-outline">
+    <div class="card-body">
+        <form action="<%= linkPrefix %>/form" method="post" class="mb-0" id="admin-form">
+            <%- formGroupHelper(formGroup) %>
+            <div class="form-group row">
+                <%- inputHelper('id', item.id, 'hidden') %>
+            </div>
+        </form>`
+        
+    </div>
+    <div class="card-footer">
+        <div class="col-12 col-sm-8 offset-sm-2">
+            <button id="admin-form-submit" class="btn btn-sm btn-success mr-1"> Save</button>
+            <a href="<%= linkPrefix %>" class="btn btn-sm btn-danger mr-1"> Cancel</a>
+        </div>
+    </div>
+
+</div>
+
+<script src="/backend/js/ckeditor5-build-decoupled-document/ckeditor.js"></script>
+<script>
+	DecoupledEditor
+		.create( document.querySelector( '#editor5' ) )
+		.then( editor => {
+			// The toolbar needs to be explicitly appended.
+			document.querySelector( '#toolbar-container' ).appendChild( editor.ui.view.toolbar.element );
+            document.querySelector( '#text-editor5' ).value = editor.getData();
+            editor.model.document.on( 'change:data', () => {
+                document.querySelector( '#text-editor5' ).value = editor.getData();
+            } );
+			window.editor = editor;
+		} )
+		.catch( error => {
+			console.error( 'There was a problem initializing the editor.', error );
+		} );
+</script>

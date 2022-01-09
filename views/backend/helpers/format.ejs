@@ -1,0 +1,9 @@
+<%
+    formatDateHelper = (time, type = null) => {
+        return moment(time).format(systemConfigs.long_time_format);
+    }
+
+    formatSummaryHelper = (content, limit = 150) => {
+        return content.replace(/<[^>]*>/igm, "").substring(0, limit);
+    }
+%>

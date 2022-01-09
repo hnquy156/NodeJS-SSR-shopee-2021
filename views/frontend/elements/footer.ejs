@@ -1,0 +1,104 @@
+<%
+	const folderUploadArticles = `/${folderUploads}/articles/`;
+    const folderUploadSettings = `/${folderUploads}/settings/`;
+	const logoFooter = folderUploadSettings + (settings.logo_white || 'logo_white.png');
+%>
+<% include ./../helpers/format %>
+
+<div class="container-fluid fh5co_footer_bg pb-3">
+	<div class="container animate-box">
+		<div class="row">
+			<div class="col-12 spdp_right py-5"><a href="/"><img src="<%= logoFooter %>" alt="img"
+					class="footer_logo" /></a></div>
+			<div class="clearfix"></div>
+			<div class="col-12 col-md-4 col-lg-3">
+				<div class="footer_main_title py-3"> Về chúng tôi</div>
+				<div class="footer_sub_about pb-3"> NEWS Express:<br>
+					Ngày thành lập: 12/12/2021. Cơ quan chủ quản: Bộ Khoa học Công nghệ. 
+					Tổng biên tập: Hoàng Ngọc Quý. 
+					Giấy phép: 06/GP-BTTTT ngày 02/01/2021. <br>
+					Tòa soạn: 
+					Tầng 15, Tòa nhà Landmark 81, Quận Bình Thạnh, TP.HCM <br>
+					Đường dây nóng: 088.888.8888 <br>
+					Điện thoại: 020 0000 9999 - máy lẻ 4000 <br>
+					Fax: 088 8888 8888 <br>
+					Liên hệ quảng cáo: 090 444 4444.
+				</div>
+				<div class="footer_mediya_icon">
+					<% socials.forEach(social => {%>
+						<div class="text-center d-inline-block">
+							<a target="_blank" href="<%= settings[social] %>" class="fh5co_display_table_footer">
+								<div class="fh5co_verticle_middle"><i class="fa fa-<%= social %>"></i></div>
+							</a>
+						</div>
+					<%})
+					%>
+				</div>
+			</div>
+			<div class="col-12 col-md-3 col-lg-2">
+				<div class="footer_main_title py-3"> Danh mục</div>
+				<ul class="footer_menu">
+					<% categoriesList.forEach(category => {%>
+						<li><a href="/category/<%= category.id %>" class=""><i class="fa fa-angle-right"></i>&nbsp;&nbsp;
+							<%= category.name %></a></li>
+					<%}) 
+					%>
+				</ul>
+			</div>
+			<div class="col-12 col-md-5 col-lg-3 position_footer_relative">
+				<div class="footer_main_title py-3"> Bài viết nhiều theo dõi</div>
+				
+				<%
+					for(let i = 0; i < 3; ++i) {
+						const article = specialArticles[i];
+						%>
+						<div class="footer_makes_sub_font"><i class="fa fa-clock-o"></i> <%= formatDateHelper(article.created.time) %></div>
+						<a href="#" class="footer_post pb-4"> <%= formatSummaryHelper(article.name, 100) %> </a>
+						<%
+					}
+				%>
+				
+				<div class="footer_position_absolute"><img src="/frontend/images/footer_sub_tipik.png" alt="img"
+						class="width_footer_sub_img" /></div>
+			</div>
+			<div class="col-12 col-md-12 col-lg-4 ">
+				<div class="footer_main_title py-3"> Bài viết thay đổi gần đây</div>
+				
+				<% newArticles.forEach(article => {%>
+					<a href="/articles/<%= article.id %>/<%= article.slug %>" class="footer_img_post_6"><img src="<%= folderUploadArticles + article.thumb %>" alt="img" /></a>
+				<%}) 
+				%>
+			</div>
+		</div>
+		<div class="row justify-content-center pt-2 pb-4">
+			<div class="col-12 col-md-8 col-lg-7 ">
+				<div class="input-group">
+					<span class="input-group-addon fh5co_footer_text_box" id="basic-addon1"><i
+							class="fa fa-envelope"></i></span>
+					<input type="text" class="form-control fh5co_footer_text_box" placeholder="Nhập Email của bạn..."
+						aria-describedby="basic-addon1">
+					<a href="#" class="input-group-addon fh5co_footer_subcribe" id="basic-addon12">
+						<i class="fa fa-paper-plane-o"></i>&nbsp;&nbsp;Đăng kí</a>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div class="container-fluid fh5co_footer_right_reserved">
+	<div class="container">
+		<div class="row  ">
+			<div class="col-12 col-md-6 py-4 Reserved"> © Copyright 2021, All rights reserved. Design by <a
+					href="https://freehtml5.co" title="Free HTML5 Bootstrap templates">FreeHTML5.co</a>. </div>
+			<div class="col-12 col-md-6 spdp_right py-4">
+				<a href="/" class="footer_last_part_menu">Tramg chủ</a>
+				<a href="/contact" class="footer_last_part_menu">Liên hệ</a>
+				<a href="/" class="footer_last_part_menu">Tin gần đây</a>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div class="gototop js-top">
+	<a href="#" class="js-gotop"><i class="fa fa-arrow-up"></i></a>
+</div>

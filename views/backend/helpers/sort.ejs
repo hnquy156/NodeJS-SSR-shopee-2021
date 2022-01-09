@@ -1,0 +1,17 @@
+<% 
+    sortHelper = (linkPrefix, name, sortField, currentSortField, currentSortType, type = '') => {
+        let icon = `fa-sort`;
+        let sortTypeLink = 'asc';
+        let style = type ? `style="${type}"` : '';
+        if (currentSortField === sortField) {
+            if (currentSortType === 'asc') {
+                sortTypeLink = 'desc';
+                icon = `fa-sort-amount-up`;
+            } else {
+                icon = `fa-sort-amount-down`;
+            }
+        }
+
+        return `<a ${style} href="${linkPrefix}/sort/${sortField}/${sortTypeLink}">${name} <i class="fas ${icon}"></i></a>`
+    }
+%>

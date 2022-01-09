@@ -1,0 +1,20 @@
+<% 
+    actionHelper = (linkPrefix) => {
+        let xhtml = '';
+        const actions = [
+            {name: 'Bulk Action', value: ''},
+            {name: 'Active', value: 'active'},
+            {name: 'Inactive', value: 'inactive'},
+            {name: 'Change Ordering', value: 'ordering'},
+            {name: 'Delete', value: 'delete'},
+        ]
+        actions.forEach(action => {
+            xhtml += `<option value="${action.value}">${action.name}</option>`;
+        })
+        return `<select id="bulk-action" name="bulk-action" data-link="${linkPrefix}" class="custom-select custom-select-sm mr-1" style="width: unset">
+                    ${xhtml}
+                </select> 
+                <button id="bulk-apply" class="btn btn-sm btn-info">Apply <span class="badge badge-pill badge-danger navbar-badge" style="display: none"></span></button>
+                `
+    }
+%>

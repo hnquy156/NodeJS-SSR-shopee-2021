@@ -1,0 +1,28 @@
+<% 
+    selectboxHelper = (name, options, selectedValue = null) => {
+        let xhtml = '';
+        
+        options.forEach(option => {
+            const selected = option.value === selectedValue ? 'selected="selected"' : '';
+            xhtml += `<option value="${option.value}" ${selected}>${option.name}</option>`;
+        })
+
+        return `<select name="${name}" class="custom-select custom-select-sm">
+                    ${xhtml}
+                </select>`
+    }
+
+    selectboxAjaxHelper = (name, options, selectedValue = null, id, linkPrefix) => {
+        let xhtml = '';
+        
+        options.forEach(option => {
+            const selected = option.value === selectedValue ? 'selected="selected"' : '';
+            xhtml += `<option value="${option.value}" ${selected}>${option.name}</option>`;
+        })
+
+        return `<select name="${name}" data-id="${id}" data-link="${linkPrefix}/change-group" 
+                    class="ajax-group-selectbox custom-select custom-select-sm" >
+                    ${xhtml}
+                </select>`
+    }
+%>

@@ -1,0 +1,75 @@
+<% include ./../helpers/time %>
+<% include ./../helpers/format %>
+
+<div class="row justify-content-start">
+    <%
+        managements.forEach(management => {
+            %>
+            <div class="col-lg-3 col-6">
+                <div class="small-box bg-info">
+                    <div class="inner">
+                        <h3><%= management.count %></h3>
+                        <p><%= management.name %></p>
+                    </div>
+                    <div class="icon text-white">
+                        <i class="<%= management.icon %>"></i>
+                    </div>
+                    <a href="/<%= systemConfigs.prefixAdmin %>/<%= management.collection %>" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+                </div>
+            </div>
+            <%
+        });
+    %>
+</div>
+
+<div class="card card-info card-outline">
+    <div class="card-header">
+        <h4 class="card-title">Recent Contact</h4>
+        <div class="card-tools">
+            <a href="#" class="btn btn-tool"><i class="fas fa-sync"></i></a>
+            <button type="button" class="btn btn-tool" data-card-widget="collapse" data-toggle="tooltip" title="Collapse"><i class="fas fa-minus"></i></button>
+        </div>
+    </div>
+    <div class="card-body">
+        <form action="" method="post" class="table-responsive" id="form-table">
+            <table class="table table-bordered table-hover text-nowrap btn-table mb-0">
+                <thead>
+                    <tr>
+                        <th class="text-center">#</th>
+                        <th class="text-center">Name</th>
+                        <th class="text-center">Phone</th>
+                        <th class="text-center">Email</th>
+                        <th class="text-center">Content</th>
+                        <th class="text-center">Created</th>
+                        <th class="text-center">Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <% items.forEach((item, index) => {
+                        %>
+                        <tr>
+                            <td class="text-center"><%= index + 1 %></td>
+                            <td class="text-center"><%- item.name %></td>
+                            <td class="text-center"><%= item.phone %></td>
+                            <td class="text-center"><%= item.email %></td>
+                            <td class="text-center"><%= formatSummaryHelper(item.content) %></td>
+                            <td class="text-center">
+                                <%- timeHelper(item.created.user_name, item.created.time) %>
+                            </td>
+                            <td class="text-center">
+                                <a href="/<%= systemConfigs.prefixAdmin %>/contacts/form/<%= item.id %>" class="rounded-circle btn btn-sm btn-info" title="Edit">
+                                    <i class="fas fa-pencil-alt"></i>
+                                </a>    
+                            </td>
+                        </tr>
+                        <%
+                    })%>
+                    <%
+                        if (items.length === 0) {%><tr><td class="text-center" colspan="10">Không có người liên hệ mới</td></tr><%}
+                    %>
+                    
+                </tbody>
+            </table>
+        </form>
+    </div>
+</div>

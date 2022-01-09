@@ -1,0 +1,8 @@
+<% 
+    loadRssHelper = (id, linkPrefix) => {
+        const linkLoad = `${linkPrefix}/save-articles/${id}`;
+        return `<a href="${linkLoad}" data-id=${id} class="ajax-load-rss rounded-circle btn btn-sm btn-success" title="Load RSS">
+                    <i class="fas fa-upload"></i>
+                </a>`
+    }
+%>

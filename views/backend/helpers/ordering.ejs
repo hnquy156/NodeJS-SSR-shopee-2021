@@ -1,0 +1,7 @@
+<% 
+    orderingHelper = (ordering, linkPrefix, id) => {
+        
+        return `<input type="number" value="${ordering}" class="ajax-ordering ordering form-control form-control-sm m-auto text-center" 
+                style="width: 65px" min="1" data-link="${linkPrefix}/change-ordering" data-id="${id}">`
+    }
+%>

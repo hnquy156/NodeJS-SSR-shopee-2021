@@ -1,0 +1,10 @@
+<% 
+    groupACPHelper = (group_acp, linkPrefix, id) => {
+        let icon = `<i class="fa fa-2x fa-check-square" aria-hidden="true"></i>`;
+        if (group_acp === 'no') {
+            icon = `<i class="fa fa-2x fa-square" aria-hidden="true"></i>`;
+        }
+        return `<a href="${linkPrefix}/change-group-acp/${id}/${group_acp}" data-group_acp="${group_acp}" class="ajax-group-acp text-success">${icon}</a>`
+    }
+%>
+

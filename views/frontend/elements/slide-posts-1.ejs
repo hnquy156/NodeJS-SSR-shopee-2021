@@ -1,0 +1,27 @@
+<%
+    slidepostsElement = (title, items) => {
+        let xhtml = ``;
+        items.forEach(item => {
+            xhtml += `<div class="item px-2">
+                        <div class="fh5co_hover_news_img">
+                            <div class="fh5co_news_img"><img style="width: 260px;" src="${folderUploadArticles + item.thumb}" alt="${item.thumb}"/></div>
+                            <div>
+                                <a href="/articles/${item.id}/${item.slug}" class="d-block fh5co_small_post_heading"><span class="">${formatSummaryHelper(item.name)}</span></a>
+                                <div class="c_g"><i class="fa fa-clock-o"></i> ${formatDateHelper(item.created.time)}</div>
+                            </div>
+                        </div>
+                    </div>`;
+        })
+        return `<div class="container-fluid pb-4 pt-5">
+                    <div class="container animate-box">
+                        <div>
+                            <div class="fh5co_heading fh5co_heading_border_bottom  mb-4">${title}</div>
+                        </div>
+                        <div class="owl-carousel owl-theme slide-posts">
+                            ${xhtml}
+                        </div>
+                    </div>
+                </div>`;
+    }
+%>
+

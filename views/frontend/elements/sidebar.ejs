@@ -1,0 +1,73 @@
+<div>
+    <div class="fh5co_heading fh5co_heading_border_bottom py-2 mb-4">Danh mục</div>
+</div>
+<div class="clearfix"></div>
+<div class="fh5co_tags_all">
+    <% categoriesList.forEach(category => {%>
+
+        <a href="/category/<%= category.id %>" class="fh5co_tagg"><%= category.name %></a>
+        
+        <%}) 
+    %>
+</div>
+
+<div>
+    <div class="fh5co_heading fh5co_heading_border_bottom pt-3 py-2 mb-4">Bài viết ngẫu nhiên</div>
+</div>
+<%
+    randomArticles.forEach(article => {%>
+        <div class="row pb-3">
+            <div class="col-5 align-self-center">
+                <a href="/articles/<%= article._id %>/<%= article.slug %>">
+                    <img src="<%= folderUploadArticles + article.thumb %>" alt="img" class="fh5co_most_trading"/>
+                </a>
+            </div>
+            <div class="col-7 paddding">
+                <a style="color:black;" href="/articles/<%= article._id %>/<%= article.slug %>">
+                    <div class="most_fh5co_treding_font"> <%= formatSummaryHelper(article.name, 50) %></div>
+                </a>
+                <div class="most_fh5co_treding_font_123"><i class="fa fa-clock-o"></i> <%= formatDateHelper(article.created.time) %></div>
+            </div>
+        </div>
+        <%});
+%>
+
+<div>
+    <div class="fh5co_heading fh5co_heading_border_bottom pt-3 py-2 mb-4">Bài viết nổi bật</div>
+</div>
+<%
+    specialArticles.forEach(article => {%>
+        <div class="row pb-3">
+            <div class="col-5 align-self-center">
+                <a href="/articles/<%= article._id %>/<%= article.slug %>">
+                    <img src="<%= folderUploadArticles + article.thumb %>" alt="img" class="fh5co_most_trading"/>
+                </a>
+            </div>
+            <div class="col-7 paddding">
+                <a style="color:black;" href="/articles/<%= article._id %>/<%= article.slug %>">
+                    <div class="most_fh5co_treding_font"> <%= formatSummaryHelper(article.name, 50) %></div>
+                </a>
+                <div class="most_fh5co_treding_font_123"><i class="fa fa-clock-o"></i> <%= formatDateHelper(article.created.time) %></div>
+            </div>
+        </div>
+        <%});
+%>
+
+<%  if (pageTitle === 'Home' || pageTitle === 'RSS') {
+    %><div class="fh5co_heading fh5co_heading_border_bottom pt-3 py-2 mb-4">Bài viết gần đây</div><%
+    newArticles.forEach(article => {%>
+        <div class="row pb-3">
+            <div class="col-5 align-self-center">
+                <a href="/articles/<%= article._id %>/<%= article.slug %>">
+                    <img src="<%= folderUploadArticles + article.thumb %>" alt="img" class="fh5co_most_trading"/>
+                </a>
+            </div>
+            <div class="col-7 paddding">
+                <a style="color:black;" href="/articles/<%= article._id %>/<%= article.slug %>">
+                    <div class="most_fh5co_treding_font"> <%= formatSummaryHelper(article.name, 50) %></div>
+                </a>
+                <div class="most_fh5co_treding_font_123"><i class="fa fa-clock-o"></i> <%= formatDateHelper(article.created.time) %></div>
+            </div>
+        </div>
+        <%});
+}%>

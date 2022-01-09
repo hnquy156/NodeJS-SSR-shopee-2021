@@ -1,0 +1,17 @@
+<% 
+    checkboxHelper = (index, id) => {
+        
+        return `<div class="custom-control custom-checkbox">
+                    <input class="custom-control-input" type="checkbox" id="checkbox-${index}" name="cid" value="${id}">
+                    <label for="checkbox-${index}" class="custom-control-label"></label>
+                </div>`
+    }
+
+    checkboxAllHelper = () => {
+        
+        return `<div class="custom-control custom-checkbox">
+                    <input class="custom-control-input" type="checkbox" id="check-all">
+                    <label for="check-all" class="custom-control-label"></label>
+                </div>`
+    }
+%>

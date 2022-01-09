@@ -1,0 +1,17 @@
+<div class="container-fluid pt-3 ">
+    <div class="container animate-box" data-animate-effect="fadeIn">
+        <div class="row mx-0">
+            <div class="col-md-12 col-12 paddding animate-box" data-animate-effect="fadeIn">
+                <div class="d-flex flex-column justify-content-center align-items-center position-relative">
+                    <div style="margin-top: 10px; margin-bottom: 10px;">
+                        <h1 href="/articles/<%= articleItem.id %>/<%= articleItem.slug %>" class="text-dark">
+                            <%= formatSummaryHelper(articleItem.name) %>
+                        </h1>
+                    </div>
+                    <img class="d-flex" style="max-width:80vw;" src="<%= folderUploadArticles + articleItem.thumb %>"
+                        alt="img" />
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

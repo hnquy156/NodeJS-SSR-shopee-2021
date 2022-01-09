@@ -1,0 +1,25 @@
+<%
+postsInCategoryRssElement = (articles) => {
+    let xhtml = ``;
+    if (articles.length === 0) {
+        xhtml += `<div class="row pb-4">
+                    <h2>Không có bài viết trong danh mục</h2>
+                </div>`;
+    } else 
+    articles.forEach(article => {
+        xhtml+= `<div class="row pb-4">
+                    <div class="col-md-5">
+                        <div class="fh5co_hover_news_img">
+                            <div style="height:auto;" class="fh5co_news_img"><img style="width: 260px; height:fit-content" src="${article.image}" alt="${article.title}"/></div>
+                        </div>
+                    </div>
+                    <div class="col-md-7 animate-box">
+                        <a href="${article.link}" class="d-block fh5co_magna py-2"> ${article.title} </a> 
+                        <a href="single.html" class="fh5co_mini_time py-3"> <i class="fa fa-clock-o"></i> ${formatDateHelper(article.pubDate)} </a>
+                        <div class="fh5co_consectetur"> ${formatSummaryHelper(article.content)}...</div>
+                    </div>
+                </div>`;
+    });
+    return `${xhtml}`;
+}
+%>

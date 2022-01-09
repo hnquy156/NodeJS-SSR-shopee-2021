@@ -1,0 +1,8 @@
+<% 
+    timeHelper = (username, time) => {
+        const formatedTime = moment(time).format(systemConfigs.time_format);
+        
+        return `<p class="mb-0 history-by"><i class="far fa-user"></i> ${username || 'Chưa có dữ liệu'}</p>
+                <p class="mb-0 history-time"><i class="far fa-clock"></i> ${formatedTime || 'Chưa có dữ liệu'}</p>`
+    }
+%>

@@ -1,0 +1,72 @@
+<% include ./../../helpers/notify-validate %>
+<% include ./../../helpers/selectbox %>
+<% include ./../../helpers/input %>
+<% include ./../../helpers/form-group %>
+<% include ./../../helpers/textarea %>
+<% include ./../../helpers/image %>
+<%
+    const collection = 'users';
+    const linkPrefix = `/${systemConfigs.prefixAdmin}/${collection}`;
+    const statusSelectbox = [
+            {value: 'default', name: '- Select status -'},
+            {value: 'active', name: 'Active'},
+            {value: 'inactive', name: 'Inactive'},
+        ];
+    const groupsSelectbox = groups.map(group => ({name: group.name, value: group.id}));
+    groupsSelectbox.unshift({value: 'default', name: '- Select Group -'});
+    const folderUploads = `/uploads/${collection}`;
+    const formGroup = [
+        {label: 'Name', input: inputHelper('name', item.name, 'text')},
+        {label: 'User Name', input: inputHelper('username', item.username, 'text')},
+        {label: 'Password', input: inputHelper('password', item.password, 'password')},
+        {label: 'Password Confirm', input: inputHelper('password_confirm', item.password, 'password')},
+        {label: 'Status', input: selectboxHelper('status', statusSelectbox, item.status)},
+        {label: 'Ordering', input: inputHelper('ordering', item.ordering, 'number')},
+        {label: 'Group', input: selectboxHelper('group_id', groupsSelectbox, item.group_id)},
+        {label: 'Content', input: textareaHelper('content', item.content, 'text')},
+        {label: 'Avatar', input: inputHelper('avatar', item.avatar, 'file')},
+        {label: 'Avatar Current', input: imageHelper(item.avatar, folderUploads)},
+    ];
+%>
+
+<%- showErrors(errors) %>
+
+<div class="card card-info card-outline">
+    <div class="card-body">
+        <form action="<%= linkPrefix %>/form" method="post" class="mb-0" id="admin-form" enctype="multipart/form-data">
+            <%- formGroupHelper(formGroup) %>
+            <div class="form-group row">
+                <%- inputHelper('id', item.id, 'hidden') %>
+                <%- inputHelper('group_name', item.group_name, 'hidden') %>
+                <%- inputHelper('avatar_old', item.avatar || '', 'hidden') %>
+            </div>
+        </form>`
+        
+    </div>
+    <div class="card-footer">
+        <div class="col-12 col-sm-8 offset-sm-2">
+            <button id="admin-form-submit" class="btn btn-sm btn-success mr-1"> Save</button>
+            <a href="<%= linkPrefix %>" class="btn btn-sm btn-danger mr-1"> Cancel</a>
+        </div>
+    </div>
+
+</div>
+
+<script src="/backend/js/ckeditor5-build-decoupled-document/ckeditor.js"></script>
+<script>
+	DecoupledEditor
+		.create( document.querySelector( '#editor5' ) )
+		.then( editor => {
+			// The toolbar needs to be explicitly appended.
+			document.querySelector( '#toolbar-container' ).appendChild( editor.ui.view.toolbar.element );
+            document.querySelector( '#text-editor5' ).value = editor.getData();
+            
+            editor.model.document.on( 'change:data', () => {
+                document.querySelector( '#text-editor5' ).value = editor.getData();
+            } );
+			window.editor = editor;
+		} )
+		.catch( error => {
+			console.error( 'There was a problem initializing the editor.', error );
+		} );
+</script>

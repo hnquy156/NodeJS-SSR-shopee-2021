@@ -1,0 +1,15 @@
+<%
+	showNotify = (messages) => {
+		let xhtml = ``;
+		messages.forEach(message => {
+			const [type, msg] = message.split('|');
+			xhtml += `<div class="alert alert-${type} alert-dismissible">
+						<button type="button" class="close close-notify" data-dismiss="alert" aria-hidden="true">&times;</button>
+						<h5><i class="icon fas fa-exclamation-triangle"></i> ${msg}</h5>
+					</div>`
+		});
+
+		return xhtml;
+	}
+%>
+

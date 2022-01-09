@@ -1,0 +1,28 @@
+<%
+    const folderUploadArticles = `/${folderUploads}/articles/`;
+%>
+<% include ./../../helpers/format %>
+<% include ./../../elements/top-posts-2 %>
+<% include ./../../elements/slide-posts-1 %>
+
+<div id="fh5co-single-content" class="container-fluid pb-4 pt-4 paddding">
+    <div class="container paddding">
+        <div class="row mx-0">
+            <div class="col-md-8 animate-box" data-animate-effect="fadeInLeft">
+                <% include ./../../elements/article %>
+            </div>
+            <div class="col-md-3 animate-box" data-animate-effect="fadeInRight">
+                <% include ./../../elements/sidebar %>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<%- slidepostsElement('Bài viết trong danh mục', categoryArticles) %>
+
+<!-- Articles Pages -->
+<!-- Parallax -->
+<script src="js/jquery.stellar.min.js"></script>
+<!-- Main -->
+<script>if (!navigator.userAgent.match(/Android|BlackBerry|iPhone|iPad|iPod|Opera Mini|IEMobile/i)){$(window).stellar();}</script>

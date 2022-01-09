@@ -1,0 +1,6 @@
+<% 
+    inputHelper = (name, value, type, id = null) => {
+        const input_id = id ? `id=${id}` : '';
+        return `<input type="${type}" name="${name}" value="${value}" ${input_id} class="form-control form-control-sm">`
+    }
+%>

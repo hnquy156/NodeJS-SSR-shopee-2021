@@ -1,0 +1,11 @@
+<% 
+    specialHelper = (special, linkPrefix, id) => {
+        let icon = `<i class="fas fa-check"></i>`;
+        let btnSpecial = `success`;
+        if (special === 'inactive') {
+            icon = `<i class="fas fa-minus"></i>`;
+            btnSpecial = `danger`;
+        }
+        return `<a href="${linkPrefix}/change-special/${special}/${id}" data-special="${special}" class="ajax-special my-btn-state rounded-circle btn btn-sm btn-${btnSpecial}">${icon}</a>`
+    }
+%>

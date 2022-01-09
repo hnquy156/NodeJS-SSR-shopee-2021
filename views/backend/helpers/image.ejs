@@ -1,0 +1,6 @@
+<% 
+    imageHelper = (avatar, folderUploads, size = 'medium') => {
+        if (!avatar) avatar = "avatar-default.jpg"
+        return `<image src="${folderUploads}/${avatar}" class="bg-info img-avatar-${size}">`
+    }
+%>

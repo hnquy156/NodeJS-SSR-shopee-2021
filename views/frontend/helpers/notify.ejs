@@ -1,0 +1,11 @@
+<%	showMessagesAuth = (messages) => {
+	let xhtml = '';
+    Object.keys(messages).forEach(type => {
+        xhtml += `<div class="alert alert-${type === 'error' ? 'danger' : type}" role="alert">
+					<button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+					<h5><i class="icon fas fa-exclamation-triangle"></i> Lỗi!</h5>
+					${messages[type]}
+				</div>`;
+    });
+	return xhtml;
+}%>

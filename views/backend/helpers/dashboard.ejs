@@ -1,0 +1,16 @@
+<%
+    managements.forEach(management => {
+        <div class="col-lg-3 col-6">
+            <div class="small-box bg-info">
+                <div class="inner">
+                    <h3><%= management.count %></h3>
+                    <p><%= management.name %></p>
+                </div>
+                <div class="icon text-white">
+                    <i class="ion ion-ios-people"></i>
+                </div>
+                <a href="/<%= systemConfigs.prefixAdmin %>/<%= <%= management.collection %>" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+            </div>
+        </div>
+    });
+%>
