@@ -15,7 +15,7 @@
 <% include ./../../helpers/format %>
 
 <%
-    const collection = 'articles';
+    const collection = 'products';
     const linkPrefix = `/${systemConfigs.prefixAdmin}/${collection}`;
     const groupsSelectbox = categoryGroups.map(group => ({name: group.name, value: group.id}));
     const groupsFilter = [{name: 'All', value: 'default'}, ...groupsSelectbox];

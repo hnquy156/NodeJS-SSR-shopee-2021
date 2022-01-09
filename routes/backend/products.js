@@ -3,7 +3,7 @@ const router = express.Router();
 
 const { body, validationResult } = require('express-validator');
 
-const collectionName = 'articles';
+const collectionName = 'products';
 const MainModel = require(__path_models + collectionName);
 const CategoriesModels = require(__path_models + 'categories');
 const UtilsHelpers = require(__path_helpers + 'utils');
@@ -17,7 +17,7 @@ const Validates = require(__path_validates + collectionName);
 const folderView = `${__path_views_admin}pages/${collectionName}`;
 const folderUploads = `${__path_uploads}${collectionName}/`;
 const linkIndex = `/${systemConfigs.prefixAdmin}/${collectionName}`;
-const pageTitle = "Articles Management";
+const pageTitle = "Products Management";
 
 
 // POST ADD/EDIT

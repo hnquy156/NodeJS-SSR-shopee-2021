@@ -10,6 +10,7 @@ const items = new Schema({
     ordering: Number,
     slug: String,
     thumb: String,
+    like: Number,
     group: {
         id: String,
         name: String,
@@ -27,4 +28,4 @@ const items = new Schema({
     content: String,
 });
 
-module.exports = mongoose.model(databaseConfigs.col_articles, items);
+module.exports = mongoose.model(databaseConfigs.col_products, items);
