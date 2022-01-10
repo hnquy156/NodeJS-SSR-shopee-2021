@@ -21,7 +21,7 @@ const pageTitle = "Products Management";
 
 
 // POST ADD/EDIT
-router.post('/form', FileHelpers.upload('thumb', collectionName), Validates.formValidate(body), async (req, res) => {
+router.post('/form',  Validates.formValidate(body), async (req, res) => {
 	const item = req.body;
 	const user = req.user;
 	const categoryGroups = await CategoriesModels.getList({}, {select: 'name'});
@@ -30,26 +30,10 @@ router.post('/form', FileHelpers.upload('thumb', collectionName), Validates.form
 	const task = item && item.id ? 'edit' : 'add';
 	res.locals.sidebarActive = `${collectionName}|form`;
 	
-	if (req.errorMulter) {
-		if (req.errorMulter.code && req.errorMulter.code === 'LIMIT_FILE_SIZE')
-			errors.push({param: 'thumb', msg: NotifyConfigs.ERROR_FILE_LIMIT});
-		else
-			errors.push({param: 'thumb', msg: req.errorMulter});
-	} else if (!req.file && task === 'add') {
-		errors.push({param: 'thumb', msg: NotifyConfigs.ERROR_FILE_REQUIRE});
-	}
-
 	if (errors.length > 0) {
-		if (req.file) FileHelpers.removeFile(folderUploads, req.file.filename);
 		res.render(`${folderView}/form`, {pageTitle, errors, item, categoryGroups});
 
 	} else {
-		if (!req.file && task === 'edit') {
-			item.thumb = item.thumb_old
-		} else {
-			item.thumb = req.file.filename;
-			FileHelpers.removeFile(folderUploads, item.thumb_old);
-		}
 		await MainModel.saveItem(item, {task, user});
 		NotifyHelpers.showNotifyAndRedirect(req, res, linkIndex, {task});
 	}
@@ -58,7 +42,7 @@ router.post('/form', FileHelpers.upload('thumb', collectionName), Validates.form
 // Get FORM --- ADD/EDIT
 router.get('/form(/:id)?', async (req, res) => {
 	const id = ParamsHelpers.getParam(req.params, 'id', '');
-	let item = {id: '', name: '', ordering: 1, content: '', group_id: '', group_name: '', slug: ''};
+	let item = {id: '', name: '', ordering: 1, content: '', group_id: '', group_name: '', slug: '', thumb: ''};
 	const categoryGroups = await CategoriesModels.getList({}, {select: 'name'});
 	const errors = [];
 	res.locals.sidebarActive = `${collectionName}|form`;;

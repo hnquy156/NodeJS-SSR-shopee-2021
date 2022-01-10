@@ -28,7 +28,7 @@
         {label: 'Slug', input: inputHelper('slug', item.slug, 'text', 'slug-form')},
         {label: 'Category', input: selectboxHelper('group_id', groupsSelectbox, item.group_id)},
         {label: 'Content', input: textareaHelper('content', item.content, 'text')},
-        {label: 'Thumb', input: inputHelper('thumb', item.thumb, 'file')},
+        {label: 'Thumb', input: inputHelper('thumb', item.thumb, 'text')},
         {label: 'Thumb Current', input: imageHelper(item.thumb, folderUploads)},
     ];
 %>

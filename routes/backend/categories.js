@@ -124,7 +124,7 @@ router.get('(/status/:status)?', async (req, res, next) => {
 // Get FORM --- ADD/EDIT
 router.get('/form(/:id)?', async (req, res) => {
 	const id = ParamsHelpers.getParam(req.params, 'id', '');
-	let item = {id: '', name: '', ordering: 1, content: '', group_acp: '', slug: '',};
+	let item = {id: '', name: '', ordering: 1, content: '', group_acp: '', slug: '', thumb: '',};
 	const errors = [];
 	const pageTitle = id ? 'Edit' : 'Add';
 	res.locals.sidebarActive = `${collectionName}|form`;

@@ -10,7 +10,10 @@ const items = new Schema({
     ordering: Number,
     slug: String,
     thumb: String,
-    like: Number,
+    like: {
+        total: Number,
+        user_id: [Array],
+    },
     group: {
         id: String,
         name: String,

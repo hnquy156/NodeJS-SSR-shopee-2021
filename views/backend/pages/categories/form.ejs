@@ -3,6 +3,7 @@
 <% include ./../../helpers/input %>
 <% include ./../../helpers/form-group %>
 <% include ./../../helpers/textarea %>
+<% include ./../../helpers/image %>
 <%
     const collection = 'categories';
     const linkPrefix = `/${systemConfigs.prefixAdmin}/${collection}`;
@@ -17,6 +18,8 @@
         {label: 'Ordering', input: inputHelper('ordering', item.ordering, 'number')},
         {label: 'Slug', input: inputHelper('slug', item.slug, 'text', 'slug-form')},
         {label: 'Content', input: textareaHelper('content', item.content, 'text')},
+        {label: 'Thumb', input: inputHelper('thumb', item.thumb, 'text')},
+        {label: 'Thumb Current', input: imageHelper(item.thumb, folderUploads)},
     ];
 %>
 
@@ -28,6 +31,7 @@
             <%- formGroupHelper(formGroup) %>
             <div class="form-group row">
                 <%- inputHelper('id', item.id, 'hidden') %>
+                <%- inputHelper('thumb_old', item.thumb || '', 'hidden') %>
             </div>
         </form>`
         
