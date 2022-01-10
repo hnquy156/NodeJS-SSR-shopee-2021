@@ -166,6 +166,8 @@ module.exports = {
         item.slug = stringsHelpers.changeToSlug(item.slug);
         item['group.id'] = item.group_id;
         item['group.name'] = item.group_name;
+        item['price.price_old'] = item.price_old;
+        item['price.price_new'] = item.price_new;
 
         if (options.task === 'add') {
             item.created = {
@@ -173,6 +175,11 @@ module.exports = {
                 user_name: user.username,
                 time: Date.now(),
             }
+            item.sold = 0;
+            item.like = {
+                total: 0,
+                user_id: [],
+            };
             return ProductsModels(item).save();
 
         }

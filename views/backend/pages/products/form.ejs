@@ -25,11 +25,13 @@
         {label: 'Status', input: selectboxHelper('status', statusSelectbox, item.status)},
         {label: 'Special', input: selectboxHelper('special', specialSelectbox, item.special)},
         {label: 'Ordering', input: inputHelper('ordering', item.ordering, 'number')},
+        {label: 'Original Price', input: inputHelper('price_old', item.price_old, 'number')},
+        {label: 'New Price', input: inputHelper('price_new', item.price_new, 'number')},
         {label: 'Slug', input: inputHelper('slug', item.slug, 'text', 'slug-form')},
         {label: 'Category', input: selectboxHelper('group_id', groupsSelectbox, item.group_id)},
         {label: 'Content', input: textareaHelper('content', item.content, 'text')},
         {label: 'Thumb', input: inputHelper('thumb', item.thumb, 'text')},
-        {label: 'Thumb Current', input: imageHelper(item.thumb, folderUploads)},
+        {label: 'Thumb Current', input: imageOutsideHelper(item.thumb)},
     ];
 %>
 
@@ -37,7 +39,7 @@
 
 <div class="card card-info card-outline">
     <div class="card-body">
-        <form action="<%= linkPrefix %>/form" method="post" class="mb-0" id="admin-form" enctype="multipart/form-data">
+        <form action="<%= linkPrefix %>/form" method="post" class="mb-0" id="admin-form" >
             <%- formGroupHelper(formGroup) %>
             <div class="form-group row">
                 <%- inputHelper('id', item.id, 'hidden') %>

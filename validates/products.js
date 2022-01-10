@@ -3,12 +3,12 @@ const util = require('util');
 const NotifyConfigs = require(__path_configs + 'notify');
 
 const options = {
-    name: {min: 3, max: 100},
+    name: {min: 3, max: 200},
     status: {value: 'default' },
     special: {value: 'default' },
     group: {value: 'default' },
     ordering: {gt: 0, lt: 100},
-    slug: {min: 3, max: 100},
+    slug: {min: 3, max: 200},
     content: {min: 1, max: 20000},
 }
 

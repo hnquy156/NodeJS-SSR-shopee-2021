@@ -89,7 +89,7 @@
                             <td class="text-center"><%- checkboxHelper(index, item.id) %></td>
                             <td class="text-center"><%= index + 1 %></td>
                             <td class="text-center"><%- highlightHelper(item.name, search_value) %></td>
-                            <td class="text-center"><%- imageHelper(item.thumb, folderUploads, 'mini') %></td>
+                            <td class="text-center"><%- imageOutsideHelper(item.thumb, 'mini') %></td>
                             <td class="text-center position-relative"><%- statusHelper(item.status, linkPrefix, item.id) %></td>
                             <td class="text-center position-relative"><%- orderingHelper(item.ordering, linkPrefix, item.id) %></td>
                             <td class="text-center"><%= item.slug %></td>

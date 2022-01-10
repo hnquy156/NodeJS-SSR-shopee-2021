@@ -42,7 +42,8 @@ router.post('/form',  Validates.formValidate(body), async (req, res) => {
 // Get FORM --- ADD/EDIT
 router.get('/form(/:id)?', async (req, res) => {
 	const id = ParamsHelpers.getParam(req.params, 'id', '');
-	let item = {id: '', name: '', ordering: 1, content: '', group_id: '', group_name: '', slug: '', thumb: ''};
+	let item = {id: '', name: '', ordering: 1, content: '', 
+				group_id: '', group_name: '', slug: '', thumb: ''};
 	const categoryGroups = await CategoriesModels.getList({}, {select: 'name'});
 	const errors = [];
 	res.locals.sidebarActive = `${collectionName}|form`;;
@@ -51,6 +52,8 @@ router.get('/form(/:id)?', async (req, res) => {
 
 	item.group_id   = item.group ? item.group.id : '';
 	item.group_name = item.group ? item.group.name : '';
+	item.price_new   = item.price ? item.price.price_new : '';
+	item.price_old = item.price ? item.price.price_old : '';
 	
 	res.render(`${folderView}/form`, {pageTitle, errors, item, categoryGroups});
 });

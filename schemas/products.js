@@ -10,6 +10,11 @@ const items = new Schema({
     ordering: Number,
     slug: String,
     thumb: String,
+    sold: Number,
+    price: {
+        price_old: Number,
+        price_new: Number,
+    },
     like: {
         total: Number,
         user_id: [Array],
