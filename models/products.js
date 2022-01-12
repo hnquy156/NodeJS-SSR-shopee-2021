@@ -22,7 +22,7 @@ module.exports = {
         categories = categories.map(category => category.name);
 
         const condition = {status: 'active', 'group.name': {$in: categories}};
-        let select = 'name thumb slug content created group';
+        let select = 'name price sold like thumb slug content created group';
         let sort = {'created.time': 'desc'};
         let skip = null;
         let limit = null;

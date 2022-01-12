@@ -1225,6 +1225,7 @@ transform: translateY(-1px);
     align-items: center;
     padding: 12px 22px;
     border-radius: 2px;
+    margin-bottom: 10px;
 }
 
 .home-filter__label {
@@ -1325,6 +1326,7 @@ transform: translateY(-1px);
 .home-product-item__img {
     /* border: 1px solid var(--border-color); */
     background-repeat: no-repeat;
+    background-size: contain;
     padding-top: 100%; /* padding top kế thừa 100% width của thẻ cha nên sẽ tạo hình vuông*/
     border-top-left-radius: 2px;
     border-top-right-radius: 2px;

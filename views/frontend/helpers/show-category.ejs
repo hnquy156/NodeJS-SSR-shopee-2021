@@ -1,0 +1,23 @@
+<%
+    showCategoryHelper = (categories) => {
+        let xhtml = '';
+        categories.forEach(category => {
+
+            xhtml += `<div class="col l-2 m-0 c-0">
+                        <a href="#" class="pc-category__item">
+                            <div class="pc-category__item-img" style="background-image:url(${category.thumb});"></div>
+                            <div class="pc-category__item-name">${category.name}</div>
+                        </a>
+                    </div>`;
+        });
+
+        return `<div class="row sm-gutter  pc-category">
+                    <div class="col l-12 m-0 c-0">
+                        <h3 class="pc-category__heading">
+                            Danh mục
+                        </h3>
+                    </div>
+                    ${xhtml}
+                </div>`;
+    }
+%>

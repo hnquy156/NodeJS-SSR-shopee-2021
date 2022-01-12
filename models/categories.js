@@ -15,7 +15,7 @@ module.exports = {
 
     getListFrontend: (options = null, params = null) => {
         const condition = {status: 'active'};
-        let select = 'name slug content created';
+        let select = 'name slug thumb content created';
         let sort = {'ordering': 'asc'};
         let skip = null;
         let limit = null;
