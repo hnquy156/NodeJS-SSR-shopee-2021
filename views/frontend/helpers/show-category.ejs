@@ -4,7 +4,7 @@
         categories.forEach(category => {
 
             xhtml += `<div class="col l-2 m-0 c-0">
-                        <a href="#" class="pc-category__item">
+                        <a href="/category/${category.id}" class="pc-category__item">
                             <div class="pc-category__item-img" style="background-image:url(${category.thumb});"></div>
                             <div class="pc-category__item-name">${category.name}</div>
                         </a>

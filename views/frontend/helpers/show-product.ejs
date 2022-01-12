@@ -9,7 +9,7 @@
             percentPrice = Math.round(percentPrice);
 
             xhtml += `<div class="col l-${column} m-3 c-6">
-                            <a class="home-product-item">
+                            <a href="/products/${product.id}" class="home-product-item">
                                 <div class="home-product-item__img" style="background-image:url(${product.thumb});"></div>
                                 <h4 class="home-product-item__name">${product.name}</h4>
                                 <div class="home-product-item__price">
@@ -31,8 +31,8 @@
                                     <span class="home-product-item__sold">75 đã bán</span>
                                 </div>
                                 <div class="home-product-item__origin">
-                                    <span class="home-product-item__brand">Astra</span>
-                                    <span class="home-product-item__origin-name">Japan</span>
+                                    <span class="home-product-item__brand add-to-cart"><i class="fas fa-cart-plus"></i></span>
+                                    <span class="home-product-item__origin-name">${product.group.name}</span>
                                 </div>
                                 <div class="home-product-item__favourite">
                                     <i class="fas fa-check"></i>
