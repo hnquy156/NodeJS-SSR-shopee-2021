@@ -1,0 +1,171 @@
+<% include ./../../helpers/show-product %>
+<% include ./../../helpers/format %>
+
+<div class="row sm-gutter app__content">
+    <div class="col l-5 m-12 c-12">
+        <div class="product__images">
+            <div  class="product__image-main" style="background-image: url('<%= productItem.thumb %>'); ">
+                
+            </div>
+
+            <!-- START slider image -->
+            <!-- <div class="product__image-slider cursor-pointer">
+                <div class="row sm-gutter no-wrap product__image-slider-box">
+                    <div class="col l-3 m-0 c-0">
+                        <div class="product__image-item" style="background-image: url('https://cf.shopee.vn/file/14e30da1c63369d792441db63ff2714e'); "></div>
+                    </div>
+                    <div class="col l-3 m-0 c-0">
+                        <div class="product__image-item" style="background-image: url('https://cf.shopee.vn/file/9dee865fcbbee33061f04e00c28e1bec_tn'); "></div>
+                    </div>
+                    <div class="col l-3 m-0 c-0">
+                        <div class="product__image-item" style="background-image: url('https://cf.shopee.vn/file/9dee865fcbbee33061f04e00c28e1bec_tn'); "></div>
+                    </div>
+                    <div class="col l-3 m-0 c-0">
+                        <div class="product__image-item" style="background-image: url('https://cf.shopee.vn/file/14e30da1c63369d792441db63ff2714e'); "></div>
+                    </div>
+                    <div class="col l-3 m-0 c-0">
+                        <div class="product__image-item" style="background-image: url('https://cf.shopee.vn/file/14e30da1c63369d792441db63ff2714e'); "></div>
+                    </div>
+                    <div class="col l-3 m-0 c-0">
+                        <div class="product__image-item" style="background-image: url('https://cf.shopee.vn/file/9dee865fcbbee33061f04e00c28e1bec_tn'); "></div>
+                    </div>
+                </div>
+                <span class="slider__btn-arrow image__btn-arrow image__btn-left "><i class="fas fa-chevron-left"></i></span>
+                <span class="slider__btn-arrow image__btn-arrow image__btn-right "><i class="fas fa-chevron-right"></i></span>
+            </div> -->
+        </div>
+    </div>
+    <div class="col l-7 m-12 c-12">
+        <div class="product__information">
+            <h3 class="product__title"><%= productItem.name %></h3>
+            <div class="product__rates">
+                <div class="product__rates-star">4.0 
+                    <span class="product__starts">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                    </span>
+                </div>
+                <div class="product__rates-review product__rates-item">7 Đánh giá</div>
+                <div class="product__rates-sold product__rates-item">23 Đã bán</div>
+            </div>
+            <div class="product__price"><%= formatCurrencyHelper(productItem.price.price_new) %></div>
+            <div class="product__information-item">
+                <div class="row ">
+                    <div class="col l-2 m-2 c-2">
+                        <div class="product__information-item-title">Vận chuyển</div>
+                    </div>
+                    <div class="col l-10 m-10 c-10">
+                        <div class="product__transport-content product__information-item-content">Vận chuyển tới ...</div>
+                    </div>
+                </div>
+            </div>
+            <div class="product__information-item">
+                <div class="row ">
+                    <div class="col l-2 m-2 c-2">
+                        <div class="product__information-item-title">Màu sắc</div>
+                    </div>
+                    <div class="col l-10 m-10 c-10">
+                        <div class="product__property-content product__information-item-content">
+                            <button class="product__property-btn">Vàng</button>
+                            <button class="product__property-btn">Đen</button>
+                            <button class="product__property-btn">Xanh</button>
+                            <button class="product__property-btn">Bạc</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="product__information-item">
+                <div class="row ">
+                    <div class="col l-2 m-2 c-2">
+                        <div class="product__information-item-title">Số lượng</div>
+                    </div>
+                    <div class="col l-10 m-10 c-10">
+                        <div class="product__quantity-content product__information-item-content">
+                            <div class="product__quantity-btn-wrap">
+                                <button class="product__quantity-btn btn-decrease">-</button>
+                                <input type="number" role="spinbutton" min="0" class="product__quantity-number" value="0">
+                                <button class="product__quantity-btn btn-increase">+</button>
+                            </div>
+                            <p class="product__quantity-current">300 sản phẩm có sẵn</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="product__checkout-btn">
+                <button class="product__add-cart btn">
+                    <i class="fas fa-cart-plus product__cart-icon"></i>
+                    Thêm vào giỏ hàng
+                </button>
+                <button class="product__buy-now btn btn--primary">Mua ngay</button>
+            </div>
+        </div>
+    </div>
+</div>
+<div class=" mb-20"></div>
+
+<%- showProductHelper('Sản phẩm cùng danh mục', products, 6) %>
+
+<div class="row sm-gutter  app__content">
+    <div class="col l-12 m-12 c-12">
+        <div class="product__detail">
+            <div class="product__title">CHI TIẾT SẢN PHẨM</div>
+            <table class="product__detail-table">
+                <tr class="product__detail-item">
+                    <td class="product__detail-item-title">Danh mục</td>
+                    <td class="product__detail-item-content">Máy tính bảng</td>
+                </tr>
+                <tr class="product__detail-item">
+                    <td class="product__detail-item-title">Dung lượng</td>
+                    <td class="product__detail-item-content">128GB</td>
+                </tr>
+                <tr class="product__detail-item">
+                    <td class="product__detail-item-title">Loại bảo hành</td>
+                    <td class="product__detail-item-content">Bảo hành nhà cung cấp</td>
+                </tr>
+                <tr class="product__detail-item">
+                    <td class="product__detail-item-title">Hạn bảo hành</td>
+                    <td class="product__detail-item-content">12 tháng
+                    </td>
+                </tr>
+                <tr class="product__detail-item">
+                    <td class="product__detail-item-title">Dung lượng pin</td>
+                    <td class="product__detail-item-content">9500mAh</td>
+                </tr>
+                <tr class="product__detail-item">
+                    <td class="product__detail-item-title">Kho hàng</td>
+                    <td class="product__detail-item-content">396</td>
+                </tr>
+                <tr class="product__detail-item">
+                    <td class="product__detail-item-title">Gửi từ</td>
+                    <td class="product__detail-item-content">Quận Bình Tân, TP. Hồ Chí Minh</td>
+                </tr>
+            </table>
+        </div>
+    </div>
+    <div class="col l-12 m-12 c-12">
+        <div class="product__description">
+            <div class="product__title">MÔ TẢ SẢN PHẨM</div>
+            <p class="product__textarea">
+                Quà tặng giá trị kèm theo 10 món <br/>
+                1 ĐẶT BIỆT TẶNG 1 tặng bao da và 1 bàn phím blutooth cao cấp + chuột <br/>
+                2 tai nghe Hphone Sony Extra bass ốp tai <br/>
+                3 Tặng sạc chuẩn (Chuẩn dòng, chuẩn nguồn) <br/>
+                4 Tặng Cable USB (Kết nối với máy tính) <br/>
+                5 Tặng Miếng dán KÍNH CƯỜNG LỰC <br/>
+                6 Tặng Đế Dựng/I-ring (Giúp để máy lên bàn xem phim <br/>
+                7 Tặng Jack OTG (Kết nối chuột, usb…) <br/>
+                8 Tặng phiếu giảm giá 200K khi thay kính cảm ứng <br/>
+                Máy tính bảng tablet As88 plus ,Là sản phẩm mẫu mới nhất hiện nay tại thi trường Việt Nam
+                2020 <br/>
+                ĐỘ PHÂN GIẢI MÀN HÌNH OLED SIÊU NÉT . <br/>
+
+            </p>
+        </div>
+    </div>
+</div>
+
+<script src="/frontend/js/product.js"></script>

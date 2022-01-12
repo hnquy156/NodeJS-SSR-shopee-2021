@@ -1580,7 +1580,7 @@ transform: translateY(-1px);
 }
 
 .product__image-main {
-    background-image: url('https://cf.shopee.vn/file/14e30da1c63369d792441db63ff2714e'); 
+    /* background-image: url('https://cf.shopee.vn/file/14e30da1c63369d792441db63ff2714e');  */
     width: 100%;
     padding-top: 100%;
     /* height: 400px; */

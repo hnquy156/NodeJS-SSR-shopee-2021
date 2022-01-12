@@ -56,7 +56,7 @@ module.exports = {
     },
 
     getItemFrontend: (id, options = null) => {
-        return ProductsModels.findById({_id: id});
+        return ProductsModels.findById(id);
     },
 
     countItems: (condition) => {

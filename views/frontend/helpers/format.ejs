@@ -6,4 +6,17 @@
     formatSummaryHelper = (content, limit = 150) => {
         return content.replace(/<[^>]*>/igm, "").substring(0, limit);
     }
+
+    formatCurrencyHelper = (price, unit = '₫') => {
+        let string = price.toString();
+        let result = '';
+        let count = 0;
+
+        for(let i = string.length - 1; i >= 0; i--) {
+            count++;
+            result = string[i] + result;
+            if (count % 3 === 0 && i > 0) result = '.' + result;
+        }
+        return result + ' ' + unit;
+    }
 %>
