@@ -34,9 +34,17 @@ module.exports = {
         if (options.task === 'products-special') {
             condition.special = 'active';
             sort = {'ordering': 'asc'};
-            limit = 5;
+            
             return ProductsModels.find(condition).select(select).sort(sort).skip(skip).limit(limit);
         }
+
+        if (options.task === 'products-soldout') {
+            sort = {'sold': 'desc'};
+            limit = 12;
+            
+            return ProductsModels.find(condition).select(select).sort(sort).skip(skip).limit(limit);
+        }
+
         if (options.task === 'products-random') {
             return ProductsModels.aggregate([
                 { $match: {status: 'active'}},

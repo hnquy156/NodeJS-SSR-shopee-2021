@@ -11,8 +11,10 @@
     <div class="col l-12 m-12 c-12">
         
         <% include ./../../elements/category-mobile %>
-
-        <%- showProductHelper('Sản phẩm bán chạy', products) %>
+        
+        <%- showProductHelper('Sản phẩm nổi bật', specialProducts) %>
+        <%- showProductHelper('Sản phẩm bán chạy', soldoutProducts) %>
+        <%- showProductHelper('Tất cả sản phẩm', products) %>
         
 
         <!-- <% include ./../../elements/pagination %> -->
