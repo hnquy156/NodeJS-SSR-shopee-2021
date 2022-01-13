@@ -41,7 +41,7 @@ module.exports = {
         if (options.task === 'products-soldout') {
             sort = {'sold': 'desc'};
             limit = 12;
-            
+
             return ProductsModels.find(condition).select(select).sort(sort).skip(skip).limit(limit);
         }
 
@@ -135,6 +135,22 @@ module.exports = {
                 return ProductsModels.updateOne({_id: ID}, data);
             });
             return await Promise.all(promiseOrdering);
+        }
+    },
+
+    changeSold: async (id, sold, options) => {
+        const user = options.user;
+        const data = {
+            sold: +sold,
+            modified: {
+                user_id: user.id,
+                user_name: user.username,
+                time: Date.now(),
+            },
+        }
+        if (options.task === 'change-sold-one') {
+            await ProductsModels.updateOne({_id: id}, data);
+            return {id, sold: +sold, notify: NotifyConfig.CHANGE_SOLD_SUCCESS}
         }
     },
 

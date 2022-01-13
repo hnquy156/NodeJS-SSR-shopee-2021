@@ -109,6 +109,37 @@ $(document).ready(function () {
         })
     });
 
+    // CHANGE SOLD //
+    $('.ajax-sold').change(function(e) {
+        const element = $(this);
+        const id = element.data('id');
+        const url = element.data('link');
+        let sold = +element.val();
+        
+        if (sold < 0) {
+            showNotify(element, 'Sold phải là giá trị không âm!!!', 'error');
+            sold = 0;
+            element.val(0);
+            return -1;
+        } else if (sold !== Math.round(sold)) {
+            showNotify(element, 'Sold phải là giá trị nguyên!!!', 'error');
+            sold = Math.round(sold);
+            element.val(sold);
+            return -1;
+        }
+        $.ajax({
+            type: 'POST',
+            data: {
+                cid: id,
+                sold,
+            },
+            url,
+            success: (data) => {
+                showNotify(element, data.notify);
+            }
+        })
+    });
+
     // Change Group of Item (user/category/...)
     $('.ajax-group-selectbox').change(function(e) {
         e.preventDefault();

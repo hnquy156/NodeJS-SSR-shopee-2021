@@ -3,6 +3,7 @@ module.exports = {
     CHANGE_STATUS_SUCCESS: 'Cập nhật status thành công',
     CHANGE_STATUS_MULTI_SUCCESS: 'Có %d phần tử được cập nhật status thành công',
     CHANGE_ORDERING_SUCCESS: 'Cập nhật ordering thành công',
+    CHANGE_SOLD_SUCCESS: 'Cập nhật Sold thành công',
     CHANGE_GROUP_ACP_SUCCESS: 'Cập nhật group ACP thành công',
     CHANGE_SPECIAL_SUCCESS: 'Cập nhật SPECIAL thành công',
     CHANGE_GROUP: 'Cập nhật group thành công',

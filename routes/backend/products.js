@@ -85,6 +85,18 @@ router.post('/change-ordering', async (req, res) => {
 	// NotifyHelpers.showNotifyAndRedirect(req, res, linkIndex, {task: 'change-ordering'});
 });
 
+/* POST change sold  */
+router.post('/change-sold', async (req, res) => {
+	const id		    = ParamsHelpers.getParam(req.body, 'cid', '');
+	const sold			= ParamsHelpers.getParam(req.body, 'sold', '');
+	const task 			= 'change-sold-one';
+	const user 			= req.user;
+	
+	const data = await MainModel.changeSold(id, sold, {task, user});
+	res.send(data);
+	// NotifyHelpers.showNotifyAndRedirect(req, res, linkIndex, {task: 'change-sold'});
+});
+
 /* GET Delete one */
 router.get('/delete/:id', async (req, res) => {
 	const id		    = ParamsHelpers.getParam(req.params, 'id', '');

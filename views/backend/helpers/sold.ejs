@@ -1,0 +1,7 @@
+<% 
+    soldHelper = (sold, linkPrefix, id) => {
+        
+        return `<input type="number" value="${sold}" class="ajax-sold  form-control form-control-sm m-auto text-center" 
+                style="width: 55px" min="0" data-link="${linkPrefix}/change-sold" data-id="${id}">`
+    }
+%>
