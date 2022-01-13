@@ -2,11 +2,13 @@ document.addEventListener('DOMContentLoaded', (event) => {
     
     sliderMain();
     sliderImage();
-
     window.addEventListener('resize', sliderMain);
+
+    toggleLike();
 
     function sliderMain() {
         const slider        = document.querySelector('#slider');
+        if (!slider) return -1;
         const sliderItemImg = document.querySelectorAll('.slider__img');
         const sliderBox     = document.querySelector('.slider__box');
         const leftBtn       = document.querySelector('.slider__btn-arrow.slider__btn-left');
@@ -52,6 +54,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
 
     function sliderImage() {
         const slider        = document.querySelector('.product__image-slider');
+        if (!slider) return -1;
         const sliderItemImg = document.querySelectorAll('.product__image-item');
         const sliderBox     = document.querySelector('.product__image-slider-box');
         const leftBtn       = document.querySelector('.image__btn-arrow.image__btn-left');
@@ -93,6 +96,16 @@ document.addEventListener('DOMContentLoaded', (event) => {
         function slideCanClick() {
             canClickSlideBtn = true;
         }
+    }
+
+    function toggleLike() {
+        const elmLikes = document.querySelectorAll('.home-product-item__like');
+
+        elmLikes.forEach(elm => {
+            elm.onclick = (e) => {
+                elm.classList.toggle('home-product-item__like--liked')
+            }
+        });
     }
 });
 

@@ -154,6 +154,26 @@ module.exports = {
         }
     },
 
+    changeLike: async (id, options) => {
+        const user = options.user;
+        
+        if (options.task === 'change-like') {
+            const isLiked = await ProductsModels.findOne({_id: id, 'like.user_id': { $in: user.id}});
+            if (isLiked) {
+                await ProductsModels.updateOne({_id: id}, {
+                    $inc: {'like.total': -1},
+                    $pull: {'like.user_id': user.id}
+                });
+            } else {
+                await ProductsModels.updateOne({_id: id}, {
+                    $inc: {'like.total': 1},
+                    $push: {'like.user_id': user.id}
+                });
+            }
+            return {id}
+        }
+    },
+
     changeGroup: async (id, group_id, group_name, options) => {
         const user = options.user;
         const data = {

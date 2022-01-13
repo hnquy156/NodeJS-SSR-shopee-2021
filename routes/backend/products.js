@@ -97,6 +97,18 @@ router.post('/change-sold', async (req, res) => {
 	// NotifyHelpers.showNotifyAndRedirect(req, res, linkIndex, {task: 'change-sold'});
 });
 
+/* POST change like  */
+router.post('/change-like/', async (req, res) => {
+	const id		    = ParamsHelpers.getParam(req.body, 'id', '');
+	// const like			= ParamsHelpers.getParam(req.body, 'like', '');
+	const task 			= 'change-like';
+	const user 			= req.user;
+	
+	const data = await MainModel.changeLike(id, {task, user});
+	res.send(data);
+	// NotifyHelpers.showNotifyAndRedirect(req, res, linkIndex, {task: 'change-like'});
+});
+
 /* GET Delete one */
 router.get('/delete/:id', async (req, res) => {
 	const id		    = ParamsHelpers.getParam(req.params, 'id', '');

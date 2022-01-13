@@ -1,15 +1,18 @@
 <%
     showProductHelper = (title, products, column = 6) => {
         column = column === 5 ? '2-4' : 12/column;
+        let linkPrefix = systemConfigs.prefixAdmin;
         let xhtml = '';
         products.forEach(product => {
+            const isLiked   = (typeof user !== 'undefined') ? product.like.user_id.indexOf(user.id) : -1;
+            const likedClass= isLiked > -1 ? 'home-product-item__like--liked' : '';
             const price_old = product.price.price_old;
             const price_new = product.price.price_new;
             let percentPrice = (price_old - price_new) / price_old * 100;
             percentPrice = Math.round(percentPrice);
 
             xhtml += `<div class="col l-${column} m-3 c-6">
-                            <a href="/products/${product.id}" class="home-product-item">
+                            <a href="/products/${product.id}" data-id=${product.id} data-link=/${linkPrefix}/products/change-like class="home-product-item">
                                 <div class="home-product-item__img" style="background-image:url(${product.thumb});"></div>
                                 <h4 class="home-product-item__name">${product.name}</h4>
                                 <div class="home-product-item__price">
@@ -17,7 +20,7 @@
                                     <span class="home-product-item__price-current">${formatCurrencyHelper(price_new)}</span>
                                 </div>
                                 <div class="home-product-item__action">
-                                    <span class="home-product-item__like home-product-item__like--liked">
+                                    <span class="home-product-item__like ajax-liked-product ${likedClass}">
                                         <i class="home-product-item__like-icon far fa-heart"></i>
                                         <i class="home-product-item__liked-icon fas fa-heart"></i>
                                     </span>
