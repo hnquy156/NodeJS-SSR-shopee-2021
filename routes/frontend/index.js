@@ -8,5 +8,7 @@ router.use('/', require('./home'));
 router.use('/category', require('./category'));
 router.use('/products', require('./products'));
 router.use('/contacts', require('./contacts'));
+router.use('/carts', require('./carts'));
+router.use('/checkouts', require('./checkouts'));
 
 module.exports = router;
