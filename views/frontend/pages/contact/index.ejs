@@ -1,77 +1,31 @@
-<%
-    const collection = 'contacts';
-    const linkPrefix = `/contact`;
-%>
-
-<div class="container-fluid  fh5co_fh5co_bg_contcat">
-    <div class="container">
-        <div class="row py-4">
-            <div class="col-md-4 py-3">
-                <div class="row fh5co_contact_us_no_icon_difh5co_hover">
-                    <div class="col-3 fh5co_contact_us_no_icon_difh5co_hover_1">
-                        <div class="fh5co_contact_us_no_icon_div"> <span><i class="fa fa-phone"></i></span> </div>
-                    </div>
-                    <div class="col-9 align-self-center fh5co_contact_us_no_icon_difh5co_hover_2">
-                        <span class="c_g d-block">Liên hệ chúng tôi</span>
-                        <span class="d-block c_g fh5co_contact_us_no_text"><%= settings.phone %></span>
-                    </div>
-                    <div class="clearfix"></div>
-                </div>
-            </div>
-            <div class="col-md-4 py-3">
-                <div class="row fh5co_contact_us_no_icon_difh5co_hover">
-                    <div class="col-3 fh5co_contact_us_no_icon_difh5co_hover_1">
-                        <div class="fh5co_contact_us_no_icon_div"> <span><i class="fa fa-envelope"></i></span> </div>
-                    </div>
-                    <div class="col-9 align-self-center fh5co_contact_us_no_icon_difh5co_hover_2">
-                        <span class="c_g d-block">Bạn có câu hỏi?</span>
-                        <span class="d-block c_g fh5co_contact_us_no_text"><%= settings.email %></span>
-                    </div>
-                    <div class="clearfix"></div>
-                </div>
-            </div>
-            <div class="col-md-4 py-3">
-                <div class="row fh5co_contact_us_no_icon_difh5co_hover">
-                    <div class="col-3 fh5co_contact_us_no_icon_difh5co_hover_1">
-                        <div class="fh5co_contact_us_no_icon_div"> <span><i class="fa fa-map-marker"></i></span> </div>
-                    </div>
-                    <div class="col-9 align-self-center fh5co_contact_us_no_icon_difh5co_hover_2">
-                        <span class="c_g d-block">Địa chỉ tòa soạn</span>
-                        <span class="d-block c_g fh5co_contact_us_no_text"> <%= settings.address %></span>
-                    </div>
-                    <div class="clearfix"></div>
-                </div>
-            </div>
-            <div class="clearfix"></div>
-        </div>
+<div class="contact__wrap mt-20">
+    <div class="contact__title">Đội chăm sóc khách hàng Shopee</div>
+    <div class="contact__subtitle">
+        <span>Chúng tôi muốn lắng nghe câu hỏi và ý kiến đóng góp từ bạn. Hãy phản hồi cho Shopee biết vấn đề của bạn nhé!</span>
+        <br/>
+        <span>Chúng tôi sẽ liên hệ lại bạn trong 24h tiếp theo.</span>
     </div>
-</div>
-<div class="container-fluid mb-4">
-    <div class="container">
-        <div class="col-12 text-center contact_margin_svnit ">
-            <div class="text-center fh5co_heading py-2">Liên hệ với chúng tôi</div>
-        </div>
-        <div class="row">
-            <div class="col-12 col-md-6">
-                <form method="post" action="<%= linkPrefix %>" class="row" id="fh5co_contact_form">
-                    <div class="col-12 py-3">
-                        <input name="name" type="text" class="form-control fh5co_contact_text_box" placeholder="Enter Your Name" required />
-                    </div>
-                    <div class="col-12 py-3">
-                        <input name="phone" type="text" class="form-control fh5co_contact_text_box" placeholder="Enter Phone Number" required/>
-                    </div>
-                    <div class="col-12 py-3">
-                        <input name="email" type="email" class="form-control fh5co_contact_text_box" placeholder="E-mail" required/>
-                    </div>
-                    <div class="col-12 py-3">
-                        <textarea name="content" class="form-control fh5co_contacts_message" placeholder="Message" required></textarea>
-                    </div>
-                    <div class="col-12 py-3 text-center"> <button style="cursor: pointer;" type="submit" class="btn contact_btn">Send Message</button> </div>
-                </form>
+
+    <div class="contact__group">
+        <form class="contact__form">
+            <h3>Thông tin liên hệ</h3>
+            <div class="form__group">
+                <label class="form__group-title" for="contact-email">Địa chỉ Email của bạn</label>
+                <input type="text" name="" id="contact-email" placeholder="abc@gmail.com" required>
             </div>
-            <div class="col-12 col-md-6" style="margin-top:16px;">
-                <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d3168.639290621062!2d-122.08624618469247!3d37.421999879825215!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e0!3m2!1sfr!2sbe!4v1514861541665" class="map_sss" allowfullscreen></iframe>
+            <div class="form__group">
+                <label class="form__group-title" for="contact-content">Nội dung phản hồi</label>
+                <textarea name="" id="contact-content" cols="30" rows="10" required></textarea>
             </div>
+            <div class="form__group">
+                <label class="form__group-title" for="contact-file">Đính kèm tệp</label>
+                <input type="file" name="" id="contact-file">
+            </div>
+
+            <button class="form__group-submit btn btn--primary" type="submit">Gửi phản hồi</button>
+        </form>
+        <div class="contact__map">
+            <iframe src="https://www.google.com/maps/embed?pb=!1m16!1m12!1m3!1d7838.469246703355!2d106.71791332225892!3d10.793333958303261!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!2m1!1slandmark%2081!5e0!3m2!1svi!2s!4v1641544434288!5m2!1svi!2s" width="550" height="480" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
         </div>
     </div>
 </div>

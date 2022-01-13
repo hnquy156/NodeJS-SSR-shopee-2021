@@ -3,8 +3,8 @@ const router = express.Router();
 
 const collectionName = 'contact';
 const MainModel = require(__path_models + 'contacts');
-const ArticlesModel = require(__path_models + 'articles');
-const CategoriesModel = require(__path_models + 'categories');
+const ProductModel = require(__path_models + 'products');
+const CategoryModel = require(__path_models + 'categories');
 const folderView = `${__path_views_frontend}pages/${collectionName}`;
 const layout = __path_views_frontend + 'layouts/layout';
 const pageTitle = 'Contact Us';

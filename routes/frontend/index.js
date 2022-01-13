@@ -7,5 +7,6 @@ const NotifyAuthenticationMiddewares = require(__path_middlewares + 'notify-auth
 router.use('/', require('./home'));
 router.use('/category', require('./category'));
 router.use('/products', require('./products'));
+router.use('/contacts', require('./contacts'));
 
 module.exports = router;
