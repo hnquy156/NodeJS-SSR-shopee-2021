@@ -49,7 +49,7 @@
                     </span>
                 </div>
                 <div class="product__rates-review product__rates-item">7 Đánh giá</div>
-                <div class="product__rates-sold product__rates-item">23 Đã bán</div>
+                <div class="product__rates-sold product__rates-item"><%= productItem.sold %> Đã bán</div>
             </div>
             <div class="product__price"><%= formatCurrencyHelper(productItem.price.price_new) %></div>
             <div class="product__information-item">
@@ -110,7 +110,7 @@
 <%- showProductHelper('Sản phẩm cùng danh mục', products, 6) %>
 
 <div class="row sm-gutter  app__content">
-    <div class="col l-12 m-12 c-12">
+    <!-- <div class="col l-12 m-12 c-12">
         <div class="product__detail">
             <div class="product__title">CHI TIẾT SẢN PHẨM</div>
             <table class="product__detail-table">
@@ -145,25 +145,13 @@
                 </tr>
             </table>
         </div>
-    </div>
-    <div class="col l-12 m-12 c-12">
+    </div> -->
+    <div class="col l-12 m-12 c-12 mb-20">
         <div class="product__description">
             <div class="product__title">MÔ TẢ SẢN PHẨM</div>
-            <p class="product__textarea">
-                Quà tặng giá trị kèm theo 10 món <br/>
-                1 ĐẶT BIỆT TẶNG 1 tặng bao da và 1 bàn phím blutooth cao cấp + chuột <br/>
-                2 tai nghe Hphone Sony Extra bass ốp tai <br/>
-                3 Tặng sạc chuẩn (Chuẩn dòng, chuẩn nguồn) <br/>
-                4 Tặng Cable USB (Kết nối với máy tính) <br/>
-                5 Tặng Miếng dán KÍNH CƯỜNG LỰC <br/>
-                6 Tặng Đế Dựng/I-ring (Giúp để máy lên bàn xem phim <br/>
-                7 Tặng Jack OTG (Kết nối chuột, usb…) <br/>
-                8 Tặng phiếu giảm giá 200K khi thay kính cảm ứng <br/>
-                Máy tính bảng tablet As88 plus ,Là sản phẩm mẫu mới nhất hiện nay tại thi trường Việt Nam
-                2020 <br/>
-                ĐỘ PHÂN GIẢI MÀN HÌNH OLED SIÊU NÉT . <br/>
-
-            </p>
+            <div class="product__textarea">
+                <%- productItem.content %>
+            </div>
         </div>
     </div>
 </div>

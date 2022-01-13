@@ -12,8 +12,8 @@ const pageTitle = 'Products';
 router.get('/:id', async (req, res, next) => {
 	const id = req.params.id;
 	
-	const productItem = await ProductModel.getItemFrontend(id);
-	const products = await ProductModel.getListFrontend({task: 'products-new'}, null);
+	const productItem  = await ProductModel.getItemFrontend(id);
+	const products 	   = await ProductModel.getListFrontend({task: 'products-in-category'}, {id: productItem.group.id});
 
 	res.render(`${folderView}/index`, { 
 		pageTitle, 
