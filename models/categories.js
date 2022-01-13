@@ -30,6 +30,10 @@ module.exports = {
     getItem: (id, options = null) => {
         return CategoriesModels.findById({_id: id});
     },
+    
+    getItemFrontend: (slug, options = null) => {
+        return CategoriesModels.findOne({slug: slug});
+    },
 
     countItems: (condition) => {
         return CategoriesModels.countDocuments(condition);

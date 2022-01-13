@@ -3,20 +3,22 @@ const router = express.Router();
 
 const collectionName = 'category';
 const ProductModel = require(__path_models + 'products');
-const CategoriesModel = require(__path_models + 'categories');
+const CategoryModel = require(__path_models + 'categories');
 const folderView = `${__path_views_frontend}pages/${collectionName}`;
 const layout = __path_views_frontend + 'layouts/layout';
 const pageTitle = 'Category';
 
 /* GET category page. */
-router.get('/:categoryID', async (req, res, next) => {
-	const id = req.params.categoryID;
-	const products = await ProductModel.getListFrontend({task: 'products-new'}, null);
+router.get('/:slug', async (req, res, next) => {
+	const categorySlug = req.params.slug;
+	const categoryItem = await CategoryModel.getItemFrontend(categorySlug, null);
+	const products 	   = await ProductModel.getListFrontend({task: 'products-in-category'}, categoryItem);
 
 	res.render(`${folderView}/index`, { 
 		pageTitle, 
 		layout, 
 		products,
+		categoryItem,
 	});
 });
 
