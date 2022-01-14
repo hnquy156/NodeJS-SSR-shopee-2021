@@ -77,7 +77,7 @@ module.exports = {
             item.ordering = 1;
             item.created = {
                 user_id: '',
-                user_name: 'user',
+                user_name: item.email,
                 time: Date.now(),
             }
             return ContactsModels(item).save();

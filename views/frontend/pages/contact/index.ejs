@@ -7,20 +7,20 @@
     </div>
 
     <div class="contact__group">
-        <form class="contact__form">
+        <form method="post" action="/contacts" class="contact__form">
             <h3>Thông tin liên hệ</h3>
             <div class="form__group">
                 <label class="form__group-title" for="contact-email">Địa chỉ Email của bạn</label>
-                <input type="text" name="" id="contact-email" placeholder="abc@gmail.com" required>
+                <input type="text" name="email" id="contact-email" placeholder="abc@gmail.com" required>
             </div>
             <div class="form__group">
                 <label class="form__group-title" for="contact-content">Nội dung phản hồi</label>
-                <textarea name="" id="contact-content" cols="30" rows="10" required></textarea>
+                <textarea name="content" id="contact-content" cols="30" rows="10" required></textarea>
             </div>
-            <div class="form__group">
+            <!-- <div class="form__group">
                 <label class="form__group-title" for="contact-file">Đính kèm tệp</label>
                 <input type="file" name="" id="contact-file">
-            </div>
+            </div> -->
 
             <button class="form__group-submit btn btn--primary" type="submit">Gửi phản hồi</button>
         </form>

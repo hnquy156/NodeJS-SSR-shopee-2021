@@ -32,7 +32,7 @@ router.post('/', async (req, res) => {
 	const contactItem = req.body;
 
 	const result = await MainModel.saveItem(contactItem, {task: 'add'});
-	res.redirect('/contact/success');
+	res.redirect('/contacts/success');
 });
 
 module.exports = router;

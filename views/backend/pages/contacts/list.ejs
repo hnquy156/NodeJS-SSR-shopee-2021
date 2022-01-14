@@ -71,10 +71,8 @@
                     <tr>
                         <th class="text-center"><%- checkboxAllHelper() %></th>
                         <th class="text-center">#</th>
-                        <th class="text-center"><%- sortHelper(linkPrefix, 'Name', 'name', sortField, sortType) %></th>
-                        <th class="text-center"><%- sortHelper(linkPrefix, 'Status', 'status', sortField, sortType) %></th>
-                        <th class="text-center"><%- sortHelper(linkPrefix, 'Phone', 'phone', sortField, sortType) %></th>
                         <th class="text-center"><%- sortHelper(linkPrefix, 'Email', 'email', sortField, sortType) %></th>
+                        <th class="text-center"><%- sortHelper(linkPrefix, 'Status', 'status', sortField, sortType) %></th>
                         <th class="text-center"><%- sortHelper(linkPrefix, 'Ordering', 'ordering', sortField, sortType) %></th>
                         <th class="text-center">Content</th>
                         <th class="text-center"><%- sortHelper(linkPrefix, 'Created', 'created.time', sortField, sortType) %></th>
@@ -88,12 +86,10 @@
                         <tr>
                             <td class="text-center"><%- checkboxHelper(index, item.id) %></td>
                             <td class="text-center"><%= index + 1 %></td>
-                            <td class="text-center"><%- highlightHelper(item.name, search_value) %></td>
+                            <td class="text-center"><%- highlightHelper(item.email, search_value) %></td>
                             <td class="text-center position-relative"><%- statusHelper(item.status, linkPrefix, item.id) %></td>
-                            <td class="text-center"><%= item.phone %></td>
-                            <td class="text-center"><%= item.email %></td>
                             <td class="text-center position-relative"><%- orderingHelper(item.ordering, linkPrefix, item.id) %></td>
-                            <td class="text-center"><%= formatSummaryHelper(item.content) %></td>
+                            <td style="width:50%" class="text-center"><%= formatSummaryHelper(item.content) %></td>
                             <td class="text-center">
                                 <%- timeHelper(item.created.user_name, item.created.time) %>
                             </td>

@@ -36,10 +36,8 @@
                 <thead>
                     <tr>
                         <th class="text-center">#</th>
-                        <th class="text-center">Name</th>
-                        <th class="text-center">Phone</th>
                         <th class="text-center">Email</th>
-                        <th class="text-center">Content</th>
+                        <th style="width:50%" class="text-center">Content</th>
                         <th class="text-center">Created</th>
                         <th class="text-center">Action</th>
                     </tr>
@@ -49,8 +47,6 @@
                         %>
                         <tr>
                             <td class="text-center"><%= index + 1 %></td>
-                            <td class="text-center"><%- item.name %></td>
-                            <td class="text-center"><%= item.phone %></td>
                             <td class="text-center"><%= item.email %></td>
                             <td class="text-center"><%= formatSummaryHelper(item.content) %></td>
                             <td class="text-center">

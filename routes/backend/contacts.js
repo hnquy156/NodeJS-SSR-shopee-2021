@@ -84,7 +84,7 @@ router.get('(/status/:status)?', async (req, res, next) => {
 	res.locals.sidebarActive = `${collectionName}|list`;
 
 	if (currentStatus !== 'all') condition.status = currentStatus;
-	if (search_value) condition.name = new RegExp(search_value, 'i');
+	if (search_value) condition.email = new RegExp(search_value, 'i');
 
 	const pagination = {
 		itemsTotal: await MainModel.countItems(condition),

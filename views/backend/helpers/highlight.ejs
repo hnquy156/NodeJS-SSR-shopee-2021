@@ -1,6 +1,6 @@
 <%
 	highlightHelper = (content, search_value) => {
-		if (!search_value) return `<p>${content}</p>`;
+		if (!search_value) return `${content}`;
 		return content.replace(new RegExp(search_value, 'ig'), match => {
 			return `<span class="text-dark  bg-warning">${match}</span>`;
 		})
