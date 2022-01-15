@@ -62,6 +62,7 @@ module.exports = {
                 $lte: params.price_to   ? +params.price_to : Infinity,
             };
             if (params.categories && params.categories.length > 0) condition['group.id'] = {$in: params.categories}
+            if (params.sort_type) sort = params.sort_type;
         }
 
         return ProductsModels.find(condition).select(select).sort(sort).skip(skip).limit(limit);

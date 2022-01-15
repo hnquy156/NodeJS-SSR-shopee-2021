@@ -1,10 +1,17 @@
 <% include ./../../helpers/show-product %>
 <% include ./../../helpers/format %>
+<% include ./../../helpers/sort %>
 
 <%
+    const sort_type = (typeof queryObj !== 'undefined') && queryObj.sort_type ? queryObj.sort_type : '-created.time';
     const price_from = (typeof queryObj !== 'undefined') && queryObj.price_from ? queryObj.price_from : '';
     const price_to = (typeof queryObj !== 'undefined') && queryObj.price_to ? queryObj.price_to : '';
     const categoriesQuery = (typeof queryObj !== 'undefined') && queryObj.categories ? queryObj.categories : [];
+
+    const sortArr = [
+        {name: 'Mới nhất', sort_type: '-created.time'},
+        {name: 'Bán chạy', sort_type: '-sold'},
+    ];
 %>
 
 <div class="row sm-gutter app__content">
@@ -43,45 +50,14 @@
                 <div class="filter__price-wrap">
                     <button type="submit" class="filter__submit btn btn--primary" id="filter-submit">ÁP DỤNG</button>
                 </div>
+                <input type="hidden" name="sort_type" value="<%= sort_type %>">
             </form>
         </div>
     </div>
 
     <div class="col l-10 m-12 c-12">
         <div class="home-filter hide-on-mobile-tablet">
-            <span class="home-filter__label">Sắp xếp theo</span>
-            <button class="home-filter__btn btn">Phổ biến</button>
-            <button class="home-filter__btn btn btn--primary">Mới nhất</button>
-            <button class="home-filter__btn btn">Bán chạy</button>
-
-            <div class="select-input">
-                <span class="select-input__label">Giá</span>
-                <i class="select-input__icon fas fa-angle-down"></i>
-                <!-- List options -->
-                <ul class="select-input__list">
-                    <li class="select-input__item">
-                        <a href="" class="select-input__link">Giá thấp đến cao</a>
-                    </li>
-                    <li class="select-input__item">
-                        <a href="" class="select-input__link">Giá cao đến thấp</a>
-                    </li>
-                </ul>
-            </div>
-
-            <div class="home-filter__page">
-                <span class="home-filter__page-num">
-                    <span class="home-filter__page-curent">1</span>/14
-                </span>
-
-                <div class="home-filter__page-control">
-                    <a href="" class="home-filter__page-btn home-filter__page-btn--disabled">
-                        <i class="home-filter__page-icon fas fa-angle-left"></i>
-                    </a>
-                    <a href="" class="home-filter__page-btn">
-                        <i class="home-filter__page-icon fas fa-angle-right"></i>
-                    </a>
-                </div>
-            </div>
+            <%- sortHelper(sortArr, sort_type) %>
         </div>
 
         <% include ./../../elements/category-mobile %>

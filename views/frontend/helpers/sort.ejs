@@ -1,0 +1,31 @@
+<%
+    sortHelper = (sortArr, currentSortType) => {
+        let xhtml = '';
+        sortArr.forEach(element => {
+            const isActive = currentSortType === element.sort_type ? 'btn--primary' : '';
+            xhtml += `<button class="home-filter__btn btn ${isActive}" data-sort="${element.sort_type}">${element.name}</button>`;
+        });
+
+        let priceName = `Giá`;
+        let activePrice = '';
+        if (currentSortType === 'price.price_new') priceName = `Giá thấp đến cao`
+        else if (currentSortType === '-price.price_new') priceName = `Giá cao đến thấp`;
+        if (currentSortType === 'price.price_new' || currentSortType === '-price.price_new') activePrice = 'btn--primary';
+
+        return `<span class="home-filter__label">Sắp xếp theo</span>
+                ${xhtml}
+                <div class="select-input btn ${activePrice}">
+                    <span class="select-input__label">${priceName}</span>
+                    <i class="select-input__icon fas fa-angle-down"></i>
+                    <!-- List options -->
+                    <ul class="select-input__list">
+                        <li class="select-input__item">
+                            <a href="" class="select-input__link" data-sort="price.price_new">Giá thấp đến cao</a>
+                        </li>
+                        <li class="select-input__item">
+                            <a href="" class="select-input__link" data-sort="-price.price_new">Giá cao đến thấp</a>
+                        </li>
+                    </ul>
+                </div>`;
+    }
+%>

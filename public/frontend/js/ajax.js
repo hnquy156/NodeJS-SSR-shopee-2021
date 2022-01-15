@@ -19,82 +19,20 @@ $(document).ready(function () {
         });
     });
 
-    // Filter submit
-    // $('#filter-submit').click(function(e) {
-    //     e.preventDefault();
-    //     let url = $('#form-filter').attr('action');
-    //     const price_from = $('input[name="price_from"]').val();
-    //     const price_to = $('input[name="price_to"]').val();
-    //     const categories = [];
-    //     $('input[name="categories"]:checked').each(function() {
-    //         categories.push($(this).val());
-    //     });
-    //     url += `?price_from=${price_from}&price_to=${price_to}&categories=${categories}`;
+    //Sort Product
+    $('.home-filter__btn').click(function() {
+        const sort_type = $(this).data('sort');
+        $('input[name="sort_type"]').val(sort_type);
+        $('#form-filter').submit();
+    });
 
-    //     $.ajax({
-    //         method: 'get',
-    //         url,
-    //         success: (data) => {
-    //         }
-    //     });
-    // });
+    $('.select-input__link').click(function(e) {
+        e.preventDefault();
+        const sort_type = $(this).data('sort');
+        $('input[name="sort_type"]').val(sort_type);
+        $('#form-filter').submit();
+    })
 
-    // CHANGE ORDERING //
-    // $('.ajax-ordering').change(function(e) {
-    //     const element = $(this);
-    //     const id = element.data('id');
-    //     const url = element.data('link');
-    //     let ordering = +element.val();
-        
-    //     if (ordering <= 0) {
-    //         showNotify(element, 'Ordering phải là giá trị lớn hơn 0!!!', 'error');
-    //         ordering = 1;
-    //         element.val(1);
-    //         return -1;
-    //     } else if (ordering !== Math.round(ordering)) {
-    //         showNotify(element, 'Ordering phải là giá trị nguyên!!!', 'error');
-    //         ordering = Math.round(ordering);
-    //         element.val(ordering);
-    //         return -1;
-    //     }
-    //     $.ajax({
-    //         type: 'POST',
-    //         data: {
-    //             cid: id,
-    //             ordering,
-    //         },
-    //         url,
-    //         success: (data) => {
-    //             showNotify(element, data.notify);
-    //         }
-    //     })
-    // });
-
-
-    // Change Group of Item (user/category/...)
-    // $('.ajax-group-selectbox').change(function(e) {
-    //     e.preventDefault();
-    //     const element = $(this);
-    //     const id = element.data('id');
-    //     const group_id = element.val();
-    //     const group_name = element.find('option:checked').text();
-    //     const url = element.data('link');
-
-    //     $.ajax({
-    //         method: 'post',
-    //         url,
-    //         data: {
-    //             id,
-    //             group_id,
-    //             group_name,
-    //         },
-    //         success: (data) => {
-    //             showNotify(element, data.notify);
-    //         }
-    //     });
-    // });
-
-    
 });
 
 function showNotify(element, content, status = 'success') {
