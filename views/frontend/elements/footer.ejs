@@ -32,15 +32,14 @@
 			<div class="col l-2-4 m-3 c-6">
 				<h3 class="footer__heading">Danh mục</h3>
 				<ul class="footer-list">
-					<li class="footer-item">
-						<a href="" class="footer-item__link">Trang điểm 1</a>
-					</li>
-					<li class="footer-item">
-						<a href="" class="footer-item__link">Trang điểm 2</a>
-					</li>
-					<li class="footer-item">
-						<a href="" class="footer-item__link">Trang điểm 3</a>
-					</li>
+					<%
+						categories.forEach(category => {%>
+							<li class="footer-item">
+								<a href="" class="footer-item__link"><%= category.name %></a>
+							</li>
+						<%})
+					%>
+					
 				</ul>
 			</div>
 			<div class="col l-2-4 m-3 c-6">

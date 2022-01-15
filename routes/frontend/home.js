@@ -14,7 +14,6 @@ router.get('/', async (req, res, next) => {
 	const products = await ProductModel.getListFrontend({task: 'products-new'}, null);
 	const specialProducts = await ProductModel.getListFrontend({task: 'products-special'}, null);
 	const soldoutProducts = await ProductModel.getListFrontend({task: 'products-soldout'}, null);
-	const categories = await CategoryModel.getListFrontend({task: 'categories-list'}, null);
 	
 	res.render(`${folderView}/index`, { 
 		layout,
@@ -22,7 +21,6 @@ router.get('/', async (req, res, next) => {
 		products,
 		specialProducts,
 		soldoutProducts,
-		categories,
 	});
 });
 

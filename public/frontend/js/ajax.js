@@ -19,6 +19,25 @@ $(document).ready(function () {
         });
     });
 
+    // Filter submit
+    // $('#filter-submit').click(function(e) {
+    //     e.preventDefault();
+    //     let url = $('#form-filter').attr('action');
+    //     const price_from = $('input[name="price_from"]').val();
+    //     const price_to = $('input[name="price_to"]').val();
+    //     const categories = [];
+    //     $('input[name="categories"]:checked').each(function() {
+    //         categories.push($(this).val());
+    //     });
+    //     url += `?price_from=${price_from}&price_to=${price_to}&categories=${categories}`;
+
+    //     $.ajax({
+    //         method: 'get',
+    //         url,
+    //         success: (data) => {
+    //         }
+    //     });
+    // });
 
     // CHANGE ORDERING //
     // $('.ajax-ordering').change(function(e) {

@@ -1,6 +1,11 @@
 <% include ./../../helpers/show-product %>
 <% include ./../../helpers/format %>
 
+<%
+    const price_from = (typeof queryObj !== 'undefined') && queryObj.price_from ? queryObj.price_from : '';
+    const price_to = (typeof queryObj !== 'undefined') && queryObj.price_to ? queryObj.price_to : '';
+    const categoriesQuery = (typeof queryObj !== 'undefined') && queryObj.categories ? queryObj.categories : [];
+%>
 
 <div class="row sm-gutter app__content">
     <div class="col l-2 m-0 c-0">
@@ -9,35 +14,34 @@
                 <i class="category__heading-icon fas fa-list"></i>    
                 Bộ lọc tìm kiếm
             </h3>
-            <form action="" class="filter">
+            <form action="/category" method="get" class="filter" id="form-filter">
                 <div class="filter__category">
                     <p class="filter__item-title">Theo danh mục</p>
                     <ul class="category-list">
-                        <li class="filter__item">
-                            <input class="filter__item-checkbox cursor-pointer" id="filter__category-checkbox1" type="checkbox" name="">
-                            <label class="cursor-pointer" for="filter__category-checkbox1">Trang điểm</label>
-                        </li>
-                        <li class="filter__item">
-                            <input class="filter__item-checkbox cursor-pointer" id="filter__category-checkbox2" type="checkbox" name="">
-                            <label class="cursor-pointer" for="filter__category-checkbox2">Trang điểm</label>
-                        </li>
-                        <li class="filter__item">
-                            <input class="filter__item-checkbox cursor-pointer" id="filter__category-checkbox3" type="checkbox" name="">
-                            <label class="cursor-pointer" for="filter__category-checkbox3">Trang điểm</label>
-                        </li>
+                        <%
+                            categories.forEach((category, index) => {
+                                const isChecked = categoriesQuery.indexOf(category.id) > -1 ? 'checked' : '';
+                            %>
+                                <li class="filter__item">
+                                    <input class="filter__item-checkbox cursor-pointer" id="filter__category-checkbox<%= index %>"
+                                        type="checkbox" name="categories" value="<%= category.id %>" <%= isChecked %>>
+                                    <label class="cursor-pointer" for="filter__category-checkbox<%= index %>"><%= category.name %></label>
+                                </li>
+                            <%})
+                        %>
                     </ul>
                 </div>
                 <div class="filter__price">
                     <p class="filter__item-title">Theo giá</p>
                     <div class="filter__price-wrap">
-                        <input class="filter__price-from filter__item" placeholder="₫ TỪ"/>
+                        <input name="price_from" type="number" class="filter__price-from filter__item" placeholder="₫ TỪ" value="<%= price_from %>"/>
                         <div class="filter__price-dash filter__item"> - </div>
-                        <input class="filter__price-to filter__item" placeholder="₫ ĐẾN"/>
+                        <input name="price_to" type="number" class="filter__price-to filter__item" placeholder="₫ ĐẾN" value="<%= price_to %>"/>
                     </div>
                 </div>
                 
                 <div class="filter__price-wrap">
-                    <div class="filter__submit btn btn--primary">ÁP DỤNG</div>
+                    <button type="submit" class="filter__submit btn btn--primary" id="filter-submit">ÁP DỤNG</button>
                 </div>
             </form>
         </div>
@@ -82,7 +86,9 @@
 
         <% include ./../../elements/category-mobile %>
 
-        <%- showProductHelper('Danh mục ' + categoryItem.name, products, 5) %>
+        <div id="product-filter">
+            <%- showProductHelper(titleCategory, products, 5) %>
+        </div>
 
     </div>
 </div>
