@@ -1,5 +1,11 @@
 $(document).ready(function () {
     
+    // Go to checkout page when click button buy now
+    $('.go-to-checkout').click(function() {
+        let href = `/checkouts/${$(this).data('id')}`;
+        location.href = href;
+    });
+
     // Delete product from Cart
     $('.ajax-cart-delete').click(function(e) {
         const eleInput = $(this).parents('.product__cart-item').find('input.product__quantity-number');
@@ -23,6 +29,7 @@ $(document).ready(function () {
                 $('.cart__product-total-quantity').text(quantityTotal);
                 $('.cart__product-total-price').data('price', priceTotal)
                 $('.cart__product-total-price').text(formatCurrencyHelper(priceTotal));
+                $('.header__cart-notice').text(quantityTotal);
             }
         });
     });

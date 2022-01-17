@@ -1,3 +1,5 @@
+<% include ./../../helpers/format %>
+
 <div class="row no-gutters app__content product__cart-title">
     <div class="col l-12 m-12 c-12">
         <h3><i class="far fa-credit-card product__cart-icon"></i> Thanh toán</h3>
@@ -9,10 +11,10 @@
             <input type="checkbox" >
         </div>
     </div>
-    <div class="col l-4 m-6 c-0">
+    <div class="col l-6 m-6 c-0">
         <div class="cart__product-info">Sản phẩm</div>
     </div>
-    <div class="col l-2 m-0 c-0">
+    <div class="col l-0 m-0 c-0">
         <div class="cart__product-property">Phân loại</div>
     </div>
     <div class="col l-6 m-6 c-0">
@@ -24,127 +26,65 @@
     </div>
 </div>
 <div class="product__cart-wrap">
-    <div class="row no-gutters product__cart-item">
-        <div class="col l-0 m-0 c-0">
-            <div class="cart__product-checkbox d-flex align-items-center">
-                <input type="checkbox" >
-            </div>
-        </div>
-        <div class="col l-4 m-4 c-9">
-            <div class="cart__product-info">
-                <div class="cart__product-img" style="background-image: url('https://cf.shopee.vn/file/c0a1c896390b1d5ce35ebbdd0d8a912b_tn');"></div>
-                <p class="cart__product-name">Laptop laptop laptop SA123</p>
-            </div>
-        </div>
-        <div class="col l-2 m-2 c-2">
-            <div class="cart__product-property d-flex align-items-center h-100">
-                Xanh lá
-            </div>
-        </div>
-        <div class="col l-6 m-6 c-12">
-            <div class="row no-gutters h-100">
-                <div class="col l-4 m-4 c-4">
-                    <div class="cart__product-prices d-flex align-items-center h-100">
-                        <div class="cart__product-price-new">12.990.000₫</div>
+    <%
+        let priceTotal = 0;
+        let quantityTotal = 0;
+        
+        cartProducts.forEach(cartProduct => {
+            const product = cartProduct.product_id;
+            const quantity = cartProduct.quantity;
+            quantityTotal += quantity;
+            priceTotal += product.price.price_new * quantity
+
+            %>
+            <div class="row no-gutters product__cart-item">
+                <div class="col l-0 m-0 c-0">
+                    <div class="cart__product-checkbox d-flex align-items-center">
+                        <input type="checkbox" >
                     </div>
                 </div>
-                <div class="col l-4 m-4 c-2">
-                    <div class="cart__product-quantity-wrap d-flex align-items-center h-100">
-                        <div class="product__quantity-btn-wrap">
-                            <span style="margin-right: 2px;" class="d-flex align-items-center">x</span>
-                            <span class="d-flex align-items-center">1</span>
+                <div class="col l-6 m-6 c-12">
+                    <div class="cart__product-info">
+                        <div class="cart__product-img" style="background-image: url('<%= product.thumb %>');"></div>
+                        <p class="cart__product-name"><%= product.name %></p>
+                    </div>
+                </div>
+                <div class="col l-0 m-0 c-0">
+                    <div class="cart__product-property d-flex align-items-center h-100">
+                        Xanh lá
+                    </div>
+                </div>
+                <div class="col l-6 m-6 c-12">
+                    <div class="row no-gutters h-100">
+                        <div class="col l-4 m-4 c-4">
+                            <div class="cart__product-prices d-flex align-items-center h-100">
+                                <div class="cart__product-price-new"><%= formatCurrencyHelper(product.price.price_old) %></div>
+                            </div>
+                        </div>
+                        <div class="col l-4 m-4 c-2">
+                            <div class="cart__product-quantity-wrap d-flex align-items-center h-100">
+                                <div class="product__quantity-btn-wrap">
+                                    <span style="margin-right: 2px;" class="d-flex align-items-center">x</span>
+                                    <span class="d-flex align-items-center"><%= quantity %></span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col l-4 m-4 c-6">
+                            <p class="cart__product-price-total d-flex h-100"><%= formatCurrencyHelper(quantity * product.price.price_new) %></p>
                         </div>
                     </div>
                 </div>
-                <div class="col l-4 m-4 c-6">
-                    <p class="cart__product-price-total d-flex h-100">12.990.000₫</p>
-                </div>
             </div>
-        </div>
-    </div>
-    <div class="row no-gutters product__cart-item">
-        <div class="col l-0 m-0 c-0">
-            <div class="cart__product-checkbox d-flex align-items-center">
-                <input type="checkbox" >
-            </div>
-        </div>
-        <div class="col l-4 m-4 c-9">
-            <div class="cart__product-info">
-                <div class="cart__product-img" style="background-image: url('https://cf.shopee.vn/file/c0a1c896390b1d5ce35ebbdd0d8a912b_tn');"></div>
-                <p class="cart__product-name">Laptop laptop laptop SA123</p>
-            </div>
-        </div>
-        <div class="col l-2 m-2 c-2">
-            <div class="cart__product-property d-flex align-items-center h-100">
-                Xanh lá
-            </div>
-        </div>
-        <div class="col l-6 m-6 c-12">
-            <div class="row no-gutters h-100">
-                <div class="col l-4 m-4 c-4">
-                    <div class="cart__product-prices d-flex align-items-center h-100">
-                        <div class="cart__product-price-new">12.990.000₫</div>
-                    </div>
-                </div>
-                <div class="col l-4 m-4 c-2">
-                    <div class="cart__product-quantity-wrap d-flex align-items-center h-100">
-                        <div class="product__quantity-btn-wrap">
-                            <span style="margin-right: 2px;" class="d-flex align-items-center">x</span>
-                            <span class="d-flex align-items-center">1</span>
-                        </div>
-                    </div>
-                </div>
-                <div class="col l-4 m-4 c-6">
-                    <p class="cart__product-price-total d-flex h-100">12.990.000₫</p>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="row no-gutters product__cart-item">
-        <div class="col l-0 m-0 c-0">
-            <div class="cart__product-checkbox d-flex align-items-center">
-                <input type="checkbox" >
-            </div>
-        </div>
-        <div class="col l-4 m-4 c-9">
-            <div class="cart__product-info">
-                <div class="cart__product-img" style="background-image: url('https://cf.shopee.vn/file/c0a1c896390b1d5ce35ebbdd0d8a912b_tn');"></div>
-                <p class="cart__product-name">Laptop laptop laptop SA123</p>
-            </div>
-        </div>
-        <div class="col l-2 m-2 c-2">
-            <div class="cart__product-property d-flex align-items-center h-100">
-                Xanh lá
-            </div>
-        </div>
-        <div class="col l-6 m-6 c-12">
-            <div class="row no-gutters h-100">
-                <div class="col l-4 m-4 c-4">
-                    <div class="cart__product-prices d-flex align-items-center h-100">
-                        <div class="cart__product-price-new">12.990.000₫</div>
-                    </div>
-                </div>
-                <div class="col l-4 m-4 c-2">
-                    <div class="cart__product-quantity-wrap d-flex align-items-center h-100">
-                        <div class="product__quantity-btn-wrap">
-                            <span style="margin-right: 2px;" class="d-flex align-items-center">x</span>
-                            <span class="d-flex align-items-center">1</span>
-                        </div>
-                    </div>
-                </div>
-                <div class="col l-4 m-4 c-6">
-                    <p class="cart__product-price-total d-flex h-100">12.990.000₫</p>
-                </div>
-            </div>
-        </div>
-    </div>
+            <%
+        })
+    %>
 </div>
 <div class="row no-gutters">
     <div class="col l-12 m-12 c-12">
         <div class="cart__product-total-products">
             <div class="cart__product-total-wrap">
-                <span class="cart__product-total-product">Tổng số tiền (0 Sản phẩm): </span>
-                <span class="cart__product-total-price">0₫</span>
+                <span class="cart__product-total-product">Tổng số tiền (<%= quantityTotal %> Sản phẩm): </span>
+                <span class="cart__product-total-price"><%= formatCurrencyHelper(priceTotal) %></span>
             </div>
         </div>
     </div>
@@ -157,22 +97,15 @@
                 Địa chỉ nhận hàng
             </div>
             <div class="cart__product-transport-destination">
-                <span class="transport__name">Hoàng Ngọc Quý</span>
-                <span class="transport__phone">(+84) 932497860</span>
-                <span class="transport__address">107 Ngô Tất Tố, Phường 22, Quận Bình Thạnh, TP. Hồ Chí Minh</span>
+                <span class="transport__name"><%= user.name %></span>
+                <span class="transport__phone"><%= user.phone %></span>
+                <span class="transport__address"><%= user.address %>, <%= user.city %></span>
                 <span class="transport__destination-change">Thay đổi</span>
             </div>
-            <div class="cart__product-transport-method">
-                <div class="transport__shipping-title">Đơn vị vận chuyển</div>
-                <div class="transport__shipping-unit">Nhanh</div>
-                <div class="transport__shipping-change">Thay đổi</div>
-                <div class="transport__price">0₫</div>
-            </div>
-            <div class="transport__date">Nhận hàng vào 11 Th01 - 16 Th01</div>
 
             <div class="cart__product-voucher-method">
                 <div class="product__voucher-title">Mã giảm giá</div>
-                <input class="product__voucher-unit" placeholder="C1587QEW">
+                <input class="product__voucher-unit" placeholder="Nhập mã giảm giá">
                 <div class="product__voucher-change">Thay đổi</div>
                 <div class="product__voucher-price">-100.000₫</div>
             </div>
@@ -196,23 +129,19 @@
                 </tr>
                 <tr>
                     <td>Tổng tiền hàng</td>
-                    <td class="text-right">1.000.000₫</td>
+                    <td class="text-right"><%= formatCurrencyHelper(priceTotal) %></td>
                 </tr>
                 <tr>
                     <td>Phí vận chuyển</td>
-                    <td class="text-right">100.000₫</td>
-                </tr>
-                <tr>
-                    <td>Miễn phí vận chuyển</td>
-                    <td class="text-right">-100.000₫</td>
+                    <td class="text-right"><%= formatCurrencyHelper(100000) %></td>
                 </tr>
                 <tr>
                     <td>Voucher, khuyết mãi</td>
-                    <td class="text-right">-100.000₫</td>
+                    <td class="text-right">-<%= formatCurrencyHelper(100000) %></td>
                 </tr>
                 <tr>
                     <td>Tổng thanh toán</td>
-                    <td class="text-right cart__product-checkout-price-total">900.000₫</td>
+                    <td class="text-right cart__product-checkout-price-total"><%= formatCurrencyHelper(priceTotal) %></td>
                 </tr>
             </table>
         </div>

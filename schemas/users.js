@@ -29,6 +29,10 @@ const items = new Schema({
         time: Date,
     },
     content: String,
+    phone: String,
+    address: String,
+    city: String,
+    email: String,
 });
 
 module.exports = mongoose.model(databaseConfigs.col_users, items);

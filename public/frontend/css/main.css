@@ -1998,6 +1998,7 @@ transform: translateY(-1px);
     min-height: 40px;
     border: 2px solid rgb(212, 212, 212);
     border-radius: 4px;
+    text-align: center;
 }
 
 .product__voucher-change {
