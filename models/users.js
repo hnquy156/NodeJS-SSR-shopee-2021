@@ -3,6 +3,7 @@ const bcrypt = require('bcryptjs');
 const SystemConfig = require(__path_configs + 'system');
 const NotifyConfig = require(__path_configs + 'notify');
 const UsersModels = require(__path_schemas + 'users');
+const CartsModels = require(__path_schemas + 'carts');
 const FileHelpers = require(__path_helpers + 'file');
 
 const folderUploads = `${__path_uploads}users/`;
@@ -102,12 +103,14 @@ module.exports = {
         }
     },
 
-    saveItem: (item, options) => {
+    saveItem: async (item, options) => {
         item['group.id'] = item.group_id;
         item['group.name'] = item.group_name;
         item.password = bcrypt.hashSync(item.password, salt);
 
         if (options.task === 'add') {
+            const cartItem = await new CartsModels({}).save();
+            item.cart = cartItem.id;
             item.created = {
                 user_id: '',
                 user_name: 'Admin',

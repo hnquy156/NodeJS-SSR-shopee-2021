@@ -10,6 +10,10 @@ const items = new Schema({
     status: String,
     ordering: Number,
     avatar: String,
+    cart: {
+        type: Schema.Types.ObjectId,
+        ref: 'carts',
+    },
     group: {
         id: String,
         name: String,

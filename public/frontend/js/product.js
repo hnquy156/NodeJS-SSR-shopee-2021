@@ -2,7 +2,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
     
     resizeProductArea();
     
-    sliderImage();
+    // sliderImage();
 
     window.addEventListener('resize', sliderImage);
 

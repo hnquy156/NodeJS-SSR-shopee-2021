@@ -162,7 +162,7 @@
             <!-- START CART -->
             <div class="header__cart">
                 <div class="header__cart-wrap">
-                    <i class="header__cart-icon fas fa-shopping-cart"></i>
+                    <a style="display: block;" href="/carts/<%= user.cart %>"><i class="header__cart-icon fas fa-shopping-cart"></i></a>
                     <span class="header__cart-notice">3</span>
                     <!-- No CART: header__cart-list-empty -->
                     <div class="header__cart-list ">
@@ -234,7 +234,7 @@
                             
                             <!-- END CART ITEM -->
                         </ul>
-                        <a class="header__cart-view-cart btn btn--primary">Xem giỏ hàng</a>
+                        <a href="/carts/<%= user.cart %>" class="header__cart-view-cart btn btn--primary">Xem giỏ hàng</a>
                     </div>
                 </div>
             </div>

@@ -85,9 +85,10 @@
                     <div class="col l-10 m-10 c-10">
                         <div class="product__quantity-content product__information-item-content">
                             <div class="product__quantity-btn-wrap">
-                                <button class="product__quantity-btn btn-decrease">-</button>
-                                <input type="number" role="spinbutton" min="0" class="product__quantity-number" value="0">
-                                <button class="product__quantity-btn btn-increase">+</button>
+                                <button class="product__quantity-btn btn-decrease" data-increase="-1">-</button>
+                                <input type="number" role="spinbutton" min="0" class="product__quantity-number" 
+                                    value="0" data-product-id="<%= productItem.id %>" data-cart-id="<%= user.cart %>">
+                                <button class="product__quantity-btn btn-increase" data-increase="1">+</button>
                             </div>
                             <p class="product__quantity-current">300 sản phẩm có sẵn</p>
                         </div>
@@ -96,11 +97,14 @@
             </div>
             
             <div class="product__checkout-btn">
-                <button class="product__add-cart btn">
+                <button class="product__add-cart btn ajax-add-cart">
                     <i class="fas fa-cart-plus product__cart-icon"></i>
                     Thêm vào giỏ hàng
                 </button>
-                <button class="product__buy-now btn btn--primary">Mua ngay</button>
+                <button class="product__buy-now btn btn--primary ajax-add-cart">Mua ngay</button>
+                <button class="btn btn--normal product__go-cart">
+                    <a href="/carts/<%= user.cart %>">Đi đến giỏ hàng</a>
+                </button>
             </div>
         </div>
     </div>

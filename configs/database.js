@@ -8,6 +8,7 @@ module.exports = {
     col_categories: 'categories',
     col_articles: 'articles',
     col_products: 'products',
+    col_carts: 'carts',
     col_contacts: 'contacts',
     col_settings: 'settings',
     col_rss: 'rss',
