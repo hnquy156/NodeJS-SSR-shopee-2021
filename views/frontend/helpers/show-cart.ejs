@@ -1,0 +1,45 @@
+<%
+    showCartHelper = (cartProducts, cartID) => {
+        let xhtml = '';
+        let quantityTotal = 0;
+        if (cartProducts && cartProducts.length > 0) {
+            cartProducts.forEach(cartProduct => {
+                const product = cartProduct.product_id;
+                const quantity = cartProduct.quantity;
+                quantityTotal += quantity;
+
+                xhtml += `<li class="header__cart-item">
+                            <img src="${product.thumb}" alt="${product.name}" class="header__cart-img">
+                            <div class="header__cart-item-info">
+                                <div class="header__cart-item-head">
+                                    <h5 class="header__cart-item-name">${product.name}</h5>
+                                    <div class="header__cart-item-price-wrap">
+                                        <span class="header__cart-item-price">${formatCurrencyHelper(product.price.price_new)}</span>
+                                        <span class="header__cart-item-multiply">x</span>
+                                        <span class="header__cart-item-quantity">${quantity}</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </li>`;
+            });
+
+            xhtml = `<h4 class="header__cart-heading">Sản phẩm đã thêm</h4>
+                    <ul class="header__cart-list-item">
+                        ${xhtml}
+                    </ul>
+                    <a href="/carts/${cartID}" class="header__cart-view-cart btn btn--primary">Xem giỏ hàng</a>`;
+        } else {
+            xhtml = `<img src="/frontend/img/no_cart.png" alt="Không có sản phẩm" class="header__cart-empty-img">
+                    <span class="header__cart-list-empty-msg">
+                        Chưa có sản phẩm
+                    </span>`;
+        }
+
+        return `<a style="display: block;" href="/carts/${cartID}"><i class="header__cart-icon fas fa-shopping-cart"></i></a>
+                <span class="header__cart-notice">${quantityTotal}</span>
+                <div class="header__cart-list ">
+                    ${xhtml}
+                </div>`;
+    }
+%>
+

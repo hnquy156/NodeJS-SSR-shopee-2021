@@ -23,12 +23,12 @@ router.get('/:id', async (req, res, next) => {
 	const id = req.params.id;
 	
 	// const cartItem = await ProductModel.getItem(id);
-	const cartProducts = await CartModel.getCartProducts(id, null);
+	// const cartProducts = await CartModel.getCartProducts(id, null);
 
 	res.render(`${folderView}/index`, { 
 		pageTitle, 
 		layout, 
-		cartProducts: cartProducts.products
+		// cartProducts: cartProducts.products
 	});
 });
 
