@@ -9,6 +9,7 @@ module.exports = {
     col_articles: 'articles',
     col_products: 'products',
     col_carts: 'carts',
+    col_discounts: 'discounts',
     col_contacts: 'contacts',
     col_settings: 'settings',
     col_rss: 'rss',

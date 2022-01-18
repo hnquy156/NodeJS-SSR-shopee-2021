@@ -1855,6 +1855,10 @@ transform: translateY(-1px);
     background-repeat: no-repeat;
 }
 
+.cart__product-name {
+    line-height: 2rem;
+}
+
 .cart__product-prices {
     display: flex;
     flex-wrap: wrap;

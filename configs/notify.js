@@ -13,6 +13,7 @@ module.exports = {
     ADD_SUCCESS: 'Thêm mới phần tử thành công',
     EDIT_SUCCESS: 'Cập nhật thông tin phần tử thành công',
     ERROR_NAME: 'Chiều dài từ %d đến %d ký tự',
+    ERROR_VALUE: 'Phải là giá trị lớn hơn %d',
     ERROR_USERNAME_EXIST: 'Username đã tồn tại',
     ERROR_PASSWORD_CONFIRM: 'Password không khớp!',
     ERROR_LOGIN: 'Username hoặc Password không đúng!',

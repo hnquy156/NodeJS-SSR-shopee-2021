@@ -120,7 +120,6 @@ $(document).ready(function () {
         $('#slug-form').val(changeToSlug($(this).val()));
     })
 
-
 });
 
 const changeToSlug = (str) => {
