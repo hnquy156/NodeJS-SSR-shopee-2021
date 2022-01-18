@@ -10,6 +10,7 @@ module.exports = {
     col_products: 'products',
     col_carts: 'carts',
     col_discounts: 'discounts',
+    col_deliveries: 'deliveries',
     col_contacts: 'contacts',
     col_settings: 'settings',
     col_rss: 'rss',

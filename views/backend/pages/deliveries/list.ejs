@@ -1,0 +1,114 @@
+<% include ./../../helpers/status %>
+<% include ./../../helpers/filter-status %>
+<% include ./../../helpers/pagination %>
+<% include ./../../helpers/control %>
+<% include ./../../helpers/action %>
+<% include ./../../helpers/notify %>
+<% include ./../../helpers/time %>
+<% include ./../../helpers/ordering %>
+<% include ./../../helpers/checkbox %>
+<% include ./../../helpers/sort %>
+<% include ./../../helpers/highlight %>
+
+<%
+    collection = 'deliveries';
+    linkPrefix = `/${systemConfigs.prefixAdmin}/${collection}`;
+%>
+<%- showNotify(messages) %>
+<!-- Search & Filter -->
+<div class="card card-info card-outline">
+    <div class="card-header">
+        <h6 class="card-title">Search &amp; Filter</h6>
+        <div class="card-tools">
+            <button type="button" class="btn btn-tool" data-card-widget="collapse" data-toggle="tooltip" title="Collapse">
+                <i class="fas fa-minus"></i></button>
+        </div>
+    </div>
+    <div class="card-body">
+        <div class="row justify-content-between">
+            <div class="mb-1">
+                <%- filterStatusHelper(filterStatus, search_value, linkPrefix) %>
+            </div>
+            <div class="mb-1">
+                <form action="" method="get">
+                    <div class="input-group">
+                        <input type="text" class="form-control form-control-sm" name="search_value" value="<%= search_value %>" style="min-width: 300px">
+                        <div class="input-group-append">
+                            <button type="button" class="btn btn-sm btn-danger" id="btn-clear-search">Clear</button>
+                            <button type="button" class="btn btn-sm btn-info" id="btn-search">Search</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- List -->
+<div class="card card-info card-outline">
+    <div class="card-header">
+        <h4 class="card-title">List</h4>
+        <div class="card-tools">
+            <a href="#" class="btn btn-tool"><i class="fas fa-sync"></i></a>
+            <button type="button" class="btn btn-tool" data-card-widget="collapse" data-toggle="tooltip" title="Collapse"><i class="fas fa-minus"></i></button>
+        </div>
+    </div>
+    <div class="card-body">
+        <!-- Control -->
+
+        <div class="d-flex flex-wrap align-items-center justify-content-between mb-2">
+            <div class="mb-1">
+                <%- actionHelper(linkPrefix) %>
+            </div>
+            <div class="mb-1">
+                <a href="<%= linkPrefix %>/form" class="btn btn-sm btn-info"><i class="fas fa-plus"></i> Add New</a>
+            </div>
+        </div>
+        <!-- List Content -->
+        <form action="" method="post" class="table-responsive" id="form-table">
+            <table class="table table-bordered table-hover text-nowrap btn-table mb-0">
+                <thead>
+                    <tr>
+                        <th class="text-center"><%- checkboxAllHelper() %></th>
+                        <th class="text-center">#</th>
+                        <th class="text-center"><%- sortHelper(linkPrefix, 'Name', 'name', sortField, sortType) %></th>
+                        <th class="text-center"><%- sortHelper(linkPrefix, 'Status', 'status', sortField, sortType) %></th>
+                        <th class="text-center"><%- sortHelper(linkPrefix, 'Ordering', 'ordering', sortField, sortType) %></th>
+                        <th class="text-center"><%- sortHelper(linkPrefix, 'Code', 'code', sortField, sortType) %></th>
+                        <th class="text-center"><%- sortHelper(linkPrefix, 'Transport Fee', 'transport_fee', sortField, sortType) %></th>
+                        <th class="text-center"><%- sortHelper(linkPrefix, 'Created', 'created.time', sortField, sortType) %></th>
+                        <th class="text-center"><%- sortHelper(linkPrefix, 'Modified', 'modified.time', sortField, sortType) %></th>
+                        <th class="text-center">Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <% items.forEach((item, index) => {
+                        %>
+                        <tr>
+                            <td class="text-center"><%- checkboxHelper(index, item.id) %></td>
+                            <td class="text-center"><%= index + 1 %></td>
+                            <td class="text-center"><%- highlightHelper(item.name, search_value) %></td>
+                            <td class="text-center position-relative"><%- statusHelper(item.status, linkPrefix, item.id) %></td>
+                            <td class="text-center position-relative"><%- orderingHelper(item.ordering, linkPrefix, item.id) %></td>
+                            <td class="text-center"><%= item.code %></td>
+                            <td class="text-center"><%= item.transport_fee %></td>
+                            <td class="text-center">
+                                <%- timeHelper(item.created.user_name, item.created.time) %>
+                            </td>
+                            <td class="text-center modified-1">
+                                <%- timeHelper(item.modified.user_name, item.modified.time) %>
+                            </td>
+                            <td class="text-center"><%- controlHelper(item.id, linkPrefix) %></td>
+                        </tr>
+                        <%
+                    })%>
+                    
+
+                    
+                </tbody>
+            </table>
+        </form>
+    </div>
+    <div class="card-footer clearfix">
+        <%- paginationHelper(pagination, linkPrefix, currentStatus, search_value) %>
+    </div>
+</div>
