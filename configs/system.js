@@ -12,5 +12,7 @@ module.exports = {
         {name: 'User', collection: 'users', icon: 'ion ion-ios-person'},
         {name: 'Group', collection: 'groups', icon: 'ion ion-ios-people'},
         {name: 'Contact', collection: 'contacts', icon: 'ion ion-ios-contact'},
+        {name: 'Discount', collection: 'discounts', icon: 'ion ion-cash'},
+        {name: 'Transport', collection: 'deliveries', icon: 'ion ion-android-car'},
     ],
 }

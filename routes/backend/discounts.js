@@ -80,6 +80,7 @@ router.get('(/status/:status)?', async (req, res, next) => {
 	const currentStatus = ParamsHelpers.getParam(req.params, 'status', 'all');
 	const currentPage = ParamsHelpers.getParam(req.query, 'page', 1);
 	const search_value = ParamsHelpers.getParam(req.query, 'search_value', '');
+	res.locals.sidebarActive = `${collectionName}|list`;
 
 	if (currentStatus !== 'all') condition.status = currentStatus;
 	if (search_value) condition.name = new RegExp(search_value, 'i');
@@ -121,6 +122,7 @@ router.get('/form(/:id)?', async (req, res) => {
 	const errors = [];
 	const pageTitle = id ? 'Edit' : 'Add';
 	item = id ? await MainModel.getItem(id) : item;
+	res.locals.sidebarActive = `${collectionName}|form`;
 	
 	res.render(`${folderView}/form`, {pageTitle, errors, item});
 });
@@ -131,6 +133,7 @@ router.post('/form', Validates.formValidate(body), async (req, res) => {
 	const errors = validationResult(req).array();
 	const pageTitle = item && item.id ? 'Edit' : 'Add';
 	const task = item && item.id ? 'edit' : 'add';
+	res.locals.sidebarActive = `${collectionName}|form`;
 	
 	if (errors.length > 0) {
 		res.render(`${folderView}/form`, {pageTitle, errors, item});
