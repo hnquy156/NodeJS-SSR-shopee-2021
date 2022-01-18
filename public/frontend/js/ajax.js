@@ -21,12 +21,24 @@ $(document).ready(function () {
         });
     });
 
-    $('.product__voucher-unit')
-    $('.product__voucher-price')
+    $('.transport__destination-change').click(function() {
+        const cityId = $('select[name="transport_city"]').val();
+        let url = `/deliveries/${cityId}`;
+
+        $.ajax({
+            method: 'get',
+            url,
+            success: (data) => {
+                if (!data || !data.data) return alert('Có lỗi khi thay đổi địa chỉ!');
+                
+                const fee = data.data.transport_fee;
+                $('td.transport-fee').data('fee', fee);
+                $('td.transport-fee').text(formatCurrencyHelper(fee));
+                updateTotalPriceCheckout();
+            },
+        });
+    });
     
-
-
-
     // Go to checkout page when click button buy now
     $('.go-to-checkout').click(function() {
         let href = `/checkouts/${$(this).data('id')}`;

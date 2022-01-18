@@ -31,6 +31,10 @@ module.exports = {
         return DeliveriesModels.findById({_id: id});
     },
 
+    getItemFrontend: (id, options = null) => {
+        return DeliveriesModels.findById({_id: id});
+    },
+
     countItems: (condition) => {
         return DeliveriesModels.countDocuments(condition);
     },
