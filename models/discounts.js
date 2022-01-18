@@ -16,6 +16,10 @@ module.exports = {
         return ItemsModels.findById({_id: id});
     },
 
+    getItemFrontend: (name, options = null) => {
+        return ItemsModels.findOne({name: name});
+    },
+
     countItems: (condition) => {
         return ItemsModels.countDocuments(condition);
     },

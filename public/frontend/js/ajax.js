@@ -1,5 +1,32 @@
 $(document).ready(function () {
     
+    // Update Total of Checkout price when load pages, change discount, transport
+    updateTotalPriceCheckout();
+
+    $('.product__voucher-change').click(function() {
+        const discountCode = $('input.product__voucher-unit').val();
+        if (!discountCode) return alert('Vui lòng nhập mã giảm giá');
+        let url = `/discounts/${discountCode}`;
+        $.ajax({
+            method: 'get',
+            url,
+            success: (data) => {
+                if (!data.data) return alert('Mã giảm giá không hợp lệ');
+                const newPrice = data.data.value;
+                $('.product__voucher-price').text(formatCurrencyHelper(newPrice));
+                $('td.transport-discount').text(formatCurrencyHelper(newPrice));
+                $('td.transport-discount').data('discount', newPrice);
+                updateTotalPriceCheckout();
+            },
+        });
+    });
+
+    $('.product__voucher-unit')
+    $('.product__voucher-price')
+    
+
+
+
     // Go to checkout page when click button buy now
     $('.go-to-checkout').click(function() {
         let href = `/checkouts/${$(this).data('id')}`;
@@ -169,6 +196,16 @@ $(document).ready(function () {
     function updateQuantityProduct(quantity) {
         let quantityTotal = +$('.header__cart-notice').text();
         $('.header__cart-notice').text(quantityTotal + quantity);
+    }
+
+    function updateTotalPriceCheckout() {
+        const price_original = $('td.transport-price-original').data('price');
+        const fee = $('td.transport-fee').data('fee');
+        const discount = $('td.transport-discount').data('discount');
+        let elePriceTotal = $('td.cart__product-checkout-price-total');
+        let priceTotal = price_original + fee - discount;
+        elePriceTotal.data('total', priceTotal);
+        elePriceTotal.text(formatCurrencyHelper(priceTotal));
     }
 
 });

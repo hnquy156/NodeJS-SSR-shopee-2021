@@ -1,0 +1,7 @@
+<% 
+    inputHelper = (name, value, type, id = null, style = null) => {
+        const input_id = id ? `id=${id}` : '';
+        const styleProperty = style ? `style="${style}"` : '';
+        return `<input ${styleProperty} type="${type}" name="${name}" value="${value}" ${input_id} class="selectbox1">`
+    }
+%>

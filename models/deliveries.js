@@ -1,23 +1,38 @@
 const util = require('util');
 
 const NotifyConfig = require(__path_configs + 'notify');
-const ItemsModels = require(__path_schemas + 'deliveries');
+const DeliveriesModels = require(__path_schemas + 'deliveries');
 
 module.exports = {
     getList: (condition, options) => {
-        return ItemsModels
+        return DeliveriesModels
             .find(condition)
             .sort(options.sort)
             .skip(options.skip)
             .limit(options.limit);
     },
 
+    getListFrontend: async (options = null, params = null) => {
+
+        const condition = {status: 'active'};
+        let select = 'name code transport_fee';
+        let sort = 'name';
+        let skip = null;
+        let limit = null;
+
+        if (options.task === 'list') {
+            return DeliveriesModels.find(condition).select(select).sort(sort).skip(skip).limit(limit);
+        }
+
+        return DeliveriesModels.find(condition).select(select).sort(sort).skip(skip).limit(limit);
+    },
+
     getItem: (id, options = null) => {
-        return ItemsModels.findById({_id: id});
+        return DeliveriesModels.findById({_id: id});
     },
 
     countItems: (condition) => {
-        return ItemsModels.countDocuments(condition);
+        return DeliveriesModels.countDocuments(condition);
     },
 
     changeStatus: async (id, currentStatus, options) => {
@@ -32,12 +47,12 @@ module.exports = {
         }
 
         if (options.task === 'change-status-one') {
-            await ItemsModels.updateOne({_id: id}, data);
+            await DeliveriesModels.updateOne({_id: id}, data);
             return {id, status, notify: NotifyConfig.CHANGE_STATUS_SUCCESS};
         }
         if (options.task === 'change-status-multi') {
             data.status = currentStatus;
-            return ItemsModels.updateMany({_id: { $in: id}}, data);
+            return DeliveriesModels.updateMany({_id: { $in: id}}, data);
         }
     },
 
@@ -51,13 +66,13 @@ module.exports = {
             },
         }
         if (options.task === 'change-ordering-one') {
-            await ItemsModels.updateOne({_id: id}, data);
+            await DeliveriesModels.updateOne({_id: id}, data);
             return {id, ordering: +ordering, notify: NotifyConfig.CHANGE_ORDERING_SUCCESS}
         }
         if (options.task === 'change-ordering-multi') {
             const promiseOrdering = id.map((ID, index) => {
                 data.ordering = +ordering[index]
-                return ItemsModels.updateOne({_id: ID}, data);
+                return DeliveriesModels.updateOne({_id: ID}, data);
             });
             return await Promise.all(promiseOrdering);
         }
@@ -65,9 +80,9 @@ module.exports = {
 
     deleteItem: (id, options) => {
         if (options.task === 'delete-one')
-            return ItemsModels.deleteOne({_id: id});
+            return DeliveriesModels.deleteOne({_id: id});
         if (options.task === 'delete-multi')
-            return ItemsModels.deleteMany({_id: { $in: id}});
+            return DeliveriesModels.deleteMany({_id: { $in: id}});
     },
 
     saveItem: (item, options) => {
@@ -78,7 +93,7 @@ module.exports = {
                 user_name: 'Admin',
                 time: Date.now(),
             }
-            return ItemsModels(item).save();
+            return DeliveriesModels(item).save();
 
         }
         if (options.task === 'edit') {
@@ -87,12 +102,12 @@ module.exports = {
                 user_name: 'Admin',
                 time: Date.now(),
             }
-            return ItemsModels.updateOne({_id: item.id}, item);
+            return DeliveriesModels.updateOne({_id: item.id}, item);
         }
     },
 
     saveAPIs: (items, options = null) => {
         
-        return ItemsModels.create(items);
+        return DeliveriesModels.create(items);
     },
 }

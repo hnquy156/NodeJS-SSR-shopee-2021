@@ -1,4 +1,14 @@
 <% include ./../../helpers/format %>
+<% include ./../../helpers/selectbox %>
+<% include ./../../helpers/input %>
+<%
+    const citySelectbox = cities.map(city => ({
+        name: city.name,
+        value: city.id,
+        transport_fee: city.transport_fee,
+    }));
+    const currentCity = citySelectbox.find(city => city.value == user.city);
+%>
 
 <div class="row no-gutters app__content product__cart-title">
     <div class="col l-12 m-12 c-12">
@@ -84,7 +94,7 @@
         <div class="cart__product-total-products">
             <div class="cart__product-total-wrap">
                 <span class="cart__product-total-product">Tổng số tiền (<%= quantityTotal %> Sản phẩm): </span>
-                <span class="cart__product-total-price"><%= formatCurrencyHelper(priceTotal) %></span>
+                <span class="cart__product-total-price" data-price="<%= priceTotal %>"><%= formatCurrencyHelper(priceTotal) %></span>
             </div>
         </div>
     </div>
@@ -99,15 +109,18 @@
             <div class="cart__product-transport-destination">
                 <span class="transport__name"><%= user.name %></span>
                 <span class="transport__phone"><%= user.phone %></span>
-                <span class="transport__address"><%= user.address %>, <%= user.city %></span>
+                <span class="transport__address">
+                    <%- inputHelper('transport_address', user.address, 'text', '', 'width: 300px') %>
+                    <%- selectboxHelper('transport_city', citySelectbox, user.city) %>
+                </span>
                 <span class="transport__destination-change">Thay đổi</span>
             </div>
 
             <div class="cart__product-voucher-method">
                 <div class="product__voucher-title">Mã giảm giá</div>
-                <input class="product__voucher-unit" placeholder="Nhập mã giảm giá">
+                <input class="product__voucher-unit" value="" placeholder="Nhập mã giảm giá">
                 <div class="product__voucher-change">Thay đổi</div>
-                <div class="product__voucher-price">-100.000₫</div>
+                <div class="product__voucher-price"><%= formatCurrencyHelper(0) %></div>
             </div>
             <div class="product__voucher-info">Mỗi lần chỉ sử dụng tối đa 1 mã giảm giá.</div>
         </div>
@@ -129,19 +142,23 @@
                 </tr>
                 <tr>
                     <td>Tổng tiền hàng</td>
-                    <td class="text-right"><%= formatCurrencyHelper(priceTotal) %></td>
+                    <td class="text-right transport-price-original" 
+                        data-price="<%= priceTotal %>"><%= formatCurrencyHelper(priceTotal) %></td>
                 </tr>
                 <tr>
                     <td>Phí vận chuyển</td>
-                    <td class="text-right"><%= formatCurrencyHelper(100000) %></td>
+                    <td class="text-right transport-fee" 
+                        data-fee="<%= currentCity.transport_fee %>"><%= formatCurrencyHelper(currentCity.transport_fee) %></td>
                 </tr>
                 <tr>
                     <td>Voucher, khuyết mãi</td>
-                    <td class="text-right">-<%= formatCurrencyHelper(100000) %></td>
+                    <td class="text-right transport-discount" 
+                        data-discount="<%= 0 %>">-<%= formatCurrencyHelper(0) %></td>
                 </tr>
                 <tr>
                     <td>Tổng thanh toán</td>
-                    <td class="text-right cart__product-checkout-price-total"><%= formatCurrencyHelper(priceTotal) %></td>
+                    <td class="text-right cart__product-checkout-price-total"
+                        data-total="<%= priceTotal %>"><%= formatCurrencyHelper(priceTotal) %></td>
                 </tr>
             </table>
         </div>
