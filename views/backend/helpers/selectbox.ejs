@@ -25,4 +25,18 @@
                     ${xhtml}
                 </select>`
     }
+
+    selectboxAjaxStatusHelper = (name, options, selectedValue = null, id, linkPrefix) => {
+        let xhtml = '';
+        
+        options.forEach(option => {
+            const selected = option.value === selectedValue ? 'selected="selected"' : '';
+            xhtml += `<option value="${option.value}" ${selected}>${option.name}</option>`;
+        })
+
+        return `<select style="width: 100px;" name="${name}" data-id="${id}" data-link="${linkPrefix}/change-status" 
+                    class="custom-select custom-select-sm" >
+                    ${xhtml}
+                </select>`
+    }
 %>

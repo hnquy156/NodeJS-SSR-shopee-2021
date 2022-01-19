@@ -11,6 +11,7 @@ module.exports = {
     col_carts: 'carts',
     col_discounts: 'discounts',
     col_deliveries: 'deliveries',
+    col_orders: 'orders',
     col_contacts: 'contacts',
     col_settings: 'settings',
     col_rss: 'rss',

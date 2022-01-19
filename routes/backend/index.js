@@ -14,6 +14,7 @@ router.use('/settings', require('./settings'));
 router.use('/rss', require('./rss'));
 router.use('/discounts', require('./discounts'));
 router.use('/deliveries', require('./deliveries'));
+router.use('/orders', require('./orders'));
 
 
 

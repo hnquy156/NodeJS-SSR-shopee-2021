@@ -1,0 +1,63 @@
+<% include ./../../helpers/time %>
+<% include ./../../helpers/format %>
+<% include ./../../helpers/price %>
+<% include ./../../helpers/image %>
+
+<%
+    const collection = 'orders';
+    const linkPrefix = `/${systemConfigs.prefixAdmin}/${collection}`;
+
+%>
+
+
+<!-- List -->
+<div class="card card-info card-outline">
+    <div class="card-header">
+        <h4 class="card-title">Product List</h4>
+        <div class="card-tools">
+            <a href="#" class="btn btn-tool"><i class="fas fa-sync"></i></a>
+            <button type="button" class="btn btn-tool" data-card-widget="collapse" data-toggle="tooltip" title="Collapse"><i class="fas fa-minus"></i></button>
+        </div>
+    </div>
+    <div class="card-body">
+        
+        <!-- List Content -->
+        <form action="" method="post" class="table-responsive" id="form-table">
+            <table class="table table-bordered table-hover text-nowrap btn-table mb-0">
+                <thead>
+                    <tr>
+                        <th class="text-center">#</th>
+                        <th class="text-center">Thumb</th>
+                        <th class="text-center">Information</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <% items.forEach((item, index) => {
+                        const product = item.product;
+                        const quantity = item.quantity;
+
+                        %>
+                        <tr>
+                            <td class="text-center"><%= index + 1 %></td>
+                            <td class="text-center"><%- imageOutsideHelper(product.thumb, 'small') %></td>
+                            <td class="text-left">
+                                <p><b>Name: </b><%= product.name %></p>
+                                <p><b>Price: </b><%= formatCurrencyHelper(product.price.price_new) %></p>
+                                <p><b>Quantity: </b><%= quantity %></p>
+                                <p><b>Total: </b><%= formatCurrencyHelper(quantity * product.price.price_new) %></p>
+                            </td>
+                        </tr>
+                        <%
+                    })%>
+                    <%
+                        if (items.length === 0) {%><tr><td class="text-center" colspan="5">Không có dữ liệu</td></tr><%}
+                    %>
+                    
+                </tbody>
+            </table>
+        </form>
+    </div>
+    <div class="card-footer clearfix">
+
+    </div>
+</div>

@@ -1,5 +1,42 @@
 $(document).ready(function () {
     
+    // Confirm orders
+    $('.cart__product-order-btn').click(function() {
+        const isConfirm = confirm('Bạn có muốn thanh toán?');
+        if (!isConfirm) return -1;
+
+        const address = $('input[name="transport_address"]').val();
+        const city = $('select[name="transport_city"]').val();
+        const fee = $('td.transport-fee').data('fee');
+        const discount = $('td.transport-discount').data('discount');
+        const total = $('td.cart__product-checkout-price-total').data('total');
+        const products = [];
+        $('.cart__product-price-total').each(function() {
+            const id = $(this).data('id');
+            const quantity = $(this).data('quantity');
+            products.push({product: id, quantity});
+        });
+        const data = {
+            address,
+            city,
+            price: {
+                fee,
+                discount,
+                total,
+            },
+            products,
+        }
+        
+        $.ajax({
+            method: 'post',
+            url: '/orders/add',
+            data: {"data": JSON.stringify(data)},
+            success: (data) => {
+                console.log(data)
+            }
+        })
+    });
+
     // Update Total of Checkout price when load pages, change discount, transport
     updateTotalPriceCheckout();
 

@@ -4,7 +4,7 @@
         filterStatus.forEach((element, index) => {
             let link = `${linkPrefix}/status/${element.value}`
             if (search_value) link += `?search_value=${search_value}`;
-            xhtml += `<a href="${link}" class="mr-1 btn btn-sm btn-${element.color}">${element.name} <span class="badge badge-pill badge-light">${element.count}</span></a>`
+            xhtml += `<a href="${link}" class="mr-1 mb-1 btn btn-sm btn-${element.color}">${element.name} <span class="badge badge-pill badge-light">${element.count}</span></a>`
         });
         return xhtml;
     }

@@ -12,5 +12,6 @@ router.use('/carts', require('./carts'));
 router.use('/checkouts', require('./checkouts'));
 router.use('/discounts', require('./discounts'));
 router.use('/deliveries', require('./deliveries'));
+router.use('/orders', require('./orders'));
 
 module.exports = router;

@@ -179,6 +179,24 @@ $(document).ready(function () {
         });
     });
 
+    // Change Group of Item (user/category/...)
+    $('select[name="change-status-order"]').change(function(e) {
+        // e.preventDefault();
+        const element = $(this);
+        const id = element.data('id');
+        const status = element.val();
+        const link = element.data('link');
+        const url = `${link}/${status}/${id}`;
+
+        $.ajax({
+            method: 'get',
+            url,
+            success: (data) => {
+                showNotify(element, data.notify);
+            }
+        });
+    });
+
     
 });
 

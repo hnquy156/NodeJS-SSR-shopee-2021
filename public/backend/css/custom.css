@@ -60,6 +60,10 @@ tr.my-read-only {
     height: 40px;
 }
 
+.img-avatar-small {
+    height: 200px;
+}
+
 .img-avatar-medium {
     max-height: 400px ;
 }
