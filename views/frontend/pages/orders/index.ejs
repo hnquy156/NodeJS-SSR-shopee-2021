@@ -1,1 +1,52 @@
-<H1>This is Order</H1>
+<% include ./../../helpers/format %>
+
+<div class="app__content">
+    <div class="order__wrap">
+        <div class="order__heading">
+            <div class="order__title">
+                <h3>Cảm ơn bạn đã đặt hàng từ Shopee</h3>
+                <p>Nhập mã đơn hàng của bạn để theo dõi trạng thái đơn hàng của bạn.</p>
+            </div>
+            <div class="order__check">
+                <input class="order__check-input btn" type="text" placeholder="Nhập mã đơn hàng">
+                <button class="btn btn--primary order__check-btn">Kiểm tra</button>
+            </div>
+        </div>
+
+        <div class="order_information">
+            <div class="order_information-title">Thông tin đơn hàng</div>
+            <div class="order_information-body">
+                <div>Mã đơn hàng: <span class="order_information-code"></span></div>
+                <div>Người mua: <span class="order_information-name"></span></div>
+                <div>Số điện thoại: <span class="order_information-phone"></span></div>
+            </div>
+        </div>
+
+        <div class="order__status">
+            <div class="order__status-bar">
+                <div class="order__status-bar-empty"></div>
+                <div class="order__status-bar-full"></div>
+                <div class="order__status-point pos-0" data-status="0">
+                    <i class="far fa-clipboard"></i>
+                </div>
+                <div class="order__status-point-text pos-0">Chờ lấy hàng</div>
+
+                <div class="order__status-point pos-1" data-status="1">
+                    <i class="fas fa-money-bill-wave"></i>
+                </div>
+                <div class="order__status-point-text pos-1">Chuẩn bị hàng</div>
+
+                <div class="order__status-point pos-2" data-status="2">
+                    <i class="fas fa-truck"></i>
+                </div>
+                <div class="order__status-point-text pos-2">Đang giao hàng</div>
+
+                <div class="order__status-point pos-3" data-status="3">
+                    <i class="fas fa-check"></i>
+                </div>
+                <div class="order__status-point-text pos-3">Giao hàng thành công</div>
+
+            </div>
+        </div>
+    </div>
+</div>

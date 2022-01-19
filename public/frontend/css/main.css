@@ -2169,3 +2169,136 @@ transform: translateY(-1px);
     padding: 0 20px;
     height: 100%;
 }
+
+/* checking order page */
+
+.order__wrap {
+    background-color: var(--white-color);
+    padding: 20px 20px;
+    margin-bottom: 30px;
+}
+
+.order__heading {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.order__title h3 {
+    font-size: 1.8rem;
+    color: var(--primary-color);
+}
+
+.order__title p {
+    font-size: 1.4rem;
+    color: var(--text-color);
+}
+
+.order__check-input {
+    border: 1px solid var(--primary-color);
+    cursor: text;
+    color: var(--text-color);
+}
+
+.order__check-input {
+    border-radius: 2px;
+}
+
+.order_information {
+    color: var(--text-color);
+    font-size: 1.4rem;
+    line-height: 3rem;
+    margin-top: 10px;
+    display: none;
+}
+
+.order_information-title {
+    font-weight: 500;
+    font-size: 1.8rem;
+}
+
+.order__status {
+    display: flex;
+    justify-content: center;
+    margin-top: 80px;
+    margin-bottom: 80px;
+}
+
+.order__status-bar {
+    width: 500px;
+    max-width: 80%;
+    height: 4px;
+    position: relative;
+}
+
+.order__status-bar .pos-0 {
+    left: 0%;
+}
+
+.order__status-bar .pos-1 {
+    left: 33.33%;
+}
+
+.order__status-bar .pos-2 {
+    left: 66.67%;
+}
+
+.order__status-bar .pos-3 {
+    left: 100%;
+}
+
+.order__status-bar-empty {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-color: var(--border-color);
+}
+
+.order__status-bar-full {
+    position: absolute;
+    width: 0%; /* Thanh trạng thái đơn hàng */
+    height: 100%;
+    background-color: var(--primary-color);
+    z-index: 2;
+}
+
+.order__status-point {
+    position: absolute;
+    height: 60px;
+    width: 60px;
+    top: 50%;
+    z-index: 3;
+    transform: translate(-50%, -50%);
+    border-radius: 50%;
+    border: 4px solid var(--border-color);
+    background-color: var(--white-color);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.order__status-point i {
+    color: var(--border-color);
+    font-size: 3rem;
+}
+
+.order__status-point.active i {
+    color: var(--primary-color);
+}
+
+.order__status-point.active {
+    border-color: var(--primary-color);
+}
+
+.order__status-point-text {
+    position: absolute;
+    color: var(--text-color);
+    font-size: 1.4rem;
+    bottom: -50px;
+    transform: translateX(-50%);
+}
+
+.order__status-point-text.pos-3 {
+    width: 138px;
+}
+

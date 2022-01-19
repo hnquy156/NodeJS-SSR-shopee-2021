@@ -1,5 +1,33 @@
 $(document).ready(function () {
     
+    // Checking status the order
+    $('.order__check-btn').click(function() {
+        const code = $('.order__check-input').val();
+        if (!code) return showNotify($(this), 'Vui lòng nhập mã đơn hàng!', 'warn');
+        
+        const url = '/orders/' + code;
+        $.ajax({
+            method: 'get',
+            url,
+            success: (data) => {
+                console.log(data);
+                if (!data || !data.data) return showNotify($(this), 'Đơn hàng không tồn tại!', 'error');
+
+                $('.order_information').css('display', 'block');
+                $('.order__status-bar-full').css('width', data.data.status/3*100 + '%');
+                $('.order__status-point').each(function() {
+                    if ($(this).data('status') <= data.data.status) $(this).addClass('active')
+                    else $(this).removeClass('active');
+                });
+                $('.order_information-code').text(data.data.code);
+                $('.order_information-name').text(formatHideHelper(data.data.name));
+                $('.order_information-phone').text(formatHideHelper(data.data.phone, 'right'));
+                
+                showNotify($(this), 'Xem thông tin đơn hàng của bạn bên dưới!', 'success');
+            }
+        });
+    });
+
     // Confirm orders
     $('.cart__product-order-btn').click(async function() {
         // const isConfirm = confirm('Bạn có muốn thanh toán?');
@@ -244,6 +272,23 @@ $(document).ready(function () {
             if (count % 3 === 0 && i > 0) result = '.' + result;
         }
         return result + ' ' + unit;
+    }
+
+    function formatHideHelper (text, showPosition = 'left', showLetterNumber = 3) {
+        let from = 0;
+        let to = text.length - 1;
+        if (showPosition === 'left') {
+            from += showLetterNumber;
+        } else {
+            to -= showLetterNumber;
+        }
+        let string = '';
+
+        for(let i = 0; i < text.length; i++) {
+            if (from <= i && i <= to) string += '*'
+            else string += text[i];
+        }
+        return string;
     }
 
     function updateQuantityProduct(quantity) {

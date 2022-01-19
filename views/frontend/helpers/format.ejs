@@ -19,4 +19,21 @@
         }
         return result + ' ' + unit;
     }
+
+    formatHideHelper = (text, showPosition = 'left', showLetterNumber = 3) => {
+        let from = 0;
+        let to = text.length - 1;
+        if (showPosition === 'left') {
+            from += showLetterNumber;
+        } else {
+            to -= showLetterNumber;
+        }
+        let string = '';
+
+        for(let i = 0; i < text.length; i++) {
+            if (from <= i && i <= to) string += '*'
+            else string += text[i];
+        }
+        return string;
+    }
 %>
