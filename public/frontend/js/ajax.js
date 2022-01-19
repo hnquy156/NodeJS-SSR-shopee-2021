@@ -1,9 +1,10 @@
 $(document).ready(function () {
     
     // Confirm orders
-    $('.cart__product-order-btn').click(function() {
-        const isConfirm = confirm('Bạn có muốn thanh toán?');
-        if (!isConfirm) return -1;
+    $('.cart__product-order-btn').click(async function() {
+        // const isConfirm = confirm('Bạn có muốn thanh toán?');
+        const isConfirm = await Swal.fire(swalConfig('Bạn có muốn thanh toán đơn hàng?', 'info', 'Đồng ý'));
+        if (!isConfirm.value) return -1;
 
         const address = $('input[name="transport_address"]').val();
         const city = $('select[name="transport_city"]').val();
@@ -42,17 +43,18 @@ $(document).ready(function () {
 
     $('.product__voucher-change').click(function() {
         const discountCode = $('input.product__voucher-unit').val();
-        if (!discountCode) return alert('Vui lòng nhập mã giảm giá');
+        if (!discountCode) return showNotify($(this), 'Vui lòng nhập mã giảm giá!', 'warn');
         let url = `/discounts/${discountCode}`;
         $.ajax({
             method: 'get',
             url,
             success: (data) => {
-                if (!data.data) return alert('Mã giảm giá không hợp lệ');
+                if (!data.data) return showNotify($(this), 'Mã giảm giá không hợp lệ!', 'error');
                 const newPrice = data.data.value;
                 $('.product__voucher-price').text(formatCurrencyHelper(newPrice));
                 $('td.transport-discount').text(formatCurrencyHelper(newPrice));
                 $('td.transport-discount').data('discount', newPrice);
+                showNotify($(this), 'Cập nhật mã giảm giá thành công!');
                 updateTotalPriceCheckout();
             },
         });
@@ -71,6 +73,7 @@ $(document).ready(function () {
                 const fee = data.data.transport_fee;
                 $('td.transport-fee').data('fee', fee);
                 $('td.transport-fee').text(formatCurrencyHelper(fee));
+                showNotify($(this), 'Thay đổi địa chỉ giao hành thành công!');
                 updateTotalPriceCheckout();
             },
         });
@@ -127,6 +130,7 @@ $(document).ready(function () {
             url,
             success: (data) => {
                 console.log(data);
+                showNotify(element, 'Thêm sản phẩm vào giỏ hàng!');
                 updateQuantityProduct(1);
             }
         });
@@ -135,7 +139,7 @@ $(document).ready(function () {
     $('.ajax-add-cart').click(function(e) {
         const element = $(this);
         const eleInput = $('input.product__quantity-number');
-        if (eleInput.val() <= 0) return alert('Vui lòng chọn số lượng sản phẩm!');
+        if (eleInput.val() <= 0) return showNotify($(this), 'Vui lòng chọn số lượng sản phẩm cần thêm!', 'error');;
 
         const ProductID  = eleInput.data('product-id');
         const CartID  = eleInput.data('cart-id');
@@ -149,15 +153,15 @@ $(document).ready(function () {
                 if (element.hasClass('product__add-cart')) {
                     updateQuantityProduct(+eleInput.val());
                     eleInput.val(0);
-                    alert('Thêm sản phẩm vào giỏ hàng thành công!');
+                    showNotify($(this), 'Thêm sản phẩm vào giỏ hàng thành công!');
+
                 } else if (element.hasClass('product__buy-now')) {
                     window.location.href = '/carts/' + CartID;
                 }
             }
         });
     });
-//     product__add-cart
-// product__buy-now
+
 
     // Change Like Product
     $('.ajax-liked-product').click(function(e) {
@@ -265,4 +269,18 @@ function showNotify(element, content, status = 'success') {
         position: 'top center',
         autoHideDelay: 2000,
     });
+}
+
+function swalConfig(text, icon, confirmText) {
+    return {
+        position: 'top',
+        title: 'Thông báo!',
+        text: text,
+        icon: icon,
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: confirmText,
+        cancelButtonText: 'Hủy',
+    };
 }
