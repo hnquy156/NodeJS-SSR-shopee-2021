@@ -28,6 +28,7 @@
                         <%
                             categories.forEach((category, index) => {
                                 const isChecked = categoriesQuery.indexOf(category.id) > -1 ? 'checked' : '';
+                                if (category.slug === 'yeu-thich') return -1;
                             %>
                                 <li class="filter__item">
                                     <input class="filter__item-checkbox cursor-pointer" id="filter__category-checkbox<%= index %>"

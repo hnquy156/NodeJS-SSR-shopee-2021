@@ -18,6 +18,7 @@ module.exports = {
     },
 
     getListFrontend: async (options = null, params = null) => {
+        const user = options.user;
         let categories = await CategoriesModels.find({status: 'active'}, 'name');
         categories = categories.map(category => category.name);
 
@@ -54,6 +55,9 @@ module.exports = {
         }
         if (options.task === 'products-in-category') {
             condition['group.id'] = params.id;
+        }
+        if (options.task === 'products-favourite') {
+            condition['like.user_id'] = {$in: user.id};
         }
 
         if (options.task === 'products-filter') {

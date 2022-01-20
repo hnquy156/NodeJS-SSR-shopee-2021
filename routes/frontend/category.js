@@ -12,8 +12,13 @@ const pageTitle = 'Category';
 router.get('/:slug', async (req, res, next) => {
 	const categorySlug = req.params.slug;
 	const categoryItem = await CategoryModel.getItemFrontend(categorySlug, null);
-	const products 	   = await ProductModel.getListFrontend({task: 'products-in-category'}, categoryItem);
 	const titleCategory = 'Danh mục ' + categoryItem.name;
+	const user = req.user;
+	let task = 'products-in-category';
+	if (categorySlug === 'yeu-thich') task = 'products-favourite';
+
+	const products = await ProductModel.getListFrontend({task, user}, categoryItem);
+	
 	res.render(`${folderView}/index`, { 
 		pageTitle, 
 		layout, 
