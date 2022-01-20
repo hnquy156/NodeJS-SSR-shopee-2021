@@ -4,6 +4,7 @@ const fs = require('fs');
 const NotifyConfig = require(__path_configs + 'notify');
 const OrdersModels = require(__path_schemas + 'orders');
 const CategoriesModels = require(__path_schemas + 'categories');
+const ProductsModels = require(__path_models + 'products');
 const FileHelpers = require(__path_helpers + 'file');
 const folderUploads = `${__path_uploads}products/`;
 const stringsHelpers = require(__path_helpers + 'string');
@@ -215,7 +216,7 @@ module.exports = {
         }
     },
 
-    saveItem: (item, options) => {
+    saveItem: async (item, options) => {
         const user = options.user;
         item.status = 0;
         item.name = user.name;
@@ -229,6 +230,7 @@ module.exports = {
                 user_name: user.username,
                 time: Date.now(),
             }
+            await ProductsModels.changeSold(item.products, 0, {task: 'change-sold-multi', user});
             return new OrdersModels(item).save();
         }
     },

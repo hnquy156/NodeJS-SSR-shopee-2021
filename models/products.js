@@ -161,6 +161,13 @@ module.exports = {
             await ProductsModels.updateOne({_id: id}, data);
             return {id, sold: +sold, notify: NotifyConfig.CHANGE_SOLD_SUCCESS}
         }
+        if (options.task === 'change-sold-multi') {
+            const productsPromise = [];
+            id.forEach(product => {
+                productsPromise.push(ProductsModels.updateOne({_id: product.product}, {$inc: {sold: product.quantity}}));
+            });
+            return await Promise.all(productsPromise);
+        }
     },
 
     changeLike: async (id, options) => {
