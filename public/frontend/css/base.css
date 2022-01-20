@@ -59,6 +59,10 @@ input[type=number] {
     text-align: right;
 }
 
+.text-no-link {
+    text-decoration: none;
+}
+
 .link__shopee {
     color: #0055aa;
     cursor: pointer;

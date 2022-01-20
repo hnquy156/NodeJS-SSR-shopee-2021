@@ -173,6 +173,10 @@
     cursor: text;
     color: var(--white-color);
 }
+.header__navbar-title--pointer {
+    cursor: pointer;
+    color: var(--white-color);
+}
 
 /* QR CODE */
 

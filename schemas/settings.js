@@ -8,10 +8,11 @@ const items = new Schema({
     google: String,
     twitter: String,
     facebook: String,
+    instagram: String,
     phone: String,
     email: String,
     address: String,
-    text_header: String,
+    copyright: String,
     logo: String,
     logo_white: String,
 });

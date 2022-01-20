@@ -5,13 +5,10 @@
 				<h3 class="footer__heading">Chăm sóc khách hàng</h3>
 				<ul class="footer-list">
 					<li class="footer-item">
-						<a href="/contacts" class="footer-item__link">Trung tâm trợ giúp</a>
+						<a href="/contacts" class="footer-item__link">Liên lạc với chúng tôi</a>
 					</li>
 					<li class="footer-item">
-						<a href="" class="footer-item__link">Shopee Mall</a>
-					</li>
-					<li class="footer-item">
-						<a href="" class="footer-item__link">Hướng dẫn mua hàng</a>
+						<a href="/orders" class="footer-item__link">Theo dõi đơn hàng</a>
 					</li>
 				</ul>
 			</div>
@@ -46,19 +43,19 @@
 				<h3 class="footer__heading">Theo dõi</h3>
 				<ul class="footer-list">
 					<li class="footer-item">
-						<a href="" class="footer-item__link">
+						<a href="<%= settings.facebook %>" target="_blank" class="footer-item__link">
 							<i class="footer-item__icon fab fa-facebook"></i>
 							Facebook
 						</a>
 					</li>
 					<li class="footer-item">
-						<a href="" class="footer-item__link">
+						<a href="<%= settings.instagram %>" target="_blank" class="footer-item__link">
 							<i class="footer-item__icon fab fa-instagram"></i>
 							Instagram
 						</a>
 					</li>
 					<li class="footer-item">
-						<a href="" class="footer-item__link">
+						<a href="<%= settings.linkedin %>" target="_blank" class="footer-item__link">
 							<i class="footer-item__icon fab fa-linkedin"></i>
 							Linkedin
 						</a>
@@ -83,7 +80,7 @@
 	</div>
 	<div class="footer__bottom">
 		<div class="grid wide">
-			<p class="footer__text">© 2021 - Bản quyền thuộc về Shopee</p>
+			<p class="footer__text"><%= settings.copyright %></p>
 		</div>
 	</div>
 </footer>

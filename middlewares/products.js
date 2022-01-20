@@ -10,6 +10,7 @@ module.exports = async (req, res, next) => {
 	const cartProducts = await CartModel.getCartProducts(req.user.cart, null);
 	res.locals.cartProducts = cartProducts.products;
 	res.locals.categories = await CategoriesModel.getListFrontend({task: 'categories-list'});
+	res.locals.settings = await SettingsModel.getItemFrontend({});
 
     next();
 }

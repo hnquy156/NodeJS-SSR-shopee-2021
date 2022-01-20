@@ -48,8 +48,8 @@ const upload = multer({
 router.get('/', async (req, res) => {
 	const messages = req.flash('notify');
 	let emptyItem = {
-		id: '', linkedin: '', twitter: '', google: '',
-		facebook: '', email: '', address: '', text_header: '', logo: '', logo_white: ''
+		id: '', linkedin: '', twitter: '', google: '', instagram: '',
+		facebook: '', email: '', address: '', copyright: '', logo: '', logo_white: ''
 	};
 	res.locals.sidebarActive = `${collectionName}|form`;
 	let item = await MainModel.getItem();
