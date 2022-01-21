@@ -6,8 +6,10 @@ const { body, validationResult } = require('express-validator');
 const collectionName = 'auth';
 const UsersModel = require(__path_models + 'users');
 const CategoriesModel = require(__path_models + 'categories');
+const NotifyConfigs = require(__path_configs + 'notify');
 const systemConfigs = require(__path_configs + 'system');
-const MainValidator = require(__path_validates + 'login');
+const LoginValidator = require(__path_validates + 'login');
+const RegisterValidator = require(__path_validates + 'register');
 const passport = require(__path_configs + 'passport');
 const salt = systemConfigs.salt;
 
@@ -45,6 +47,22 @@ router.get('/register', async (req, res, next) => {
 	});
 });
 
+// POST REGISTER
+router.post('/register', RegisterValidator.formValidate(body), async (req, res) => {
+	const item = req.body;
+	const userItem = await UsersModel.getUserByUsername(item.username );
+	const errors = validationResult(req).array();
+
+	if (userItem) errors.push({param: 'username', msg: NotifyConfigs.ERROR_USERNAME_EXIST});
+	
+	if (errors.length > 0) {
+		res.render(`${folderView}/register`, {pageTitle, layout, errors, item});
+	} else {
+		await UsersModel.saveItemFrontend(item, {task: 'add'});
+		res.redirect(linkLogin);
+	}
+});
+
 /* GET Login. */
 router.get('/login', async (req, res, next) => {
 	if (req.isAuthenticated()) res.redirect(linkIndex);
@@ -60,7 +78,7 @@ router.get('/login', async (req, res, next) => {
 });
 
 // POST Login
-router.post('/login', MainValidator.formValidate(body), (req, res, next) => {
+router.post('/login', LoginValidator.formValidate(body), (req, res, next) => {
 	const item = req.body;
 	const errors = validationResult(req).array();
 

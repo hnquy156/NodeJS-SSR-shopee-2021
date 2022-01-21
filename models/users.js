@@ -132,4 +132,38 @@ module.exports = {
             return UsersModels.updateOne({_id: item.id}, item);
         }
     },
+
+    saveItemFrontend: async (item, options) => {
+        // item['group.id'] = item.group_id;
+        // item['group.name'] = item.group_name;
+        item.password = bcrypt.hashSync(item.password, salt);
+
+        if (options.task === 'add') {
+            const cartItem = await new CartsModels({}).save();
+            item.cart = cartItem.id;
+            item.created = {
+                user_id: '',
+                user_name: item.username,
+                time: Date.now(),
+            }
+            item.phone = '';
+            item.address = '';
+            item.city = '';
+            item.email = '';
+            return UsersModels(item).save();
+
+        }
+        if (options.task === 'edit') {
+            
+            if (bcrypt.compareSync(SystemConfig.password_default, item.password)) {
+                delete item.password;
+            }
+            item.modified = {
+                user_id: '',
+                user_name: 'Admin',
+                time: Date.now(),
+            }
+            return UsersModels.updateOne({_id: item.id}, item);
+        }
+    },
 }
