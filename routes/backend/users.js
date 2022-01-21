@@ -64,8 +64,8 @@ router.post('/form', FileHelpers.upload('avatar', 'users'), Validates.formValida
 // Get FORM --- ADD/EDIT
 router.get('/form(/:id)?', async (req, res) => {
 	const id = ParamsHelpers.getParam(req.params, 'id', '');
-	let item = {id: '', name: '', ordering: 1, content: '', group_id: '', group_name: '',
-				 username: '', password: '', password_confirm: ''};
+	let item = {id: '', name: '', ordering: 1, content: '', group_id: '', group_name: '', phone: '', email: '',
+				city: '', address: '', username: '', password: '', password_confirm: ''};
 	const groups = await GroupsModel.getList({}, {select: 'name'});
 	const errors = [];
 	res.locals.sidebarActive = `${collectionName}|form`;;

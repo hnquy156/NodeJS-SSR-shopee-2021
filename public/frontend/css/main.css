@@ -808,6 +808,19 @@
 
 /* Authen Modal */
 
+.auth__wrap {
+    display: flex;
+    justify-content: right;
+    margin-bottom: 30px;
+    min-height: 550px;
+    /* background-color: var(--primary-color); */
+    background-image: url("https://cf.shopee.vn/file/85ea8ed2e12c2a5832bc2a77c478eabb"); 
+    background-size: cover; 
+    background-repeat: no-repeat; 
+    background-position: center center;
+    padding: 20px;
+}
+
 .auth-form {
     width: 500px;
     background-color: var(--white-color);
@@ -845,6 +858,18 @@
     margin-top: 16px;
     padding: 0 12px;
     font-size: 1.4rem;
+    border-radius: 2px;
+    border: 1px solid var(--border-color);
+    outline: none;
+} 
+
+.auth-form__error {
+    width: 100%;
+    margin-top: 16px;
+    padding: 10px 12px;
+    font-size: 1.4rem;
+    background-color: rgba(238, 77, 45, 0.1);
+    line-height: 2rem;
     border-radius: 2px;
     border: 1px solid var(--border-color);
     outline: none;
@@ -2306,3 +2331,38 @@ transform: translateY(-1px);
     width: 138px;
 }
 
+/* NO PERMISSION PAGE */
+
+.no-permission {
+    padding: 20px;
+    margin-bottom: 30px;
+    background-color: var(--white-color);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.no-permission h1 {
+    color: var(--primary-color);
+    font-size: 3rem;
+    margin-bottom: 20px;
+}
+
+.no-permission h3 {
+    color: var(--text-color);
+    font-size: 1.4rem;
+}
+
+.no-permission i {
+    color: var(--primary-color);
+    font-size: 30rem;
+    margin-top: 40px;
+    margin-bottom: 40px;
+}
+
+.no-permission a {
+    color: var(--text-color);
+    display: flex;
+    margin: auto;
+}

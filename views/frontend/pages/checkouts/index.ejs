@@ -7,7 +7,8 @@
         value: city.id,
         transport_fee: city.transport_fee,
     }));
-    const currentCity = citySelectbox.find(city => city.value == user.city);
+    let currentCity = citySelectbox.find(city => city.value == user.city);
+    if (!currentCity) currentCity = citySelectbox[0];
 %>
 
 <div class="row no-gutters app__content product__cart-title">

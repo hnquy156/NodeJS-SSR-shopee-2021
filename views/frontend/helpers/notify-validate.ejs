@@ -10,12 +10,10 @@
 			});
 			name = name.charAt(0).toUpperCase() + name.slice(1);
 
-			xhtml += `<li class="text-white"><b>${name}:</b> ${error.msg}</li>`
+			xhtml += `<div><b>${name}:</b> ${error.msg}</div>`
 		})
-		return `<div class="alert alert-danger alert-dismissible">
-					<button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
-					<h5><i class="icon fas fa-exclamation-triangle"></i> Lỗi!</h5>
-					<ul class="list-unstyled mb-0">${xhtml}</ul>
+		return `<div class="auth-form__group">
+					<div class="auth-form__error">${xhtml}</div>
 				</div>`;
 	}
 %>

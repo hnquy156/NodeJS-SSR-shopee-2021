@@ -31,4 +31,15 @@ router.get('/:id', async (req, res, next) => {
 	});
 });
 
+/* POST change like  */
+router.post('/change-like/', async (req, res) => {
+	const id		    = req.body.id;
+	const task 			= 'change-like';
+	const user 			= req.user;
+	
+	const data = await ProductModel.changeLike(id, {task, user});
+	res.send(data);
+	// NotifyHelpers.showNotifyAndRedirect(req, res, linkIndex, {task: 'change-like'});
+});
+
 module.exports = router;

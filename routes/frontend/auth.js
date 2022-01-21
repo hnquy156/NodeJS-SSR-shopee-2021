@@ -1,18 +1,14 @@
 const express = require('express');
 const router = express.Router();
-const bcrypt = require('bcryptjs');
 
-const passport = require('passport');
-const LocalStrategy = require('passport-local').Strategy;
 const { body, validationResult } = require('express-validator');
 
 const collectionName = 'auth';
-const ArticlesModel = require(__path_models + 'articles');
 const UsersModel = require(__path_models + 'users');
 const CategoriesModel = require(__path_models + 'categories');
 const systemConfigs = require(__path_configs + 'system');
 const MainValidator = require(__path_validates + 'login');
-const NotifyConfigs = require(__path_configs + 'notify');
+const passport = require(__path_configs + 'passport');
 const salt = systemConfigs.salt;
 
 const folderView = `${__path_views_frontend}pages/${collectionName}`;
@@ -35,6 +31,20 @@ router.get('/logout', async (req, res, next) => {
 	res.redirect(linkLogin);
 });
 
+/* GET Register. */
+router.get('/register', async (req, res, next) => {
+	if (req.isAuthenticated()) res.redirect(linkIndex);
+	const item = {email: '', password: ''};
+	const errors = [];
+
+	res.render(`${folderView}/register`, { 
+		pageTitle, 
+		layout,
+		item,
+		errors,
+	});
+});
+
 /* GET Login. */
 router.get('/login', async (req, res, next) => {
 	if (req.isAuthenticated()) res.redirect(linkIndex);
@@ -43,7 +53,7 @@ router.get('/login', async (req, res, next) => {
 
 	res.render(`${folderView}/login`, { 
 		pageTitle, 
-		layout: false,
+		layout,
 		item,
 		errors,
 	});
@@ -57,41 +67,17 @@ router.post('/login', MainValidator.formValidate(body), (req, res, next) => {
 	if (errors.length > 0) {
 		return res.render(`${folderView}/login`, { 
 			pageTitle, 
-			layout: false,
+			layout,
 			item,
 			errors,
 		});
-	} else
-	passport.authenticate('local', { 
+	} else return passport.authenticate('local', { 
 		successRedirect: linkIndex,
         failureRedirect: linkLogin,
         failureFlash: true 
 	})(req, res, next);
 });
 
-passport.use(new LocalStrategy(
-	async (username, password, done) => {
-		const user = await UsersModel.getUserByUsername(username);
-
-		if (!user) {
-			return done(null, false, { message: NotifyConfigs.ERROR_LOGIN });
-		}
-		if (!bcrypt.compareSync(password, user.password)) {
-			return done(null, false, { message: NotifyConfigs.ERROR_LOGIN });
-		}
-		console.log('Success!');
-		return done(null, user);
-	}
-));
-
-passport.serializeUser(function(user, done) {
-	done(null, user.id);
-});
-
-passport.deserializeUser( async (id, done) => {
-	const user = await UsersModel.getItem(id);
-	done(null, user);
-});
 
 
 module.exports = router;

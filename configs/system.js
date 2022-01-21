@@ -16,4 +16,5 @@ module.exports = {
         {name: 'Transport', collection: 'deliveries', icon: 'ion ion-android-car'},
         {name: 'Orders', collection: 'orders', icon: 'ion ion-android-clipboard'},
     ],
+    guest_id: "61e988c264c3211cacddaa9e",
 }
