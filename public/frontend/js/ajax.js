@@ -60,8 +60,15 @@ $(document).ready(function () {
             method: 'post',
             url: '/orders/add',
             data: {"data": JSON.stringify(data)},
-            success: (data) => {
-                console.log(data)
+            success: async (data) => {
+                await Swal.fire({
+                    title: 'Đặt hàng thành công!', 
+                    text: 'Mã đơn hàng của bạn là: ' + data.code, 
+                    icon: 'success',
+                    confirmButtonText: "Copy mã đơn hàng và chuyển đến trang theo dõi đơn hàng",
+                });
+                navigator.clipboard.writeText(data.code);
+                window.location.pathname = '/orders';
             }
         })
     });
