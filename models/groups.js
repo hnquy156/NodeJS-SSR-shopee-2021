@@ -13,7 +13,7 @@ module.exports = {
     },
 
     getItem: (id, options = null) => {
-        return GroupsModels.findById({_id: id});
+        return GroupsModels.findOne({_id: id});
     },
 
     countItems: (condition) => {

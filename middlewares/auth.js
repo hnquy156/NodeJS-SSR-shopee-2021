@@ -12,7 +12,7 @@ module.exports = async (req, res, next) => {
     if (req.isAuthenticated()) {
         res.locals.user = req.user;
         const groupOfUser = await GroupsModel.getItem(req.user.group.id);
-        if (groupOfUser.group_acp === 'yes') return next()
+        if (groupOfUser && groupOfUser.group_acp === 'yes') return next()
         else return res.redirect(linkNoPermission);
     } else {
         return res.redirect(linkLogin);
