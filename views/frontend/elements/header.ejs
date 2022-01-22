@@ -9,20 +9,18 @@
         <!-- START NAV -->
         <nav class="header__navbar hide-on-mobile-tablet">
             <ul class="header__navbar-list">
-                <li class="header__navbar-item header__navbar-item--has-qr header__navbar-item--separate">
-                    Vào cửa hàng trên ứng dụng
-                    <div class="header__qr">
-                        <img src="/frontend/img/qrcode.png" alt="qr code" class="header__qr-img">
-                        <div class="header__qr-apps">
-                            <a href="" class="header__qr-link">
-                                <img src="/frontend/img/google_play.png" alt="google play" class="header__qr-download-img">
-                            </a>
-                            <a href="" class="header__qr-link">
-                                <img src="/frontend/img/app_store.png" alt="app store" class="header__qr-download-img">
-                            </a>
-                        </div>
-                    </div>
-                </li>
+                <%
+                    if (isLogin) {%>
+                        <li class="header__navbar-item header__navbar-item--separate">
+                            <a href="/category/yeu-thich" class="text-no-link"><span class="header__navbar-title--pointer">Danh mục yêu thích</span></a>
+                        </li>
+                    <%}
+                    if (isAdmin) {%>
+                        <li class="header__navbar-item header__navbar-item--separate">
+                            <a href="/<%= systemConfigs.prefixAdmin %>" class="text-no-link"><span class="header__navbar-title--pointer">Vào phần quản trị</span></a>
+                        </li>
+                    <%}
+                %>
                 <li class="header__navbar-item header__navbar-item--separate">
                     <a href="/orders" class="text-no-link"><span class="header__navbar-title--pointer">Kiểm tra đơn hàng</span></a>
                 </li>
