@@ -9,6 +9,7 @@
 <% include ./../../helpers/checkbox %>
 <% include ./../../helpers/sort %>
 <% include ./../../helpers/highlight %>
+<% include ./../../helpers/input %>
 
 <%
     collection = 'deliveries';
@@ -89,8 +90,8 @@
                             <td class="text-center"><%- highlightHelper(item.name, search_value) %></td>
                             <td class="text-center position-relative"><%- statusHelper(item.status, linkPrefix, item.id) %></td>
                             <td class="text-center position-relative"><%- orderingHelper(item.ordering, linkPrefix, item.id) %></td>
-                            <td class="text-center"><%= item.code %></td>
-                            <td class="text-center"><%= item.transport_fee %></td>
+                            <td class="text-center position-relative"><%- inputAjaxHelper('code', item.code, 'number', item.id) %></td>
+                            <td class="text-center position-relative"><%- inputAjaxHelper('transport_fee', item.transport_fee, 'number', item.id) %></td>
                             <td class="text-center">
                                 <%- timeHelper(item.created.user_name, item.created.time) %>
                             </td>

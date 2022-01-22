@@ -15,6 +15,38 @@ const folderView = `${__path_views_admin}pages/${collectionName}`;
 const linkIndex = `/${systemConfigs.prefixAdmin}/${collectionName}`;
 const pageTitle = "Discounts Management";
 
+/* POST change code name discount */
+router.post('/change-name', async (req, res) => {
+	const id		    = ParamsHelpers.getParam(req.body, 'id', '');
+	const name			= ParamsHelpers.getParam(req.body, 'name', '');
+	const task 			= 'change-name';
+	const user 			= req.user;
+
+	const data = await MainModel.changeName(id, name, {task, user});
+	res.send(data);
+});
+
+/* POST change value */
+router.post('/change-value', async (req, res) => {
+	const id		    = ParamsHelpers.getParam(req.body, 'id', '');
+	const value			= ParamsHelpers.getParam(req.body, 'value', '');
+	const task 			= 'change-value';
+	const user 			= req.user;
+
+	const data = await MainModel.changeValue(id, value, {task, user});
+	res.send(data);
+});
+
+/* POST change value */
+router.post('/change-times', async (req, res) => {
+	const id		    = ParamsHelpers.getParam(req.body, 'id', '');
+	const times			= ParamsHelpers.getParam(req.body, 'times', '');
+	const task 			= 'change-times';
+	const user 			= req.user;
+
+	const data = await MainModel.changeTimes(id, times, {task, user});
+	res.send(data);
+});
 
 /* GET SORT */
 router.get('/sort/:sortField/:sortType', async (req, res) => {

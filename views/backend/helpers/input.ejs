@@ -3,4 +3,10 @@
         const input_id = id ? `id=${id}` : '';
         return `<input type="${type}" name="${name}" value="${value}" ${input_id} class="form-control form-control-sm">`
     }
+
+    inputAjaxHelper = (name, value, type, id = null, style = null) => {
+        const input_style = style ? `style=${style}` : '';
+        return `<input type="${type}" name="${name}" value="${value}" ${input_style} data-link="${linkPrefix}/change-${name}"
+                    data-id="${id}" class="ajax-input form-control form-control-sm text-center">`
+    }
 %>

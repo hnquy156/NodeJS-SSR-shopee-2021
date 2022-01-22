@@ -1,5 +1,38 @@
 $(document).ready(function () {
     
+    // Change Input // transport_fee, value discount
+    $('.ajax-input').change(function(e) {
+        const element = $(this);
+        const name = element.attr('name');
+        const id = element.data('id');
+        const url = element.data('link');
+        let value = +element.val();
+        
+        if (value <= 0) {
+            showNotify(element, 'Phải là giá trị lớn hơn 0!!!', 'error');
+            value = 1;
+            element.val(1);
+            return -1;
+        } else if (value !== Math.round(value)) {
+            showNotify(element, 'Phải là giá trị nguyên!!!', 'error');
+            value = Math.round(value);
+            element.val(value);
+            return -1;
+        }
+        $.ajax({
+            method: 'POST',
+            data: {
+                id: id,
+                [name]: value,
+            },
+            url,
+            success: (data) => {
+                showNotify(element, data.notify);
+                console.log(data)
+            }
+        })
+    });
+
     // Change Status
     $('.ajax-status').click(function(e) {
         e.preventDefault();

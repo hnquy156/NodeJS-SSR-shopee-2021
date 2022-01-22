@@ -82,6 +82,38 @@ module.exports = {
         }
     },
 
+    changeTransportFee: async (id, transport_fee, options) => {
+        const user = options.user;
+        const data = {
+            transport_fee: +transport_fee,
+            modified: {
+                user_id: user.id,
+                user_name: user.username,
+                time: Date.now(),
+            },
+        }
+        if (options.task === 'change-transport-fee') {
+            await DeliveriesModels.updateOne({_id: id}, data);
+            return {id, transport_fee: +transport_fee, notify: NotifyConfig.CHANGE_TRANSPORT_FEE_SUCCESS}
+        }
+    },
+
+    changeCode: async (id, code, options) => {
+        const user = options.user;
+        const data = {
+            code: +code,
+            modified: {
+                user_id: user.id,
+                user_name: user.username,
+                time: Date.now(),
+            },
+        }
+        if (options.task === 'change-code') {
+            await DeliveriesModels.updateOne({_id: id}, data);
+            return {id, code: +code, notify: NotifyConfig.CHANGE_CODE_SUCCESS}
+        }
+    },
+
     deleteItem: (id, options) => {
         if (options.task === 'delete-one')
             return DeliveriesModels.deleteOne({_id: id});

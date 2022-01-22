@@ -9,6 +9,7 @@
 <% include ./../../helpers/checkbox %>
 <% include ./../../helpers/sort %>
 <% include ./../../helpers/highlight %>
+<% include ./../../helpers/input %>
 
 <%
     collection = 'discounts';
@@ -92,8 +93,8 @@
                             <td class="text-center"><%- highlightHelper(item.name, search_value) %></td>
                             <td class="text-center position-relative"><%- statusHelper(item.status, linkPrefix, item.id) %></td>
                             <td class="text-center position-relative"><%- orderingHelper(item.ordering, linkPrefix, item.id) %></td>
-                            <td class="text-center"><%= item.value %></td>
-                            <td class="text-center"><%= item.times %></td>
+                            <td class="text-center position-relative"><%- inputAjaxHelper('value', item.value, 'number', item.id, "width:100px;") %></td>
+                            <td class="text-center position-relative"><%- inputAjaxHelper('times', item.times, 'number', item.id, "width:60px;") %></td>
                             <td class="text-center"><%= item.used %></td>
                             <td class="text-center"><%- timeDateHelper(item.start) %></td>
                             <td class="text-center"><%- timeDateHelper(item.end) %></td>

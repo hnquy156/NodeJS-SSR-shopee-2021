@@ -1,5 +1,3 @@
-const util = require('util');
-
 const NotifyConfig = require(__path_configs + 'notify');
 const ItemsModels = require(__path_schemas + 'discounts');
 
@@ -64,6 +62,54 @@ module.exports = {
                 return ItemsModels.updateOne({_id: ID}, data);
             });
             return await Promise.all(promiseOrdering);
+        }
+    },
+
+    changeName: async (id, name, options) => {
+        const user = options.user;
+        const data = {
+            name: +name,
+            modified: {
+                user_id: user.id,
+                user_name: user.username,
+                time: Date.now(),
+            },
+        }
+        if (options.task === 'change-name') {
+            await ItemsModels.updateOne({_id: id}, data);
+            return {id, name: +name, notify: NotifyConfig.CHANGE_CODE_SUCCESS}
+        }
+    },
+
+    changeValue: async (id, value, options) => {
+        const user = options.user;
+        const data = {
+            value: +value,
+            modified: {
+                user_id: user.id,
+                user_name: user.username,
+                time: Date.now(),
+            },
+        }
+        if (options.task === 'change-value') {
+            await ItemsModels.updateOne({_id: id}, data);
+            return {id, value: +value, notify: NotifyConfig.CHANGE_VALUE_SUCCESS}
+        }
+    },
+
+    changeTimes: async (id, times, options) => {
+        const user = options.user;
+        const data = {
+            times: +times,
+            modified: {
+                user_id: user.id,
+                user_name: user.username,
+                time: Date.now(),
+            },
+        }
+        if (options.task === 'change-times') {
+            await ItemsModels.updateOne({_id: id}, data);
+            return {id, times: +times, notify: NotifyConfig.CHANGE_TIMES_SUCCESS}
         }
     },
 

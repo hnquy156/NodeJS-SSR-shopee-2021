@@ -33,6 +33,28 @@ router.get('/api-city', async (req, res) => {
 	res.send(result);
 });
 
+/* POST change transport fee */
+router.post('/change-transport_fee', async (req, res) => {
+	const id		    = ParamsHelpers.getParam(req.body, 'id', '');
+	const transport_fee	= ParamsHelpers.getParam(req.body, 'transport_fee', '');
+	const task 			= 'change-transport-fee';
+	const user 			= req.user;
+
+	const data = await MainModel.changeTransportFee(id, transport_fee, {task, user});
+	res.send(data);
+});
+
+/* POST change code */
+router.post('/change-code', async (req, res) => {
+	const id		    = ParamsHelpers.getParam(req.body, 'id', '');
+	const code			= ParamsHelpers.getParam(req.body, 'code', '');
+	const task 			= 'change-code';
+	const user 			= req.user;
+
+	const data = await MainModel.changeCode(id, code, {task, user});
+	res.send(data);
+});
+
 /* GET SORT */
 router.get('/sort/:sortField/:sortType', async (req, res) => {
 	req.session.sortType		    = ParamsHelpers.getParam(req.params, 'sortType', 'asc');
