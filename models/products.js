@@ -1,6 +1,3 @@
-const util = require('util');
-const fs = require('fs');
-
 const NotifyConfig = require(__path_configs + 'notify');
 const ProductsModels = require(__path_schemas + 'products');
 const CategoriesModels = require(__path_schemas + 'categories');
@@ -22,7 +19,7 @@ module.exports = {
         let categories = await CategoriesModels.find({status: 'active'}, 'name');
         categories = categories.map(category => category.name);
 
-        const condition = {status: 'active', 'group.name': {$in: categories}};
+        let condition = {status: 'active', 'group.name': {$in: categories}};
         let select = 'name price sold like thumb slug content created group';
         let sort = {'created.time': 'desc'};
         let skip = null;

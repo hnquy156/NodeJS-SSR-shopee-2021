@@ -8,14 +8,6 @@ const folderView = `${__path_views_frontend}pages/${collectionName}`;
 const layout = __path_views_frontend + 'layouts/layout';
 const pageTitle = 'Sản phẩm';
 
-/* GET API product */
-// router.get('/', async (req, res, next) => {
-// 	console.log(req.query);
-	
-// 	const products = await ProductModel.getListFrontend({task: 'products-filter'}, req.query);
-// 	res.send(products);
-// });
-
 /* GET product page. */
 router.get('/:id', async (req, res, next) => {
 	const id = req.params.id;
