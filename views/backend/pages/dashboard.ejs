@@ -1,5 +1,14 @@
 <% include ./../helpers/time %>
 <% include ./../helpers/format %>
+<%
+    const filterOrderStatus = [
+        {name: 'All', value: 'all', color: 'secondary', count: 15},
+        {name: 'Waiting', value: 0, color: 'secondary', count: 7},
+        {name: 'Preparing', value: 1, color: 'secondary', count: 8},
+        {name: 'Delivering', value: 2, color: 'secondary', count: 8},
+        {name: 'Complete', value: 3, color: 'secondary', count: 8},
+    ];
+%>
 
 <div class="row justify-content-start">
     <%
@@ -22,16 +31,17 @@
     %>
 </div>
 
+<%/* Recent Contacts */%>
 <div class="card card-info card-outline">
     <div class="card-header">
-        <h4 class="card-title">Recent Contact</h4>
+        <h4 class="card-title">Recent Contacts</h4>
         <div class="card-tools">
-            <a href="#" class="btn btn-tool"><i class="fas fa-sync"></i></a>
+            <a href="/<%= systemConfigs.prefixAdmin %>" class="btn btn-tool"><i class="fas fa-sync"></i></a>
             <button type="button" class="btn btn-tool" data-card-widget="collapse" data-toggle="tooltip" title="Collapse"><i class="fas fa-minus"></i></button>
         </div>
     </div>
     <div class="card-body">
-        <form action="" method="post" class="table-responsive" id="form-table">
+        <form action="" method="post" class="table-responsive">
             <table class="table table-bordered table-hover text-nowrap btn-table mb-0">
                 <thead>
                     <tr>
@@ -43,7 +53,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <% items.forEach((item, index) => {
+                    <% contactItems.forEach((item, index) => {
                         %>
                         <tr>
                             <td class="text-center"><%= index + 1 %></td>
@@ -61,7 +71,129 @@
                         <%
                     })%>
                     <%
-                        if (items.length === 0) {%><tr><td class="text-center" colspan="10">Không có người liên hệ mới</td></tr><%}
+                        if (contactItems.length === 0) {%><tr><td class="text-center" colspan="5">Không có người liên hệ mới</td></tr><%}
+                    %>
+                    
+                </tbody>
+            </table>
+        </form>
+    </div>
+</div>
+
+<%/* Recent Discounts */%>
+<div class="card card-info card-outline">
+    <div class="card-header">
+        <h4 class="card-title">Recent Discounts</h4>
+        <div class="card-tools">
+            <a href="/<%= systemConfigs.prefixAdmin %>" class="btn btn-tool"><i class="fas fa-sync"></i></a>
+            <button type="button" class="btn btn-tool" data-card-widget="collapse" data-toggle="tooltip" title="Collapse"><i class="fas fa-minus"></i></button>
+        </div>
+    </div>
+    <div class="card-body">
+        <form class="table-responsive">
+            <table class="table table-bordered table-hover text-nowrap btn-table mb-0">
+                <thead>
+                    <tr>
+                        <th class="text-center">#</th>
+                        <th class="text-center">Name</th>
+                        <th class="text-center">Value</th>
+                        <th class="text-center">Times</th>
+                        <th class="text-center">Used</th>
+                        <th class="text-center">Date Start</th>
+                        <th class="text-center">Date End</th>
+                        <th class="text-center">Created</th>
+                        <th class="text-center">Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <% discountItems.forEach((item, index) => {
+                        %>
+                        <tr>
+                            <td class="text-center"><%= index + 1 %></td>
+                            <td class="text-center"><%= item.name %></td>
+                            <td class="text-center"><%= formatCurrencyHelper(item.value) %></td>
+                            <td class="text-center"><%= item.times %></td>
+                            <td class="text-center"><%= item.used %></td>
+                            <td class="text-center"><%- timeDateHelper(item.start) %></td>
+                            <td class="text-center"><%- timeDateHelper(item.end) %></td>
+                            <td class="text-center">
+                                <%- timeHelper(item.created.user_name, item.created.time) %>
+                            </td>
+                            <td class="text-center">
+                                <a href="/<%= systemConfigs.prefixAdmin %>/discounts/form/<%= item.id %>" class="rounded-circle btn btn-sm btn-info" title="Edit">
+                                    <i class="fas fa-pencil-alt"></i>
+                                </a>    
+                            </td>
+                        </tr>
+                        <%
+                    })%>
+                    <%
+                        if (discountItems.length === 0) {%><tr><td class="text-center" colspan="9">Không có mã giảm giá</td></tr><%}
+                    %>
+                    
+                </tbody>
+            </table>
+        </form>
+    </div>
+</div>
+
+<%/* Recent Orders */%>
+<div class="card card-info card-outline">
+    <div class="card-header">
+        <h4 class="card-title">Recent Orders</h4>
+        <div class="card-tools">
+            <a href="/<%= systemConfigs.prefixAdmin %>" class="btn btn-tool"><i class="fas fa-sync"></i></a>
+            <button type="button" class="btn btn-tool" data-card-widget="collapse" data-toggle="tooltip" title="Collapse"><i class="fas fa-minus"></i></button>
+        </div>
+    </div>
+    <div class="card-body">
+        <form class="table-responsive">
+            <table class="table table-bordered table-hover text-nowrap btn-table mb-0">
+                <thead>
+                    <tr>
+                        <th class="text-center">#</th>
+                        <th class="text-center">Code</th>
+                        <th class="text-center">User Information</th>
+                        <th class="text-center">Order Information</th>
+                        <th class="text-center">Status</th>
+                        <th class="text-center">Created</th>
+                        <th class="text-center">Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <% orderItems.forEach((item, index) => {
+                        const statusItem = filterOrderStatus.find(element => element.value == item.status);
+                        const orderStatus = statusItem.name;
+                        %>
+                        <tr>
+                            <td class="text-center"><%= index + 1 %></td>
+                            <td class="text-center"><%= item.code %></td>
+                            <td class="text-left">
+                                <p><b>Name: </b><%= item.name %></p>
+                                <p><b>Phone: </b><%= item.phone %></p>
+                                <p><b>Email: </b><%= item.email %></p>
+                                <p><b>Address: </b><%= item.address %></p>
+                                <p><b>Local: </b><%= item.city.name %></p>
+                            </td>
+                            <td class="text-left">
+                                <p><b>Fee: </b><%= formatCurrencyHelper(item.price.fee) %></p>
+                                <p><b>Acount: </b><%= formatCurrencyHelper(item.price.discount) %></p>
+                                <p><b>Total: </b><%= formatCurrencyHelper(item.price.total) %></p>
+                            </td>
+                            <td class="text-center"><%= orderStatus %></td>
+                            <td class="text-center">
+                                <%- timeHelper(item.created.user_name, item.created.time) %>
+                            </td>
+                            <td class="text-center">
+                                <a href="/<%= systemConfigs.prefixAdmin %>/orders/view/<%= item.id %>" class="rounded-circle btn btn-sm btn-secondary" title="Edit">
+                                    <i class="fas fa-eye"></i>
+                                </a>    
+                            </td>
+                        </tr>
+                        <%
+                    })%>
+                    <%
+                        if (orderItems.length === 0) {%><tr><td class="text-center" colspan="7">Không có đơn hàng</td></tr><%}
                     %>
                     
                 </tbody>
