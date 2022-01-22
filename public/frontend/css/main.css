@@ -375,8 +375,16 @@
     */
     color: transparent;
     text-decoration: none;
-    display: block;
+    display: flex;
+    align-items: center;
     line-height: 0; /* Logo không chứa chữ nên không cần care để 0 cho nó ra giữa*/
+}
+
+.header__logo-text {
+    color: var(--white-color);
+    display: block;
+    font-size: 2rem;
+    margin-left: 8px;
 }
 
 .header__search-checkbox:checked ~ .header__search {

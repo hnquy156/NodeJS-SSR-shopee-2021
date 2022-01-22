@@ -7,7 +7,7 @@ const DiscountModel = require(__path_models + 'discounts');
 const collectionName = 'checkouts';
 const folderView = `${__path_views_frontend}pages/${collectionName}`;
 const layout = __path_views_frontend + 'layouts/layout';
-const pageTitle = 'Check Out';
+const pageTitle = 'Thanh toán';
 
 /* GET home page. */
 router.get('/:id', async (req, res, next) => {

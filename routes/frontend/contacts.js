@@ -7,7 +7,7 @@ const ProductModel = require(__path_models + 'products');
 const CategoryModel = require(__path_models + 'categories');
 const folderView = `${__path_views_frontend}pages/${collectionName}`;
 const layout = __path_views_frontend + 'layouts/layout';
-const pageTitle = 'Contact Us';
+const pageTitle = 'Liên hệ với chúng tôi';
 
 /* GET contact page. */
 router.get('/', async (req, res, next) => {

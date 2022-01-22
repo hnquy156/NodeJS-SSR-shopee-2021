@@ -6,7 +6,7 @@ const OrderModel = require(__path_models + 'orders');
 const collectionName = 'orders';
 const folderView = `${__path_views_frontend}pages/${collectionName}`;
 const layout = __path_views_frontend + 'layouts/layout';
-const pageTitle = 'Order';
+const pageTitle = 'Đơn hàng của bạn';
 const linkIndex = '/' + collectionName;
 
 /* GET ORDER PAGE */

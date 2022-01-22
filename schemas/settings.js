@@ -15,6 +15,7 @@ const items = new Schema({
     copyright: String,
     logo: String,
     logo_white: String,
+    name: String,
 });
 
 module.exports = mongoose.model(databaseConfigs.col_settings, items);

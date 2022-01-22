@@ -7,6 +7,7 @@
     collection = 'settings';
     linkPrefix = `/${systemConfigs.prefixAdmin}/${collection}`;
     const formGroup = [
+        {label: 'Name', input: inputHelper('name', item.name, 'text')},
         {label: 'Phone', input: inputHelper('phone', item.phone, 'number')},
         {label: 'Email', input: inputHelper('email', item.email, 'text')},
         {label: 'Address', input: inputHelper('address', item.address, 'text')},
@@ -16,8 +17,8 @@
         {label: 'Facebook', input: inputHelper('facebook', item.facebook, 'text')},
         {label: 'Instagram', input: inputHelper('instagram', item.instagram, 'text')},
         {label: 'Copyright', input: inputHelper('copyright', item.copyright, 'text')},
-        // {label: 'Logo', input: inputHelper('logo', item.logo, 'file')},
-        // {label: 'Logo White', input: inputHelper('logo_white', item.logo_white, 'file')},
+        {label: 'Logo', input: inputHelper('logo', item.logo, 'file')},
+        {label: 'Logo White', input: inputHelper('logo_white', item.logo_white, 'file')},
     ];
 %>
 

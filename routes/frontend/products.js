@@ -6,7 +6,7 @@ const ProductModel = require(__path_models + 'products');
 const collectionName = 'products'
 const folderView = `${__path_views_frontend}pages/${collectionName}`;
 const layout = __path_views_frontend + 'layouts/layout';
-const pageTitle = 'Products';
+const pageTitle = 'Sản phẩm';
 
 /* GET API product */
 // router.get('/', async (req, res, next) => {

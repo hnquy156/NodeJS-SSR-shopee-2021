@@ -7,7 +7,7 @@ const ProductModel = require(__path_models + 'products');
 const collectionName = 'carts'
 const folderView = `${__path_views_frontend}pages/${collectionName}`;
 const layout = __path_views_frontend + 'layouts/layout';
-const pageTitle = 'Cart';
+const pageTitle = 'Giỏ hàng';
 
 /* GET Add product to cart. */
 router.get('/:task/:cartID/:productID', async (req, res, next) => {

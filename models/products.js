@@ -18,7 +18,7 @@ module.exports = {
     },
 
     getListFrontend: async (options = null, params = null) => {
-        const user = options.user;
+        const user = options.user ? options.user: {id: '', name: ''};
         let categories = await CategoriesModels.find({status: 'active'}, 'name');
         categories = categories.map(category => category.name);
 
