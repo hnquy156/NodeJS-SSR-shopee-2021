@@ -116,13 +116,13 @@
                     <%- inputHelper('transport_address', user.address, 'text', '', 'width: 300px') %>
                     <%- selectboxHelper('transport_city', citySelectbox, user.city) %>
                 </span>
-                <span class="transport__destination-change">Thay đổi</span>
+                <span class="transport__destination-change">Cập nhật địa chỉ giao hàng</span>
             </div>
 
             <div class="cart__product-voucher-method">
                 <div class="product__voucher-title">Mã giảm giá</div>
                 <input class="product__voucher-unit" value="" placeholder="Nhập mã giảm giá">
-                <div class="product__voucher-change">Thay đổi</div>
+                <div class="product__voucher-change">Cập nhật mã giảm giá</div>
                 <div class="product__voucher-price"><%= formatCurrencyHelper(0) %></div>
             </div>
             <div class="product__voucher-info">Mỗi lần chỉ sử dụng tối đa 1 mã giảm giá.</div>
@@ -136,7 +136,6 @@
             <div class="cart__product-checkout-method">
                 <div class="cart__product-checkout-method-title">Phương thức thanh toán</div>
                 <p>Thanh toán khi nhận hàng</p>
-                <div class="cart__product-checkout-method-change">Thay đổi</div>
             </div>
             <table class="cart__product-checkout-info">
                 <tr>
@@ -169,7 +168,7 @@
     <div class="col l-12 m-12 c-12">
         <div class="cart__product-order">
             <div class="cart__product-order-policy">
-                Nhấn "Đặt hàng" đồng nghĩa với việc bạn đồng ý tuân theo <span class="link__shopee">Điều khoản Shopee</span> và 
+                Nhấn "Đặt hàng" đồng nghĩa với việc bạn đồng ý tuân theo <span class="link__shopee">Điều khoản <%= settings.name %></span> và 
                 <span class="link__shopee">Điều khoản và Điều kiện</span> của hợp đồng Bảo hiểm
             </div>
             <div class="cart__product-order-btn btn btn--primary">
