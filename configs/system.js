@@ -15,6 +15,7 @@ module.exports = {
         {name: 'Discount', collection: 'discounts', icon: 'ion ion-cash'},
         {name: 'Transport', collection: 'deliveries', icon: 'ion ion-android-car'},
         {name: 'Orders', collection: 'orders', icon: 'ion ion-android-clipboard'},
+        {name: 'Sliders', collection: 'sliders', icon: 'ion ion-ios-albums-outline'},
     ],
     guest_id: "61e988c264c3211cacddaa9e",
 }

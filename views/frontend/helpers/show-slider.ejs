@@ -1,0 +1,22 @@
+<%
+    showSliderHelper = (sliders) => {
+        let xhtml = '';
+        sliders.forEach(slider => {
+            xhtml += `<div class="slider__item">
+                        <img class="slider__img" src="${slider.thumb}" alt="${slider.thumb}">
+                    </div>`;
+        });
+
+        return `<div class="row sm-gutter app__content">
+                    <div class="col l-12 m-12 c-0">
+                        <div class="slider" id="slider">
+                            <div class="slider__box">
+                                ${xhtml}
+                            </div>
+                            <span class="slider__btn-arrow slider__btn-left"><i class="fas fa-chevron-left"></i></span>
+                            <span class="slider__btn-arrow slider__btn-right"><i class="fas fa-chevron-right"></i></span>
+                        </div>
+                    </div>
+                </div>`;
+    }
+%>

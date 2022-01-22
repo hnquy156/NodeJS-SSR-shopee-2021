@@ -15,7 +15,6 @@ router.use('/rss', require('./rss'));
 router.use('/discounts', require('./discounts'));
 router.use('/deliveries', require('./deliveries'));
 router.use('/orders', require('./orders'));
-
-
+router.use('/sliders', require('./sliders'));
 
 module.exports = router;

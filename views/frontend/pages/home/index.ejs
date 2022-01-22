@@ -1,11 +1,10 @@
 <% include ./../../helpers/show-product %>
 <% include ./../../helpers/show-category %>
 <% include ./../../helpers/format %>
+<% include ./../../helpers/show-slider %>
 
-<% include ./../../elements/slider %>
-
+<%- showSliderHelper(sliders) %>
 <%- showCategoryHelper(categories) %>
-
 
 <div class="row sm-gutter">
     <div class="col l-12 m-12 c-12">
