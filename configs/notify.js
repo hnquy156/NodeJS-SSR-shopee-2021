@@ -21,6 +21,8 @@ module.exports = {
     EDIT_SUCCESS: 'Cập nhật thông tin phần tử thành công',
     ERROR_NAME: 'Chiều dài từ %d đến %d ký tự',
     ERROR_USERNAME_SPACE: 'Không được có kí tự đặc biệt',
+    ERROR_PHONE: 'Số điện thoại không hợp lệ!',
+    ERROR_EMAIL: 'Email không hợp lệ!',
     ERROR_VALUE: 'Phải là giá trị lớn hơn %d',
     ERROR_USERNAME_EXIST: 'Username đã tồn tại',
     ERROR_PASSWORD_CONFIRM: 'Password không khớp!',

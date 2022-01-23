@@ -12,6 +12,8 @@ const options = {
     group: {value: 'default' },
     ordering: {gt: 0, lt: 100},
     content: {min: 1, max: 100},
+    phone: {min: 9, max: 11},
+    email: {min: 5, max: 30},
 }
 
 module.exports = {
@@ -50,6 +52,16 @@ module.exports = {
         // name
         body('name', util.format(NotifyConfigs.ERROR_NAME, options.name.min, options.name.max))
             .isLength(options.name),
+
+        // phone
+        body('phone', util.format(NotifyConfigs.ERROR_PHONE))
+            .isLength(options.phone)
+            .custom(value => !/[^0-9]/g.test(value)),
+
+        // email
+        body('email', util.format(NotifyConfigs.ERROR_EMAIL))
+            .isEmail()
+            .isLength(options.email),
     ],
 
     passwordFrontendValidate: (body) => [
