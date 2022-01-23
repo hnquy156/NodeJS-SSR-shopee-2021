@@ -45,4 +45,10 @@ module.exports = {
         body('content', util.format(NotifyConfigs.ERROR_NAME, options.content.min, options.content.max))
         .isLength(options.content),
     ],
+
+    formFrontendValidate: (body) => [
+        // name
+        body('name', util.format(NotifyConfigs.ERROR_NAME, options.name.min, options.name.max))
+            .isLength(options.name),
+    ],
 }

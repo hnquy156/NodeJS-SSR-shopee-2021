@@ -1,0 +1,10 @@
+<% 
+    imageHelper = (avatar, folderUploads, size = 'medium') => {
+        if (!avatar) avatar = "avatar-default.jpg"
+        return `<image src="${folderUploads}/${avatar}" class="bg-info img-avatar-${size}">`
+    }
+
+    imageOutsideHelper = (avatar, size = 'medium') => {
+        return `<image src="${avatar}" class="bg-info img-avatar-${size}">`
+    }
+%>

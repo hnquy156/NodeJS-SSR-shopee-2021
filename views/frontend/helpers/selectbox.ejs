@@ -1,5 +1,5 @@
 <% 
-    selectboxHelper = (name, options, selectedValue = null) => {
+    selectboxHelper = (name, options, selectedValue = null, className = null) => {
         let xhtml = '';
         
         options.forEach(option => {
@@ -7,7 +7,7 @@
             xhtml += `<option value="${option.value}" ${selected}>${option.name}</option>`;
         })
 
-        return `<select name="${name}" class="selectbox1">
+        return `<select name="${name}" class="selectbox1 ${className}">
                     ${xhtml}
                 </select>`
     }

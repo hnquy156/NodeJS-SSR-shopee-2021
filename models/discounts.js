@@ -21,6 +21,7 @@ module.exports = {
         return ItemsModels.findOne({status: 'active', name: name,
             start: {$lte: now},
             end: {$gte: now},
+            times: {$gt: 0},
         });
     },
 

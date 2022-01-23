@@ -1,0 +1,70 @@
+<% include ./../../helpers/notify-validate %>
+<% include ./../../helpers/notify %>
+<% include ./../../helpers/selectbox %>
+<% include ./../../helpers/image %>
+<%
+    const linkUpload = `/${folderUploads}/users`;
+    const citySelectbox = cities.map(city => ({
+        name: city.name,
+        value: city.id,
+        transport_fee: city.transport_fee,
+    }));
+%>
+
+<div class="row sm-gutter">
+    <div class="col l-12 m-12 c-12">
+        <div class="user__wrap">
+            <form action="/users/profile" method="post" class="auth-form auth-form__container" enctype="multipart/form-data">
+                <div class="auth-form__header">
+                    <h3 class="auth-form__heading">Thông tin người dùng</h3>
+                </div>
+                <%- showErrors(errors) %>
+                <%- showNotify(messages) %>
+                <div class="auth-form__form">
+                    <div class="row sm-gutter auth-form__group">
+                        <label class="auth-form__label col l-3 m-12 c-12">Tên đăng nhập</label>
+                        <input class="auth-form__input col l-9 m-12 c-12" value="<%= item.username %>" type="text" disabled>
+                    </div>
+                    <div class="row sm-gutter auth-form__group">
+                        <label class="auth-form__label col l-3 m-12 c-12">Họ và tên</label>
+                        <input class="auth-form__input col l-9 m-12 c-12" value="<%= item.name %>" name="name" type="text">
+                    </div>
+                    <div class="row sm-gutter auth-form__group">
+                        <label class="auth-form__label col l-3 m-12 c-12">Số điện thoại</label>
+                        <input class="auth-form__input col l-9 m-12 c-12" value="<%= item.phone %>" name="phone" type="text">
+                    </div>
+                    <div class="row sm-gutter auth-form__group">
+                        <label class="auth-form__label col l-3 m-12 c-12">Email</label>
+                        <input class="auth-form__input col l-9 m-12 c-12" value="<%= item.email %>" name="email" type="text">
+                    </div>
+                    <div class="row sm-gutter auth-form__group">
+                        <label class="auth-form__label col l-3 m-12 c-12">Địa chỉ</label>
+                        <input class="auth-form__input col l-9 m-12 c-12" value="<%= item.address %>" name="address" type="text">
+                    </div>
+                    <div class="row sm-gutter auth-form__group">
+                        <label class="auth-form__label col l-3 m-12 c-12">Tỉnh, thành phố</label>
+                        <%- selectboxHelper('city', citySelectbox, item.city, "auth-form__input col l-9 m-12 c-12") %>
+                    </div>
+                    <div class="row sm-gutter auth-form__group">
+                        <label class="auth-form__label col l-3 m-12 c-12">Ảnh đại diện</label>
+                        <div class="mt-20 col l-9 m-12 c-12">
+                            <%- imageHelper(item.avatar, linkUpload, 'small') %>
+                        </div>
+                    </div>
+                    <input value="<%= item.avatar %>" name="avatar_old" type="hidden">
+                    <input value="<%= item.id %>" name="id" type="hidden">
+                    <input value="<%= item.username %>" name="username" type="hidden">
+                    <div class="row sm-gutter auth-form__group">
+                        <label class="auth-form__label col l-3 m-12 c-12">Đổi ảnh đại diện</label>
+                        <input class="auth-form__input col l-9 m-12 c-12" name="avatar" type="file">
+                    </div>
+                </div>
+
+                <div class="auth-form__controls">
+                    <button type="submit" class="btn btn--primary">LƯU THAY ĐỔI</button>
+                    <div class="btn btn--normal auth-form__control-back">TRỞ LẠI</div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

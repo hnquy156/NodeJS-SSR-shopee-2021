@@ -136,9 +136,9 @@ module.exports = {
     saveItemFrontend: async (item, options) => {
         // item['group.id'] = item.group_id;
         // item['group.name'] = item.group_name;
-        item.password = bcrypt.hashSync(item.password, salt);
-
+        
         if (options.task === 'add') {
+            item.password = bcrypt.hashSync(item.password, salt);
             const cartItem = await new CartsModels({}).save();
             item.cart = cartItem.id;
             item.created = {
@@ -153,14 +153,11 @@ module.exports = {
             return UsersModels(item).save();
 
         }
-        if (options.task === 'edit') {
-            
-            if (bcrypt.compareSync(SystemConfig.password_default, item.password)) {
-                delete item.password;
-            }
+        if (options.task === 'edit-info') {
+           
             item.modified = {
-                user_id: '',
-                user_name: 'Admin',
+                user_id: item.id,
+                user_name: item.username,
                 time: Date.now(),
             }
             return UsersModels.updateOne({_id: item.id}, item);

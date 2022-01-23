@@ -11,3 +11,20 @@
     });
 	return xhtml;
 }%>
+
+<%
+	showNotify = (messages) => {
+		let xhtml = ``;
+		messages.forEach(message => {
+			const [type, msg] = message.split('|');
+			xhtml += `<div class="auth-form__group">
+						<div class="auth-form__error">
+							<h2 style="color:#0bf71f;"><i class="icon fas fa-exclamation-triangle"></i> Thông báo!</h2>
+							<div>${msg}</div>
+						</div>
+					</div>`;
+		});
+
+		return xhtml;
+	}
+%>

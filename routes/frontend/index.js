@@ -12,6 +12,7 @@ router.use('/products', require('./products'));
 router.use('/contacts', require('./contacts'));
 router.use('/carts', AuthUserMdw, require('./carts'));
 router.use('/checkouts', AuthUserMdw, require('./checkouts'));
+router.use('/users', AuthUserMdw, require('./users'));
 router.use('/discounts', require('./discounts'));
 router.use('/deliveries', require('./deliveries'));
 router.use('/orders', require('./orders'));

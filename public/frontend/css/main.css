@@ -38,6 +38,7 @@
 .header__navbar-user-img {
     height: 22px;
     border-radius: 50%;
+    object-fit: scale-down;
 }
 
 .header__navbar-user-name {
@@ -869,6 +870,15 @@
     border-radius: 2px;
     border: 1px solid var(--border-color);
     outline: none;
+} 
+
+.auth-form__label {
+    width: 100%;
+    height: 40px;
+    line-height: 40px;
+    margin-top: 16px;
+    padding: 0 12px;
+    font-size: 1.4rem;
 } 
 
 .auth-form__error {
@@ -2373,4 +2383,28 @@ transform: translateY(-1px);
     color: var(--text-color);
     display: flex;
     margin: auto;
+}
+
+/* FORM USER INNFORMATION */
+
+.user__wrap {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 30px;
+    min-height: 550px;
+    /* background-color: var(--primary-color); */
+    background-color: var(--white-color);
+    padding: 20px;
+}
+
+.img-avatar-mini {
+    height: 40px;
+}
+
+.img-avatar-small {
+    height: 200px;
+}
+
+.img-avatar-medium {
+    max-height: 400px ;
 }

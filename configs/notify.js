@@ -5,6 +5,7 @@ module.exports = {
     CHANGE_ORDERING_SUCCESS: 'Cập nhật ordering thành công',
     CHANGE_TRANSPORT_FEE_SUCCESS: 'Cập nhật transport fee thành công',
     CHANGE_CODE_SUCCESS: 'Cập nhật Code thành công',
+    CHANGE_USER_SUCCESS: 'Cập nhật thông tin thành công',
     CHANGE_NAME_SUCCESS: 'Cập nhật NAME thành công',
     CHANGE_VALUE_SUCCESS: 'Cập nhật VALUE thành công',
     CHANGE_TIMES_SUCCESS: 'Cập nhật TIMES thành công',

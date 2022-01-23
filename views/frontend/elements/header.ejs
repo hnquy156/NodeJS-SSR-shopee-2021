@@ -88,12 +88,11 @@
                 <%
                     if (isLogin) {%>
                         <li class="header__navbar-item header__navbar-user">
-                            <img src="/frontend/img/avatar_default.png" alt="" class="header__navbar-user-img">
-                            <span class="header__navbar-user-name"><%= user.name %></span>
+                            <span class="header__navbar-user-name"><i class="fas fa-user"></i>  <%= user.name %></span>
 
                             <ul class="header__navbar-user-menu">
                                 <li class="header__navbar-user-item">
-                                    <a href="">Tài khoản của tôi</a>
+                                    <a href="/users/profile">Tài khoản của tôi</a>
                                 </li>
                                 <li class="header__navbar-user-item">
                                     <a href="">Địa chỉ của tôi</a>
