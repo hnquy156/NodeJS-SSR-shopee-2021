@@ -1,5 +1,6 @@
 const NotifyConfig = require(__path_configs + 'notify');
 const ItemsModels = require(__path_schemas + 'discounts');
+const moment = require('moment');
 
 module.exports = {
     getList: (condition, options) => {
@@ -15,7 +16,12 @@ module.exports = {
     },
 
     getItemFrontend: (name, options = null) => {
-        return ItemsModels.findOne({name: name});
+        const now = moment(new Date(), 'YYYY-MM-DD').format('YYYY-MM-DD');
+        
+        return ItemsModels.findOne({status: 'active', name: name,
+            start: {$lte: now},
+            end: {$gte: now},
+        });
     },
 
     countItems: (condition) => {
@@ -110,6 +116,12 @@ module.exports = {
         if (options.task === 'change-times') {
             await ItemsModels.updateOne({_id: id}, data);
             return {id, times: +times, notify: NotifyConfig.CHANGE_TIMES_SUCCESS}
+        }
+    },
+
+    changeTimesFrontend: async (id, options) => {
+        if (options.task === 'change-times-after-use') {
+            return await ItemsModels.updateOne({_id: id}, {$inc: {times: -1}});
         }
     },
 

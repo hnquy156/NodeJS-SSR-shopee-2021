@@ -6,8 +6,8 @@ const databaseConfigs = require(__path_configs + 'database');
 const items = new Schema({
 	name: String,
     status: String,
-    start: Date,
-    end: Date,
+    start: String,
+    end: String,
     value: Number,
     ordering: Number,
     times: Number,

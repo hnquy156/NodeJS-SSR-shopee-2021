@@ -7,7 +7,7 @@
     }
 
     timeDateHelper = (time) => {
-        const formatedTime = moment(time).format(systemConfigs.time_format);
+        const formatedTime = moment(new Date(time), systemConfigs.time_format).format(systemConfigs.time_format);
         
         return `<p class="mb-0 history-time"><i class="far fa-clock"></i> ${formatedTime || 'Chưa có dữ liệu'}</p>`
     }

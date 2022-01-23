@@ -150,7 +150,7 @@ router.get('(/status/:status)?', async (req, res, next) => {
 router.get('/form(/:id)?', async (req, res) => {
 	const id = ParamsHelpers.getParam(req.params, 'id', '');
 	let item = {id: '', name: '', ordering: 1, content: '', times: '', used: 0, value: '', 
-				start: Date.now(), end: Date.now()};
+				start: '', end: ''};
 	const errors = [];
 	const pageTitle = id ? 'Edit' : 'Add';
 	item = id ? await MainModel.getItem(id) : item;

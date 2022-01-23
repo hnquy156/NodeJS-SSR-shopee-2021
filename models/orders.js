@@ -5,6 +5,7 @@ const NotifyConfig = require(__path_configs + 'notify');
 const OrdersModels = require(__path_schemas + 'orders');
 const CategoriesModels = require(__path_schemas + 'categories');
 const ProductsModels = require(__path_models + 'products');
+const DiscountModels = require(__path_models + 'discounts');
 const FileHelpers = require(__path_helpers + 'file');
 const folderUploads = `${__path_uploads}products/`;
 const stringsHelpers = require(__path_helpers + 'string');
@@ -231,6 +232,8 @@ module.exports = {
                 time: Date.now(),
             }
             await ProductsModels.changeSold(item.products, 0, {task: 'change-sold-multi', user});
+            if (item.discount_id) await DiscountModels.changeTimesFrontend(item.discount_id, {task: 'change-times-after-use'});
+            
             return new OrdersModels(item).save();
         }
     },

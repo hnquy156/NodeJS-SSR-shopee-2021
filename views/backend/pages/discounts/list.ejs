@@ -76,7 +76,6 @@
                         <th class="text-center"><%- sortHelper(linkPrefix, 'Ordering', 'ordering', sortField, sortType) %></th>
                         <th class="text-center"><%- sortHelper(linkPrefix, 'Value', 'value', sortField, sortType) %></th>
                         <th class="text-center"><%- sortHelper(linkPrefix, 'Times', 'times', sortField, sortType) %></th>
-                        <th class="text-center"><%- sortHelper(linkPrefix, 'Used', 'used', sortField, sortType) %></th>
                         <th class="text-center"><%- sortHelper(linkPrefix, 'Date Start', 'start', sortField, sortType) %></th>
                         <th class="text-center"><%- sortHelper(linkPrefix, 'Date End', 'end', sortField, sortType) %></th>
                         <th class="text-center"><%- sortHelper(linkPrefix, 'Created', 'created.time', sortField, sortType) %></th>
@@ -95,7 +94,6 @@
                             <td class="text-center position-relative"><%- orderingHelper(item.ordering, linkPrefix, item.id) %></td>
                             <td class="text-center position-relative"><%- inputAjaxHelper('value', item.value, 'number', item.id, "width:100px;") %></td>
                             <td class="text-center position-relative"><%- inputAjaxHelper('times', item.times, 'number', item.id, "width:60px;") %></td>
-                            <td class="text-center"><%= item.used %></td>
                             <td class="text-center"><%- timeDateHelper(item.start) %></td>
                             <td class="text-center"><%- timeDateHelper(item.end) %></td>
                             <td class="text-center">

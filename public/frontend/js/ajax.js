@@ -10,7 +10,6 @@ $(document).ready(function () {
             method: 'get',
             url,
             success: (data) => {
-                console.log(data);
                 if (!data || !data.data) return showNotify($(this), 'Đơn hàng không tồn tại!', 'error');
 
                 $('.order_information').css('display', 'block');
@@ -38,6 +37,7 @@ $(document).ready(function () {
         const city = $('select[name="transport_city"]').val();
         const fee = $('td.transport-fee').data('fee');
         const discount = $('td.transport-discount').data('discount');
+        const discount_id = $('input.product__voucher-unit').data('id');
         const total = $('td.cart__product-checkout-price-total').data('total');
         const products = [];
         $('.cart__product-price-total').each(function() {
@@ -54,6 +54,7 @@ $(document).ready(function () {
                 total,
             },
             products,
+            discount_id,
         }
         
         $.ajax({
@@ -86,9 +87,11 @@ $(document).ready(function () {
             success: (data) => {
                 if (!data.data) return showNotify($(this), 'Mã giảm giá không hợp lệ!', 'error');
                 const newPrice = data.data.value;
+                
                 $('.product__voucher-price').text(formatCurrencyHelper(newPrice));
                 $('td.transport-discount').text(formatCurrencyHelper(newPrice));
                 $('td.transport-discount').data('discount', newPrice);
+                $('input.product__voucher-unit').data('id', data.data._id);
                 showNotify($(this), 'Cập nhật mã giảm giá thành công!');
                 updateTotalPriceCheckout();
             },
@@ -131,7 +134,6 @@ $(document).ready(function () {
             method: 'get',
             url,
             success: (data) => {
-                console.log(data)
                 let quantityTotal = +$('.cart__product-total-quantity').text();
                 let priceTotal = $('.cart__product-total-price').data('price');
                 let price = $(this).parents('.product__cart-item').find('.cart__product-price-new').data('price');
@@ -168,7 +170,6 @@ $(document).ready(function () {
             method: 'get',
             url,
             success: (data) => {
-                console.log(data);
                 showNotify(element, 'Thêm sản phẩm vào giỏ hàng!');
                 // updateQuantityProduct(1);
                 resetCart();
@@ -189,7 +190,6 @@ $(document).ready(function () {
             method: 'get',
             url,
             success: (data) => {
-                console.log(data)
                 if (element.hasClass('product__add-cart')) {
                     // updateQuantityProduct(+eleInput.val());
                     eleInput.val(0);
@@ -326,7 +326,6 @@ $(document).ready(function () {
             method: 'get',
             url,
             success: (data) => {
-                console.log(data);
 
                 const id = $('.header__cart-list').data('id');
                 $('#header__cart-wrap').html(showHtmlCart(data.data, id));
@@ -389,12 +388,11 @@ $(document).ready(function () {
         const ProductID  = $(this).parents('.header__cart-item').data('id');
         const CartID  = $('.header__cart-list').data('id');
         const url = `/carts/delete/${CartID}/${ProductID}`;
-        console.log(url)
+        
         $.ajax({
             method: 'get',
             url,
             success: (data) => {
-                console.log(data);
                 resetCart();
 
                 // Delete product in cart in Cart Page when delete product on header

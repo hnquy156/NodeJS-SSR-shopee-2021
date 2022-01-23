@@ -17,8 +17,8 @@
         {label: 'Ordering', input: inputHelper('ordering', item.ordering, 'number')},
         {label: 'Value', input: inputHelper('value', item.value, 'number')},
         {label: 'Times', input: inputHelper('times', item.times, 'number')},
-        {label: 'Date Start', input: inputHelper('start', moment(item.start).format('YYYY-MM-DD'), 'date')},
-        {label: 'End Start', input: inputHelper('end', moment(item.end).format('YYYY-MM-DD'), 'date')},
+        {label: 'Date Start', input: inputHelper('start', item.start, 'date')},
+        {label: 'End Start', input: inputHelper('end', item.end, 'date')},
         {label: 'Content', input: textareaHelper('content', item.content, 'text')},
     ];
 %>
