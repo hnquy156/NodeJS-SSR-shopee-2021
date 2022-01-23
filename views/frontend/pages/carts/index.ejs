@@ -37,7 +37,7 @@
             quantityTotal += quantity;
             priceTotal += product.price.price_new * quantity
             %>
-            <div class="row no-gutters product__cart-item">
+            <div class="row no-gutters product__cart-item" data-product-id="<%= product.id %>">
                 <div class="col l-0 m-0 c-0">
                     <div class="cart__product-checkbox d-flex align-items-center">
                         <input type="checkbox" >

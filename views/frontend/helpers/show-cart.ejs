@@ -8,7 +8,7 @@
                 const quantity = cartProduct.quantity;
                 quantityTotal += quantity;
 
-                xhtml += `<li class="header__cart-item">
+                xhtml += `<li class="header__cart-item" data-id=${product.id}>
                             <img src="${product.thumb}" alt="${product.name}" class="header__cart-img">
                             <div class="header__cart-item-info">
                                 <div class="header__cart-item-head">
@@ -18,6 +18,10 @@
                                         <span class="header__cart-item-multiply">x</span>
                                         <span class="header__cart-item-quantity">${quantity}</span>
                                     </div>
+                                </div>
+                                <div class="header__cart-item-body">
+                                    <span class="header__cart-item-description"></span>
+                                    <span class="header__cart-item-delete">Xóa</span>
                                 </div>
                             </div>
                         </li>`;
@@ -37,7 +41,7 @@
 
         return `<a style="display: block;" href="/carts/${cartID}"><i class="header__cart-icon fas fa-shopping-cart"></i></a>
                 <span class="header__cart-notice">${quantityTotal}</span>
-                <div class="header__cart-list ">
+                <div class="header__cart-list" data-id=${cartID}>
                     ${xhtml}
                 </div>`;
     }

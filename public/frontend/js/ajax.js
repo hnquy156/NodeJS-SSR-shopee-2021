@@ -120,7 +120,7 @@ $(document).ready(function () {
         location.href = href;
     });
 
-    // Delete product from Cart
+    // Delete product from Cart on Cart Page
     $('.ajax-cart-delete').click(function(e) {
         const eleInput = $(this).parents('.product__cart-item').find('input.product__quantity-number');
         const ProductID  = eleInput.data('product-id');
@@ -143,10 +143,14 @@ $(document).ready(function () {
                 $('.cart__product-total-quantity').text(quantityTotal);
                 $('.cart__product-total-price').data('price', priceTotal)
                 $('.cart__product-total-price').text(formatCurrencyHelper(priceTotal));
-                $('.header__cart-notice').text(quantityTotal);
+                // $('.header__cart-notice').text(quantityTotal);
+                resetCart();
             }
         });
     });
+
+    // Delete Products in Carts on Header
+    $('.header__cart-item-delete').click(deleteProductCart);
 
     // Increase/decrease quantity of product in product pages
     $('.product__quantity-btn').click(ajaxChangeQuantityProduct);
@@ -166,11 +170,12 @@ $(document).ready(function () {
             success: (data) => {
                 console.log(data);
                 showNotify(element, 'Thêm sản phẩm vào giỏ hàng!');
-                updateQuantityProduct(1);
+                // updateQuantityProduct(1);
+                resetCart();
             }
         });
     });
-
+        // On product page
     $('.ajax-add-cart').click(function(e) {
         const element = $(this);
         const eleInput = $('input.product__quantity-number');
@@ -186,9 +191,10 @@ $(document).ready(function () {
             success: (data) => {
                 console.log(data)
                 if (element.hasClass('product__add-cart')) {
-                    updateQuantityProduct(+eleInput.val());
+                    // updateQuantityProduct(+eleInput.val());
                     eleInput.val(0);
                     showNotify($(this), 'Thêm sản phẩm vào giỏ hàng thành công!');
+                    resetCart();
 
                 } else if (element.hasClass('product__buy-now')) {
                     window.location.href = '/carts/' + CartID;
@@ -263,7 +269,8 @@ $(document).ready(function () {
                 $('.cart__product-total-quantity').text(quantityTotal);
                 $('.cart__product-total-price').text(formatCurrencyHelper(priceTotal));
                 $('.cart__product-total-price').data('price', priceTotal);
-                $('.header__cart-notice').text(quantityTotal);
+                // $('.header__cart-notice').text(quantityTotal);
+                resetCart();
             }
         });
     }
@@ -313,6 +320,92 @@ $(document).ready(function () {
         elePriceTotal.text(formatCurrencyHelper(priceTotal));
     }
 
+    function resetCart() {
+        const url = `/carts/get-products/`;
+        $.ajax({
+            method: 'get',
+            url,
+            success: (data) => {
+                console.log(data);
+
+                const id = $('.header__cart-list').data('id');
+                $('#header__cart-wrap').html(showHtmlCart(data.data, id));
+                $('.header__cart-item-delete').click(deleteProductCart);
+            }
+        });
+
+    }
+
+    function showHtmlCart(cartProducts, cartID) {
+        let xhtml = '';
+        let quantityTotal = 0;
+        if (cartProducts && cartProducts.length > 0) {
+            cartProducts.forEach(cartProduct => {
+                const product = cartProduct.product_id;
+                const quantity = cartProduct.quantity;
+                quantityTotal += quantity;
+
+                xhtml += `<li class="header__cart-item" data-id=${product._id}>
+                            <img src="${product.thumb}" alt="${product.name}" class="header__cart-img">
+                            <div class="header__cart-item-info">
+                                <div class="header__cart-item-head">
+                                    <h5 class="header__cart-item-name">${product.name}</h5>
+                                    <div class="header__cart-item-price-wrap">
+                                        <span class="header__cart-item-price">${formatCurrencyHelper(product.price.price_new)}</span>
+                                        <span class="header__cart-item-multiply">x</span>
+                                        <span class="header__cart-item-quantity">${quantity}</span>
+                                    </div>
+                                </div>
+                                <div class="header__cart-item-body">
+                                    <span class="header__cart-item-description"></span>
+                                    <span class="header__cart-item-delete">Xóa</span>
+                                </div>
+                            </div>
+                        </li>`;
+            });
+
+            xhtml = `<h4 class="header__cart-heading">Sản phẩm đã thêm</h4>
+                    <ul class="header__cart-list-item">
+                        ${xhtml}
+                    </ul>
+                    <a href="/carts/${cartID}" class="header__cart-view-cart btn btn--primary">Xem giỏ hàng</a>`;
+        } else {
+            xhtml = `<img src="/frontend/img/no_cart.png" alt="Không có sản phẩm" class="header__cart-empty-img">
+                    <span class="header__cart-list-empty-msg">
+                        Chưa có sản phẩm
+                    </span>`;
+        }
+
+        return `<a style="display: block;" href="/carts/${cartID}"><i class="header__cart-icon fas fa-shopping-cart"></i></a>
+                <span class="header__cart-notice">${quantityTotal}</span>
+                <div class="header__cart-list" data-id=${cartID}>
+                    ${xhtml}
+                </div>`;
+    }
+
+    // function delete product in cart on header
+    function deleteProductCart() {
+        const eleProductItem = $(this).parents('.header__cart-item');
+        const ProductID  = $(this).parents('.header__cart-item').data('id');
+        const CartID  = $('.header__cart-list').data('id');
+        const url = `/carts/delete/${CartID}/${ProductID}`;
+        console.log(url)
+        $.ajax({
+            method: 'get',
+            url,
+            success: (data) => {
+                console.log(data);
+                resetCart();
+
+                // Delete product in cart in Cart Page when delete product on header
+                if ($('#product-cart').length > 0) {
+                    $(`.product__cart-item[data-product-id="${ProductID}"]`).remove();
+                };
+            }
+        });
+    }
+
+    //End $ready
 });
 
 function showNotify(element, content, status = 'success') {
@@ -336,3 +429,4 @@ function swalConfig(text, icon, confirmText) {
         cancelButtonText: 'Hủy',
     };
 }
+

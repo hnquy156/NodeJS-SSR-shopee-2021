@@ -29,6 +29,8 @@ router.post('/change-like/', async (req, res) => {
 	const task 			= 'change-like';
 	const user 			= req.user;
 	
+	if (!user) return res.end();
+	
 	const data = await ProductModel.changeLike(id, {task, user});
 	res.send(data);
 	// NotifyHelpers.showNotifyAndRedirect(req, res, linkIndex, {task: 'change-like'});
