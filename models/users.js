@@ -162,5 +162,15 @@ module.exports = {
             }
             return UsersModels.updateOne({_id: item.id}, item);
         }
+
+        if (options.task === 'edit-password') {
+            const password = bcrypt.hashSync(item.password, salt);
+            item.modified = {
+                user_id: item.id,
+                user_name: item.username,
+                time: Date.now(),
+            }
+            return UsersModels.updateOne({_id: item.id}, {password});
+        }
     },
 }

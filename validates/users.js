@@ -51,4 +51,18 @@ module.exports = {
         body('name', util.format(NotifyConfigs.ERROR_NAME, options.name.min, options.name.max))
             .isLength(options.name),
     ],
+
+    passwordFrontendValidate: (body) => [
+        // password_old
+        body('password_old', util.format(NotifyConfigs.ERROR_NAME, options.password.min, options.password.max))
+            .isLength(options.password),
+
+        // password
+        body('password', util.format(NotifyConfigs.ERROR_NAME, options.password.min, options.password.max))
+            .isLength(options.password),
+
+        // password_confirm
+        body('password_confirm', NotifyConfigs.ERROR_PASSWORD_CONFIRM)
+            .custom((value, { req }) => value === req.body.password),
+    ],
 }

@@ -11,6 +11,9 @@ const showNotifyAndRedirect = async (req, res, linkRedirect, params = null) => {
 		case 'edit-info':
 			notify = notifyConfig.CHANGE_USER_SUCCESS;
 			break;
+		case 'edit-password':
+			notify = notifyConfig.CHANGE_PASSWORD_SUCCESS;
+			break;
 		case 'edit':
 			notify = notifyConfig.EDIT_SUCCESS;
 			break;

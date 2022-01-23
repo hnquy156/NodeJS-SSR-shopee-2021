@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 
+const bcrypt = require('bcryptjs');
 const { body, validationResult } = require('express-validator');
 
 const collectionName = 'users';
@@ -14,11 +15,55 @@ const NotifyHelpers = require(__path_helpers + 'notify');
 
 const folderUploads = `${__path_uploads}${collectionName}/`;
 const folderView = `${__path_views_frontend}pages/${collectionName}`;
+const salt = systemConfigs.salt;
 let   pageTitle = 'Đăng nhập';
 const linkIndex = `/users/profile`;
 const linkLogin = `/auth/login/`;
 const layout = __path_views_frontend + 'layouts/layout';
 
+/* GET change password. */
+router.get('/change-password', async (req, res, next) => {
+	const messages	= req.flash('notify');
+	const item = req.user;
+	const errors = [];
+	pageTitle = 'Đổi mật khẩu';
+
+	res.render(`${folderView}/change-password`, { 
+		pageTitle, 
+		layout,
+		item,
+		errors,
+		messages,
+	});
+});
+
+/* POST change password. */
+router.post('/change-password', Validates.passwordFrontendValidate(body), async (req, res, next) => {
+	const messages	= [];
+	const item = req.body;
+	const errors = validationResult(req).array();
+	const task = 'edit-password';
+	pageTitle = 'Đổi mật khẩu';
+
+	const userItem = await UsersModel.getItem(item.id);
+	
+	if (!bcrypt.compareSync(item.password_old, userItem.password)) {
+		errors.push({param: 'password_old', msg: NotifyConfigs.ERROR_PASSWORD});
+	}
+
+	if (errors.length > 0) {
+		return res.render(`${folderView}/change-password`, { 
+			pageTitle, 
+			layout,
+			item,
+			errors,
+			messages,
+		});
+	}
+
+	await UsersModel.saveItemFrontend(item, {task});
+	NotifyHelpers.showNotifyAndRedirect(req, res, linkIndex, {task});
+});
 
 /* GET profile. */
 router.get('/profile', async (req, res, next) => {
