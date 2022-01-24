@@ -1,5 +1,47 @@
 $(document).ready(function () {
-    
+
+    // Add event toggle Like
+    toggleLike();
+
+    // Load more when scroll to bottom
+    $(window).scroll(function() {
+        if ($('#loading').length == 0) return -1;
+
+        let isLoading = $('#loading').data('loading');
+        let page = $('#loading').data('page');
+
+        if ($(window).scrollTop() + $(window).height() == $(document).height() && !isLoading) {
+            $('#loading').fadeIn('slow');
+            $('#loading').data('loading', true);
+            
+            $.ajax({
+                method: 'get',
+                url: '/products/load-more',
+                data: {
+                    page,
+                },
+                success: (data) => {
+                    if (!data.data || data.data.length == 0) return $('#loading').remove();
+
+                    $('#loading').data('page', page + 1);
+                    $('#loading').fadeOut('fast');
+                    $('#loading').data('loading', false);
+
+                    const products = data.data;
+                    const user = data.user;
+                    
+                    const htmlData = LoadMoreProducts(user, products, 6);
+                    $('#all-products').append(htmlData).ready(function() {
+                        if(!user) return;
+                        $('.ajax-cart').click(AddToCart);
+                        $('.ajax-liked-product').click(ChangeLikeProduct);
+                        toggleLike();
+                    });
+                },
+            });
+        }
+    });
+
     // Checking status the order
     $('.order__check-btn').click(function() {
         const code = $('.order__check-input').val();
@@ -159,24 +201,9 @@ $(document).ready(function () {
     $('input.product__quantity-number').change(ajaxChangeQuantityProduct);
 
     // Add to cart
-    $('.ajax-cart').click(function(e) {
-        e.preventDefault();
-        const element = $(this);
-        const ProductID  = element.closest('.home-product-item').data('id');
-        const CartID  = element.data('id');
-        const url = `/carts/add/${CartID}/${ProductID}?quantity=1`;
+    $('.ajax-cart').click(AddToCart);
 
-        $.ajax({
-            method: 'get',
-            url,
-            success: (data) => {
-                showNotify(element, 'Thêm sản phẩm vào giỏ hàng!');
-                // updateQuantityProduct(1);
-                resetCart();
-            }
-        });
-    });
-        // On product page
+    // Add product to Cart On product page
     $('.ajax-add-cart').click(function(e) {
         const element = $(this);
         const eleInput = $('input.product__quantity-number');
@@ -203,9 +230,98 @@ $(document).ready(function () {
         });
     });
 
-
     // Change Like Product
-    $('.ajax-liked-product').click(function(e) {
+    $('.ajax-liked-product').click(ChangeLikeProduct);
+
+    //Sort Product
+    $('.home-filter__btn').click(function() {
+        const sort_type = $(this).data('sort');
+        $('input[name="sort_type"]').val(sort_type);
+        $('#form-filter').submit();
+    });
+
+    $('.select-input__link').click(function(e) {
+        e.preventDefault();
+        const sort_type = $(this).data('sort');
+        $('input[name="sort_type"]').val(sort_type);
+        $('#form-filter').submit();
+    });
+
+    // FUNCTION
+    function LoadMoreProducts (user, products, column = 6) {
+        column = column === 5 ? '2-4' : 12/column;
+        if (!user) user = {id: '', cart: ''};
+        
+        let xhtml = '';
+        products.forEach(product => {
+            const isLiked   = (typeof user !== 'undefined') ? product.like.user_id.find(id => id == user._id) : -1;
+            const likedClass= isLiked ? 'home-product-item__like--liked' : '';
+            const price_old = product.price.price_old;
+            const price_new = product.price.price_new;
+            let percentPrice = (price_old - price_new) / price_old * 100;
+            percentPrice = Math.round(percentPrice);
+            product.id = product._id;
+
+            xhtml += `<div class="col l-${column} m-3 c-6">
+                            <a href="/products/${product.id}" data-id=${product.id} data-link=/products/change-like class="home-product-item">
+                                <div class="home-product-item__img" style="background-image:url(${product.thumb});"></div>
+                                <h4 class="home-product-item__name">${product.name}</h4>
+                                <div class="home-product-item__price">
+                                    <span class="home-product-item__price-old">${formatCurrencyHelper(price_old)}</span>
+                                    <span class="home-product-item__price-current">${formatCurrencyHelper(price_new)}</span>
+                                </div>
+                                <div class="home-product-item__action">
+                                    <span class="home-product-item__like ajax-liked-product ${likedClass}">
+                                        <i class="home-product-item__like-icon far fa-heart"></i>
+                                        <i class="home-product-item__liked-icon fas fa-heart"></i>
+                                    </span>
+                                    <div class="home-product-item__rating">
+                                        <i class="home-product-item__start--gold fas fa-star"></i>
+                                        <i class="home-product-item__start--gold fas fa-star"></i>
+                                        <i class="home-product-item__start--gold fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                    </div>
+                                    <span class="home-product-item__sold">${product.sold} đã bán</span>
+                                </div>
+                                <div class="home-product-item__origin">
+                                    <span data-id=${user.cart} class="home-product-item__brand ajax-cart"><i class="fas fa-cart-plus"></i></span>
+                                    <span class="home-product-item__origin-name">${product.group.name}</span>
+                                </div>
+                                <div class="home-product-item__favourite">
+                                    <i class="fas fa-check"></i>
+                                    <span>Yêu thích</span>
+                                </div>
+                                <div class="home-product-item__sale-off">
+                                    <span class="home-product-item__sale-off-percent">${percentPrice}%</span>
+                                    <span class="home-product-item__sale-off-label">GIẢM</span>
+                                </div>
+                            </a>
+                        </div>`;
+        });
+
+        return xhtml;
+    }
+
+    function AddToCart(e) {
+        e.preventDefault();
+        const element = $(this);
+        const ProductID  = element.closest('.home-product-item').data('id');
+        const CartID  = element.data('id');
+        const url = `/carts/add/${CartID}/${ProductID}?quantity=1`;
+
+        $.ajax({
+            method: 'get',
+            url,
+            success: (data) => {
+                showNotify(element, 'Thêm sản phẩm vào giỏ hàng!');
+                // updateQuantityProduct(1);
+                resetCart();
+            }
+        });
+    }
+
+    function ChangeLikeProduct(e) {
         e.preventDefault();
         const element = $(this);
         const url = element.closest('.home-product-item').data('link');
@@ -221,21 +337,7 @@ $(document).ready(function () {
                 
             }
         });
-    });
-
-    //Sort Product
-    $('.home-filter__btn').click(function() {
-        const sort_type = $(this).data('sort');
-        $('input[name="sort_type"]').val(sort_type);
-        $('#form-filter').submit();
-    });
-
-    $('.select-input__link').click(function(e) {
-        e.preventDefault();
-        const sort_type = $(this).data('sort');
-        $('input[name="sort_type"]').val(sort_type);
-        $('#form-filter').submit();
-    });
+    }
 
     function ajaxChangeQuantityProduct() {
         const increase = $(this).data('increase') ? +$(this).data('increase') : 0;
@@ -380,6 +482,16 @@ $(document).ready(function () {
                 <div class="header__cart-list" data-id=${cartID}>
                     ${xhtml}
                 </div>`;
+    }
+
+    function toggleLike() {
+        const elmLikes = document.querySelectorAll('.home-product-item__like');
+
+        elmLikes.forEach(elm => {
+            elm.onclick = (e) => {
+                elm.classList.toggle('home-product-item__like--liked')
+            }
+        });
     }
 
     // function delete product in cart on header

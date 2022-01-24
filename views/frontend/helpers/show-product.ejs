@@ -1,5 +1,5 @@
 <%
-    showProductHelper = (title, products, column = 6) => {
+    showProductHelper = (title, products, column = 6, loadMoreId = null) => {
         column = column === 5 ? '2-4' : 12/column;
         let linkPrefix = systemConfigs.prefixAdmin;
         let xhtml = '';
@@ -50,7 +50,7 @@
         });
 
         return `<div class="home-product">
-                    <div class="row sm-gutter">
+                    <div class="row sm-gutter" id="${loadMoreId}">
                         <div class="col l-12 m-0 c-0">
                             <h3 class="home-product-title">${title}</h3>
                         </div>

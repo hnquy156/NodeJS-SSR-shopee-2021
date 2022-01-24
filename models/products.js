@@ -26,6 +26,13 @@ module.exports = {
         let limit = null;
 
         if (options.task === 'products-new') {
+            limit = 12;
+            return ProductsModels.find(condition).select(select).sort(sort).skip(skip).limit(limit);
+        }
+
+        if (options.task === 'products-load-more') {
+            limit = 12;
+            skip = (params.page - 1) * limit;
             return ProductsModels.find(condition).select(select).sort(sort).skip(skip).limit(limit);
         }
 

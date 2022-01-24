@@ -4,8 +4,6 @@ document.addEventListener('DOMContentLoaded', (event) => {
     sliderImage();
     window.addEventListener('resize', sliderMain);
 
-    toggleLike();
-
     function sliderMain() {
         const slider        = document.querySelector('#slider');
         if (!slider) return -1;
@@ -66,7 +64,6 @@ document.addEventListener('DOMContentLoaded', (event) => {
         const delayClickBtn = 400;
     
         leftBtn.addEventListener('click', () => {
-            console.log(count)
             if (!canClickSlideBtn) return -1;
             canClickSlideBtn = false;
             count += sliderWidth;
@@ -98,14 +95,6 @@ document.addEventListener('DOMContentLoaded', (event) => {
         }
     }
 
-    function toggleLike() {
-        const elmLikes = document.querySelectorAll('.home-product-item__like');
-
-        elmLikes.forEach(elm => {
-            elm.onclick = (e) => {
-                elm.classList.toggle('home-product-item__like--liked')
-            }
-        });
-    }
+    
 });
 

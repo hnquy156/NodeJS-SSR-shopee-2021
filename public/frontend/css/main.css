@@ -2408,3 +2408,30 @@ transform: translateY(-1px);
 .img-avatar-medium {
     max-height: 400px ;
 }
+
+/* Loading more product */
+
+.loading__wrap {
+    margin-bottom: 20px;
+    display: none;
+}
+
+.loading__content {
+    display: flex;
+    justify-content: center;
+}
+
+.loading__icon {
+    color: var(--primary-color);
+    font-size: 2rem;
+    animation: rotateInfinity 2s linear infinite;
+}
+
+@keyframes rotateInfinity {
+    0% {
+        transform: rotateZ(0deg);
+    }
+    100% {
+        transform: rotateZ(360deg);
+    }
+}

@@ -13,7 +13,7 @@ $(document).ready(function () {
 
     // Back
     $('.auth-form__control-back').click(function() {
-        history.back();
+        window.location.pathname = '/';
     })
 });
 
