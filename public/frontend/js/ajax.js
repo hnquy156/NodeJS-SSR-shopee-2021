@@ -3,6 +3,19 @@ $(document).ready(function () {
     // Add event toggle Like
     toggleLike();
 
+    // Search Products
+    $('.header__search-input').keyup(function(e) {
+        if(e.keyCode == 13) {
+            $('.header__search-btn').click();
+        }
+    });
+    $('.header__search-btn').click(function() {
+        const search = $('.header__search-input').val();
+        if (!search.trim()) return -1;
+
+        window.location.href = `/category?search=${search}`;
+    });
+
     // Load more when scroll to bottom
     $(window).scroll(function() {
         if ($('#loading').length == 0) return -1;
@@ -248,6 +261,10 @@ $(document).ready(function () {
     });
 
     // FUNCTION
+    function SearchProducts() {
+        
+    }
+
     function LoadMoreProducts (user, products, column = 6) {
         column = column === 5 ? '2-4' : 12/column;
         if (!user) user = {id: '', cart: ''};

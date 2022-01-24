@@ -1,5 +1,7 @@
+<% include ./highlight %>
+
 <%
-    showProductHelper = (title, products, column = 6, loadMoreId = null) => {
+    showProductHelper = (title, products, column = 6, loadMoreId = null, search = '') => {
         column = column === 5 ? '2-4' : 12/column;
         let linkPrefix = systemConfigs.prefixAdmin;
         let xhtml = '';
@@ -10,11 +12,12 @@
             const price_new = product.price.price_new;
             let percentPrice = (price_old - price_new) / price_old * 100;
             percentPrice = Math.round(percentPrice);
+            const name = highlightHelper(product.name, search);
 
             xhtml += `<div class="col l-${column} m-3 c-6">
                             <a href="/products/${product.id}" data-id=${product.id} data-link=/products/change-like class="home-product-item">
                                 <div class="home-product-item__img" style="background-image:url(${product.thumb});"></div>
-                                <h4 class="home-product-item__name">${product.name}</h4>
+                                <h4 class="home-product-item__name">${name}</h4>
                                 <div class="home-product-item__price">
                                     <span class="home-product-item__price-old">${formatCurrencyHelper(price_old)}</span>
                                     <span class="home-product-item__price-current">${formatCurrencyHelper(price_new)}</span>

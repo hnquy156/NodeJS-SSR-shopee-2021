@@ -1,0 +1,9 @@
+<%
+	highlightHelper = (content, search_value) => {
+		if (!search_value) return `${content}`;
+		return content.replace(new RegExp(search_value, 'ig'), match => {
+			return `<span class="highlight">${match}</span>`;
+		})
+	}
+%>
+

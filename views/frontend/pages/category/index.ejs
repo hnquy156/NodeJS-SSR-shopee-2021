@@ -7,6 +7,7 @@
     const price_from = (typeof queryObj !== 'undefined') && queryObj.price_from ? queryObj.price_from : '';
     const price_to = (typeof queryObj !== 'undefined') && queryObj.price_to ? queryObj.price_to : '';
     const categoriesQuery = (typeof queryObj !== 'undefined') && queryObj.categories ? queryObj.categories : [];
+    const search = (typeof queryObj !== 'undefined') && queryObj.search ? queryObj.search.trim() : '';
 
     const sortArr = [
         {name: 'Mới nhất', sort_type: '-created.time'},
@@ -64,7 +65,7 @@
         <% include ./../../elements/category-mobile %>
 
         <div id="product-filter">
-            <%- showProductHelper(titleCategory, products, 5) %>
+            <%- showProductHelper(titleCategory, products, 5, null, search) %>
         </div>
 
     </div>

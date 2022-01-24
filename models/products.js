@@ -71,6 +71,7 @@ module.exports = {
             };
             if (params.categories && params.categories.length > 0) condition['group.id'] = {$in: params.categories}
             if (params.sort_type) sort = params.sort_type;
+            if (params.search) condition.name = new RegExp(params.search.trim(), 'ig');
         }
 
         return ProductsModels.find(condition).select(select).sort(sort).skip(skip).limit(limit);
