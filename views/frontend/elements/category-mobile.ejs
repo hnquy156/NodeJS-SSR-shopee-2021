@@ -1,40 +1,9 @@
 <nav class="mobile-category">
     <ul class="mobile-category__list">
-        <li class="mobile-category__item">
-            <a href="" class="mobile-category__link">Dụng cụ thiết bị và tiện ích</a>
-        </li>
-        <li class="mobile-category__item">
-            <a href="" class="mobile-category__link">Dụng cụ thiết bị và tiện ích</a>
-        </li>
-        <li class="mobile-category__item">
-            <a href="" class="mobile-category__link">Dụng cụ thiết bị và tiện ích</a>
-        </li>
-        <li class="mobile-category__item">
-            <a href="" class="mobile-category__link">Dụng cụ thiết bị và tiện ích</a>
-        </li>
-        <li class="mobile-category__item">
-            <a href="" class="mobile-category__link">Dụng cụ thiết bị và tiện ích</a>
-        </li>
-        <li class="mobile-category__item">
-            <a href="" class="mobile-category__link">Dụng cụ thiết bị và tiện ích</a>
-        </li>
-        <li class="mobile-category__item">
-            <a href="" class="mobile-category__link">Dụng cụ thiết bị và tiện ích</a>
-        </li>
-        <li class="mobile-category__item">
-            <a href="" class="mobile-category__link">Dụng cụ thiết bị và tiện ích</a>
-        </li>
-        <li class="mobile-category__item">
-            <a href="" class="mobile-category__link">Dụng cụ thiết bị và tiện ích</a>
-        </li>
-        <li class="mobile-category__item">
-            <a href="" class="mobile-category__link">Dụng cụ thiết bị và tiện ích</a>
-        </li>
-        <li class="mobile-category__item">
-            <a href="" class="mobile-category__link">Dụng cụ thiết bị và tiện ích</a>
-        </li>
-        <li class="mobile-category__item">
-            <a href="" class="mobile-category__link">Dụng cụ thiết bị và tiện ích</a>
-        </li>
+        <% categories.forEach(category => {%>
+            <li class="mobile-category__item">
+                <a href="/category/<%= category.slug %>" class="mobile-category__link"><%= category.name %></a>
+            </li>
+            <%}) %>
     </ul>
 </nav>

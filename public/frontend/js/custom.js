@@ -14,6 +14,14 @@ $(document).ready(function () {
     // Back
     $('.auth-form__control-back').click(function() {
         window.location.pathname = '/';
-    })
+    });
+
+    // Active sort bar in header in mobile/tablet device
+    let queryString = window.location.search;
+    let params = new URLSearchParams(queryString);
+    let sort_type = params.get('sort_type');
+    if(sort_type == null) sort_type = '';
+   
+    $('.header__sort-bar').find(`li.header__sort-item[data-sort="${sort_type}"]`).addClass('header__sort-item--active');
 });
 
