@@ -33,8 +33,8 @@ $(document).ready(function () {
                     const htmlData = LoadMoreProducts(user, products, 6);
                     $('#all-products').append(htmlData).ready(function() {
                         if(!user) return;
-                        $('.ajax-cart').click(AddToCart);
-                        $('.ajax-liked-product').click(ChangeLikeProduct);
+                        $('.ajax-cart').off('click').click(AddToCart);
+                        $('.ajax-liked-product').off('click').click(ChangeLikeProduct);
                         toggleLike();
                     });
                 },
@@ -285,7 +285,7 @@ $(document).ready(function () {
                                     <span class="home-product-item__sold">${product.sold} đã bán</span>
                                 </div>
                                 <div class="home-product-item__origin">
-                                    <span data-id=${user.cart} class="home-product-item__brand ajax-cart"><i class="fas fa-cart-plus"></i></span>
+                                    <span data-id="${user.cart}" class="home-product-item__brand ajax-cart"><i class="fas fa-cart-plus"></i></span>
                                     <span class="home-product-item__origin-name">${product.group.name}</span>
                                 </div>
                                 <div class="home-product-item__favourite">
