@@ -1,3 +1,10 @@
+/* Only PC */
+@media (min-width: 1024px) {
+    .app__container {
+        margin-top: calc(32px + var(--header-height));
+    }
+}
+
 /* Mobile & Tablet */
 @media (max-width: 1023px) {
 
