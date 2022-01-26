@@ -30,7 +30,8 @@ router.get('/:slug', async (req, res, next) => {
 /* GET filtered category page. */
 router.get('/', async (req, res, next) => {
 	const products = await ProductModel.getListFrontend({task: 'products-filter'}, req.query);
-	const titleCategory = 'Kết quả tìm kiếm';
+	const searchResultText = req.query && req.query.search ? `với từ khóa "${req.query.search}"`: '';
+	const titleCategory = `Kết quả tìm kiếm: Có ${products.length} kết quả được tìm thấy ${searchResultText}`;
 
 	res.render(`${folderView}/index`, { 
 		pageTitle: titleCategory, 

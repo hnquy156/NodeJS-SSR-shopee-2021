@@ -8,6 +8,10 @@ $(document).ready(function () {
 
     // Search Products
     $('.header__search-input').keyup(function(e) {
+        if ($('#filter-submit').length > 0) {
+            $('input[name="search"]').val($('.header__search-input').val());
+        }
+
         if(e.keyCode == 13) {
             $('.header__search-btn').click();
         }
@@ -16,8 +20,15 @@ $(document).ready(function () {
         const search = $('.header__search-input').val();
         if (!search.trim()) return -1;
 
+        if ($('#filter-submit').length > 0) return $('#filter-submit').click();
+
         window.location.href = `/category?search=${search}`;
     });
+
+    // Show search keyword in search bar
+    if ($('#filter-submit').length > 0) {
+        $('.header__search-input').val($('input[name="search"]').val());
+    }
 
     // Load more when scroll to bottom
     $(window).scroll(function() {
