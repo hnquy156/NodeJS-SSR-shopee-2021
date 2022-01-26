@@ -6,6 +6,18 @@ $(document).ready(function () {
     // Add event toggle Like
     toggleLike();
 
+    // Add Notify Some Functions don't exist
+    $('.auth-form__social-fb').click(function() {
+        InformFunctionNoExist($(this));
+    });
+    $('.auth-form__social-gg').click(function() {
+        InformFunctionNoExist($(this));
+    });
+    $('.is-updating').click(function(e) {
+        e.preventDefault();
+        InformFunctionNoExist($(this));
+    });
+
     // Search Products
     $('.header__search-input').keyup(function(e) {
         if ($('#filter-submit').length > 0) {
@@ -233,6 +245,7 @@ $(document).ready(function () {
     // Add product to Cart On product page
     $('.ajax-add-cart').click(function(e) {
         const element = $(this);
+        if (!isLogin) return InformNeedLogin(element);
         const eleInput = $('input.product__quantity-number');
         if (eleInput.val() <= 0) return showNotify($(this), 'Vui lòng chọn số lượng sản phẩm cần thêm!', 'error');;
 
@@ -277,6 +290,10 @@ $(document).ready(function () {
     // FUNCTION
     function InformNeedLogin(element) {
         if (!isLogin) return showNotify(element, 'Bạn cần đăng nhập để thực hiện thao tác này', 'info');
+    }
+
+    function InformFunctionNoExist(element) {
+        return showNotify(element, 'Chức năng này đang trong quá trình phát triển', 'info');
     }
 
     function LoadMoreProducts (user, products, column = 6) {
