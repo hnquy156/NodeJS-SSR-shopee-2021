@@ -1,5 +1,8 @@
 $(document).ready(function () {
-
+    
+    // isLogin ?
+    let isLogin = $('.header').data('login');
+    
     // Add event toggle Like
     toggleLike();
 
@@ -45,7 +48,7 @@ $(document).ready(function () {
                     
                     const htmlData = LoadMoreProducts(user, products, 6);
                     $('#all-products').append(htmlData).ready(function() {
-                        if(!user) return;
+                        // if(!user) return;
                         $('.ajax-cart').off('click').click(AddToCart);
                         $('.ajax-liked-product').off('click').click(ChangeLikeProduct);
                         toggleLike();
@@ -261,8 +264,8 @@ $(document).ready(function () {
     });
 
     // FUNCTION
-    function SearchProducts() {
-        
+    function InformNeedLogin(element) {
+        if (!isLogin) return showNotify(element, 'Bạn cần đăng nhập để thực hiện thao tác này', 'info');
     }
 
     function LoadMoreProducts (user, products, column = 6) {
@@ -323,6 +326,8 @@ $(document).ready(function () {
     function AddToCart(e) {
         e.preventDefault();
         const element = $(this);
+        if (!isLogin) return InformNeedLogin(element);
+
         const ProductID  = element.closest('.home-product-item').data('id');
         const CartID  = element.data('id');
         const url = `/carts/add/${CartID}/${ProductID}?quantity=1`;
@@ -341,6 +346,8 @@ $(document).ready(function () {
     function ChangeLikeProduct(e) {
         e.preventDefault();
         const element = $(this);
+        if (!isLogin) return InformNeedLogin(element);
+        
         const url = element.closest('.home-product-item').data('link');
         const id  = element.closest('.home-product-item').data('id');
 
@@ -502,6 +509,8 @@ $(document).ready(function () {
     }
 
     function toggleLike() {
+        if (!isLogin) return -1;
+
         const elmLikes = document.querySelectorAll('.home-product-item__like');
 
         elmLikes.forEach(elm => {

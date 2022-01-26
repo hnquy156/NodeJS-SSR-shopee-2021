@@ -4,7 +4,7 @@
     const isLogin = systemConfigs.guest_id != user.id;
 %>
 
-<header class="header">
+<header class="header" data-login="<%= isLogin %>">
     <div class="grid wide">
         <!-- START NAV -->
         <nav class="header__navbar hide-on-mobile-tablet">
