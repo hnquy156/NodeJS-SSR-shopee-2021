@@ -39,5 +39,4 @@ module.exports = {
     ERROR_FILE_EXTENSION: 'Phần mở rộng file không hợp lệ!',
     MAIL_TITLE_ORDER: 'SHOPBEE - Mua hàng thành công',
     MAIL_CONTENT_ORDER: '<p>Cảm ơn bạn đã mua hàng tại ShopBee</p><p>Mã đơn hàng của bạn là: <B>%s</B></p>',
-    LOAD_RSS_SUCCESS: 'Cập nhật RSS thành công',
 };

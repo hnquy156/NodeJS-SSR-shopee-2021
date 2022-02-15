@@ -11,7 +11,6 @@ router.use('/categories', require('./categories'));
 router.use('/products', require('./products'));
 router.use('/contacts', require('./contacts'));
 router.use('/settings', require('./settings'));
-router.use('/rss', require('./rss'));
 router.use('/discounts', require('./discounts'));
 router.use('/deliveries', require('./deliveries'));
 router.use('/orders', require('./orders'));

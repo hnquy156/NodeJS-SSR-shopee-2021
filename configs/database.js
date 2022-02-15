@@ -15,6 +15,4 @@ module.exports = {
     col_contacts: 'contacts',
     col_sliders: 'sliders',
     col_settings: 'settings',
-    col_rss: 'rss',
-    col_rss_articles: 'rssArticles',
 }
