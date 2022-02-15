@@ -1,38 +1,28 @@
-const express = require('express');
-const router = express.Router();
-
 const collectionName = 'contact';
 const MainModel = require(__path_models + 'contacts');
-const ProductModel = require(__path_models + 'products');
-const CategoryModel = require(__path_models + 'categories');
 const folderView = `${__path_views_frontend}pages/${collectionName}`;
 const layout = __path_views_frontend + 'layouts/layout';
 const pageTitle = 'Liên hệ với chúng tôi';
 
-/* GET contact page. */
-router.get('/', async (req, res, next) => {
+module.exports = {
+	index: async (req, res, next) => {
 
-	res.render(`${folderView}/index`, { 
-		pageTitle, 
-		layout,
-	});
-});
+		res.render(`${folderView}/index`, { 
+			pageTitle, 
+			layout,
+		});
+	},
+	success: async (req, res, next) => {
 
-/* GET contact sent page. */
-router.get('/success', async (req, res, next) => {
-
-	res.render(`${folderView}/success`, { 
-		pageTitle, 
-		layout,
-	});
-});
-
-// POST Contact Page
-router.post('/', async (req, res) => {
-	const contactItem = req.body;
-
-	const result = await MainModel.saveItem(contactItem, {task: 'add'});
-	res.redirect('/contacts/success');
-});
-
-module.exports = router;
+		res.render(`${folderView}/success`, { 
+			pageTitle, 
+			layout,
+		});
+	},
+	sendContact: async (req, res) => {
+		const contactItem = req.body;
+	
+		const result = await MainModel.saveItem(contactItem, {task: 'add'});
+		res.redirect('/contacts/success');
+	}
+}
