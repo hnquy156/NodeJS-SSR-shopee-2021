@@ -134,8 +134,6 @@ module.exports = {
     },
 
     saveItemFrontend: async (item, options) => {
-        // item['group.id'] = item.group_id;
-        // item['group.name'] = item.group_name;
         
         if (options.task === 'add') {
             item.password = bcrypt.hashSync(item.password, salt);
@@ -150,6 +148,10 @@ module.exports = {
             item.address = '';
             item.city = '';
             item.email = '';
+            item.ordering = 1;
+            item['group.id'] = SystemConfig.group_user_default.id;
+            item['group.name'] = SystemConfig.group_user_default.name;
+
             return UsersModels(item).save();
 
         }

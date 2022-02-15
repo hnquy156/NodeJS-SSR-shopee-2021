@@ -102,7 +102,7 @@
                             </td>
                             <td class="text-left">
                                 <p><b>Fee: </b><%= formatCurrencyHelper(item.price.fee) %></p>
-                                <p><b>Acount: </b><%= formatCurrencyHelper(item.price.discount) %></p>
+                                <p><b>Discount: </b><%= formatCurrencyHelper(item.price.discount) %></p>
                                 <p><b>Total: </b><%= formatCurrencyHelper(item.price.total) %></p>
                             </td>
                             <td class="text-center position-relative"><%- selectboxAjaxStatusHelper('change-status-order', statusSelectbox, item.status, item.id, linkPrefix) %></td>

@@ -19,4 +19,8 @@ module.exports = {
         {name: 'Sliders', collection: 'sliders', icon: 'ion ion-ios-albums-outline'},
     ],
     guest_id: "61e988c264c3211cacddaa9e",
+    group_user_default: {
+        id: '61e2e59bde85e7fa65800160',
+        name: 'user',
+    }
 }
