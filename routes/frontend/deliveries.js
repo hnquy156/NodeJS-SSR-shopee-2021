@@ -5,6 +5,6 @@ const collectionName = 'deliveries';
 const MainController = require(__path_controllers_frontend + collectionName);
 
 
-router.get('/:id', MainController.getDiscountCode);
+router.get('/:id', MainController.getTransportFee);
 
 module.exports = router;

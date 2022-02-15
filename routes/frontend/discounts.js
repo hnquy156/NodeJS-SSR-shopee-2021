@@ -1,22 +1,11 @@
 const express = require('express');
 const router = express.Router();
 
-const moment = require('moment');
-
-const DeliveryModel = require(__path_models + 'deliveries');
-const DiscountModel = require(__path_models + 'discounts');
-
 const collectionName = 'discounts';
-const folderView = `${__path_views_frontend}pages/${collectionName}`;
-const layout = __path_views_frontend + 'layouts/layout';
-const pageTitle = 'Discount';
+const MainController = require(__path_controllers_frontend + collectionName);
+
 
 /* GET discount code */
-router.get('/:code', async (req, res, next) => {
-	const code = req.params.code;
-	const data = await DiscountModel.getItemFrontend(code);
-
-	res.send({data});
-});
+router.get('/:code', MainController.getDiscountCode);
 
 module.exports = router;
