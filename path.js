@@ -10,6 +10,9 @@ module.exports = {
     folderHelpers: 'helpers',
     folderSchemas: 'schemas',
     folderModels: 'models',
+    folderControllers: 'controllers',
+    folderControllersAdmin: 'backend',
+    folderControllersFrontend: 'frontend',
     folderValidates: 'validates',
     folderMiddlewares: 'middlewares',
 }
